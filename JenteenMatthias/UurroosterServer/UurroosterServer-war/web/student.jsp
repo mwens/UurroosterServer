@@ -37,7 +37,7 @@
 
         <ul id="myUL">
             <c:forEach var="student" items="${studentLijst}">
-                <!-- verwijder en voegtoe functie moeten hier nog geïmplementeerd worden -->
+                <!-- verwijder en voegtoe functie moeten hier nog geïmplementeerd worden --> 
                 <li>${student}<button type="button" class="toevoegen" onclick="voegtoe( ${student} )">V</button><button type="button" class="verwijderen" onclick="verwijder( ${student} )">X</button></li>
             </c:forEach>
         </ul>
