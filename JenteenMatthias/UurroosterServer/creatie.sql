@@ -17,7 +17,7 @@ create table URS_Gebruiker(
         naam    varchar(32)     not null unique,
         ww      varchar(32)     not null,
         /* security groep (niet klasgroep!) */
-        groep   varchar(32),
+        groep   varchar(32)     not null,
         primary key(userId)
         );
 
@@ -35,7 +35,8 @@ create table URS_Student(
         /* 0 = Select, 1 = Bevestig + overzicht, 2 = overzicht */
         status  int             not null,
         foreign key(userId) references URS_Gebruiker,
-        foreign key(klasId) references URS_Klas
+        foreign key(klasId) references URS_Klas,
+        primary key(userId)
         );
         
 create table URS_StudentRelatie(
@@ -44,5 +45,6 @@ create table URS_StudentRelatie(
         /* 0 = enkel voor test, 1 = WEL samen, 2 = NIET samen */
         relatie int             not null,
         foreign key(student) references URS_Gebruiker,
-        foreign key(collega) references URS_Gebruiker
+        foreign key(collega) references URS_Gebruiker,
+        primary key(student, collega)
         );
