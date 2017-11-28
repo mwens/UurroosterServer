@@ -9,10 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>login</title>
     </head>
     <body>
-        <h1>Geheim</h1>
-        <p> Welkom <%= request.getUserPrincipal() %>! Op deze pagina staat keigeheime informatie!</p>
+        <h1>Log in</h1>
+        <button><a href="student/student.do">Studentenportaal</a></button>
+        <button><a href="docent/docent.do">Docentenportaal</a></button>
     </body>
 </html>
