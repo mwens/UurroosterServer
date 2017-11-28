@@ -11,7 +11,7 @@
         <web-resource-collection>
             <web-resource-name>resource</web-resource-name>
             <description/>
-            <url-pattern>/*</url-pattern>
+            <url-pattern>/student/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -27,7 +27,7 @@
         <web-resource-collection>
             <web-resource-name>resource</web-resource-name>
             <description/>
-            <url-pattern>/*</url-pattern>
+            <url-pattern>/docent/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
