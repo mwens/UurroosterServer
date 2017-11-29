@@ -4,9 +4,25 @@
         <servlet-name>Controller</servlet-name>
         <servlet-class>pakket.Controller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>student</servlet-name>
+        <servlet-class>pakket.student</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>docent</servlet-name>
+        <servlet-class>pakket.docent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/common/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>student</servlet-name>
+        <url-pattern>/student.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>docent</servlet-name>
+        <url-pattern>/docent.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
