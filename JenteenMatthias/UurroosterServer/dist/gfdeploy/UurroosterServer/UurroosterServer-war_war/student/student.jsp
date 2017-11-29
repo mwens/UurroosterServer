@@ -10,6 +10,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
         <title>Student</title>
         <script>
         function myFunction() {
@@ -35,11 +37,15 @@
     <body>
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
 
-        <ul id="myUL">
-            <c:forEach var="student" items="${studentLijst}">
-                <!-- verwijder en voegtoe functie moeten hier nog geïmplementeerd worden --> 
-                <li>${student}<button type="button" class="toevoegen" onclick="voegtoe( ${student} )">V</button><button type="button" class="verwijderen" onclick="verwijder( ${student} )">X</button></li>
-            </c:forEach>
+
+	<ul id="myUL">
+                <!-- verwijder en voegtoe functie moeten hier nog geïmplementeerd worden -->
+                <li><a href="">Matthias Wens</a><button type="button" class="toevoegen" onclick="voegtoe()">V</button><button type="button" class="verwijderen" onclick="verwijder()">X</button></li>
+                <li><a href="">Jente Heremans</a><button type="button" class="toevoegen" onclick="voegtoe()">V</button><button type="button" class="verwijderen" onclick="verwijder()">X</button></li>
+                <li><a href="">Jeroen Streulens</a><button type="button" class="toevoegen" onclick="voegtoe()">V</button><button type="button" class="verwijderen" onclick="verwijder()">X</button></li>
+                <li><a href="">Wouter Mauriën</a><button type="button" class="toevoegen" onclick="voegtoe()">V</button><button type="button" class="verwijderen" onclick="verwijder()">X</button></li>
+                <li><a href="">Toon Blommaerts</a><button type="button" class="toevoegen" onclick="voegtoe()">V</button><button type="button" class="verwijderen" onclick="verwijder()">X</button></li>
+                <li><a href="">Kristof De Ridder</a><button type="button" class="toevoegen" onclick="voegtoe()">V</button><button type="button" class="verwijderen" onclick="verwijder()">X</button></li>
         </ul>
     </body>
 </html>

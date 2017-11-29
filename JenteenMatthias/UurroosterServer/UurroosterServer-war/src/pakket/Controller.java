@@ -30,11 +30,12 @@ public class Controller extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+      
         System.out.println("TEST: " + request.getUserPrincipal().getName());
         if (request.isUserInRole("beheerder")){
             
         }
+        gotoPage("/student/student.jsp", request, response);
     }
     
     public void gotoPage(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
