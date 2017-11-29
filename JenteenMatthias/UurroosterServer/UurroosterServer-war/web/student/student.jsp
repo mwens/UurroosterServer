@@ -10,42 +10,65 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
         <title>Student</title>
         <script>
-        function myFunction() {
-            // Declare variables
-            var input, filter, ul, li, a, i;
-            input = document.getElementById('myInput');
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName('li');
+            function voegtoe(){
+                var table = document.getElementById("targettable");
 
-            // Loop through all list items, and hide those who don't match the search query
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
-                }
+                var tr = document.createElement("tr");
+                var td = document.createElement("td");            
+                var student = document.getElementById("geselecteerdeStudent").value;
+                var txt = document.createTextNode(student);
+                var td2 = document.createElement("td");            
+                var txt2 = document.createTextNode("V");
+
+                td.appendChild(txt);
+                tr.appendChild(td);
+                td2.appendChild(txt2);
+                tr.appendChild(td2);
+                table.appendChild(tr);
             }
-        }
+            
+            function verwijder(){
+                var table = document.getElementById("targettable");
+
+                var tr = document.createElement("tr");
+                var td = document.createElement("td");            
+                var student = document.getElementById("geselecteerdeStudent").value;
+                var txt = document.createTextNode(student);
+                var td2 = document.createElement("td");            
+                var txt2 = document.createTextNode("X");
+
+                td.appendChild(txt);
+                tr.appendChild(td);
+                td2.appendChild(txt2);
+                tr.appendChild(td2);
+                table.appendChild(tr);
+            }
         </script>
     </head>
     <body>
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
-
-
-	<ul id="myUL">
-                <!-- verwijder en voegtoe functie moeten hier nog geïmplementeerd worden -->
-                <li><a href="">Matthias Wens</a><button type="button" class="toevoegen" onclick="voegtoe()">V</button><button type="button" class="verwijderen" onclick="verwijder()">X</button></li>
-                <li><a href="">Jente Heremans</a><button type="button" class="toevoegen" onclick="voegtoe()">V</button><button type="button" class="verwijderen" onclick="verwijder()">X</button></li>
-                <li><a href="">Jeroen Streulens</a><button type="button" class="toevoegen" onclick="voegtoe()">V</button><button type="button" class="verwijderen" onclick="verwijder()">X</button></li>
-                <li><a href="">Wouter Mauriën</a><button type="button" class="toevoegen" onclick="voegtoe()">V</button><button type="button" class="verwijderen" onclick="verwijder()">X</button></li>
-                <li><a href="">Toon Blommaerts</a><button type="button" class="toevoegen" onclick="voegtoe()">V</button><button type="button" class="verwijderen" onclick="verwijder()">X</button></li>
-                <li><a href="">Kristof De Ridder</a><button type="button" class="toevoegen" onclick="voegtoe()">V</button><button type="button" class="verwijderen" onclick="verwijder()">X</button></li>
-        </ul>
+        <div class="header">
+            <h1>Studentenportaal</h1>
+        </div>
+        <form>
+            <input list="Studenten" name="Studenten" id="geselecteerdeStudent">
+            <datalist id="Studenten">
+                <option value="Matthias Wens">
+                <option value="Jente Heremans">
+                <option value="Jeroen Streulens">
+                <option value="Wouter Mauriën">
+                <option value="Toon Blommaerts">
+                <option value="Kristof De Ridder">
+            </datalist>
+            <button type="button" class="toevoegen" onclick="voegtoe()">V</button>
+            <button type="button" class="verwijderen" onclick="verwijder()">X</button>
+        </form>
+        <table id="targettable">
+            <tr>
+                <th>Student</th><th>Voorkeur</th>
+            </tr>           
+        </table>
     </body>
 </html>
