@@ -7,38 +7,44 @@
  * Author:  Jente
  * Created: 21-nov-2017
  */
+drop table URS_StudentRelatie;
+drop table URS_Student;
+drop table URS_Klas;
+drop table URS_Gebruiker;
 
-
-create table URS_Docent(
-        id      int,
-        naam    varchar2(32)    not null,
-        ww      varchar2(32)    not null,
-        primary key(id)
+create table URS_Gebruiker(
+        userId      int,
+        naam    varchar(32)     not null unique,
+        ww      varchar(32)     not null,
+        /* security groep (niet klasgroep!) */
+        groep   varchar(32)     not null,
+        primary key(userId)
         );
 
-create table URS_Groep(
-        id      int,
-        naam    varchar2(32)    not null,
+create table URS_Klas(
+        klasId  int,
+        naam    varchar(32)     not null unique,
+        /* 0 = OPEN, 1 = GESLOTEN */
         status  int             not null,
-        primary key(id)
+        primary key(klasId)
         );
 
 create table URS_Student(
-        id      int,
-        naam    varchar2(32)    not null,
-        ww      varchar2(32)    not null,
-        /* 0 = OPEN, 1 = GESLOTEN */
+        userId  int             not null,
+        klasId  int,
+        /* 0 = Select, 1 = Bevestig + overzicht, 2 = overzicht */
         status  int             not null,
-        groep   int             null,
-        primary key(id),
-        foreign key(groep) references URSGroep
+        foreign key(userId) references URS_Gebruiker,
+        foreign key(klasId) references URS_Klas,
+        primary key(userId)
         );
         
 create table URS_StudentRelatie(
         student int             not null,
         collega int             not null,
-        /* 0 = Niet gebruikt voor test situaties, 1 = WEL, 2 = NIET */
+        /* 0 = enkel voor test, 1 = WEL samen, 2 = NIET samen */
         relatie int             not null,
-        foreign key(student) references URS_Student,
-        foreign key(collega) references URS_Student
+        foreign key(student) references URS_Gebruiker,
+        foreign key(collega) references URS_Gebruiker,
+        primary key(student, collega)
         );

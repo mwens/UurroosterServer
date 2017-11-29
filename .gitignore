@@ -1,0 +1,9 @@
+/JenteenMatthias/UurroosterServer-Client/build/
+/JenteenMatthias/UurroosterServer/build/
+/JenteenMatthias/UurroosterServer/UurroosterServer-ejb/build/
+/JenteenMatthias/UurroosterServer/UurroosterServer-ejb/dist/
+/JenteenMatthias/UurroosterServer/UurroosterServer-war/build/
+/JenteenMatthias/UurroosterServer/UurroosterServer-war/dist/
+/JenteenMatthias/UurroosterServer-Client/dist/
+*.properties
+*.properties
