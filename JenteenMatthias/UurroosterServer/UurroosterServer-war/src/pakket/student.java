@@ -45,6 +45,17 @@ public class student extends HttpServlet {
         studentBean.setStatus(userId, 2);
         System.out.println(studentBean.getStatus(userId));
         List<UrsStudentrelatie> l = studentBean.getRelaties(userId);
+        System.out.println("Relaties voor:");
+        for(UrsStudentrelatie sr : l){
+            System.out.println(sr.getUrsStudentrelatiePK().getCollega() + " : " + ((sr.getRelatie() == 2) ? "Niet" : "Wel"));
+        }
+        
+        studentBean.setRelatie(0, 1, 2); //Pas aan
+        studentBean.setRelatie(0, 2, 1); // Pas aan
+        studentBean.setRelatie(0, 6, 1); // Creeer
+        studentBean.setRelatie(0, 14, 0); // delete
+        System.out.println("Relaties Na:");
+        l = studentBean.getRelaties(userId);
         for(UrsStudentrelatie sr : l){
             System.out.println(sr.getUrsStudentrelatiePK().getCollega() + " : " + ((sr.getRelatie() == 2) ? "Niet" : "Wel"));
         }

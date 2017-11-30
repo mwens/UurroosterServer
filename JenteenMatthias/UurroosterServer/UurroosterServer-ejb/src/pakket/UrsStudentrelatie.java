@@ -29,7 +29,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "UrsStudentrelatie.findAll", query = "SELECT u FROM UrsStudentrelatie u")
     , @NamedQuery(name = "UrsStudentrelatie.findByStudent", query = "SELECT u FROM UrsStudentrelatie u WHERE u.ursStudentrelatiePK.student = :student")
     , @NamedQuery(name = "UrsStudentrelatie.findByCollega", query = "SELECT u FROM UrsStudentrelatie u WHERE u.ursStudentrelatiePK.collega = :collega")
-    , @NamedQuery(name = "UrsStudentrelatie.findByRelatie", query = "SELECT u FROM UrsStudentrelatie u WHERE u.relatie = :relatie")})
+    , @NamedQuery(name = "UrsStudentrelatie.findByRelatie", query = "SELECT u FROM UrsStudentrelatie u WHERE u.relatie = :relatie")
+    , @NamedQuery(name = "UrsStudentrelatie.findByPk", query = "SELECT u FROM UrsStudentrelatie u WHERE u.ursStudentrelatiePK.student = :student AND u.ursStudentrelatiePK.collega = :collega")
+    , @NamedQuery(name = "UrsStudentrelatie.deleteByPk", query = "DELETE FROM UrsStudentrelatie u WHERE u.ursStudentrelatiePK.student = :student AND u.ursStudentrelatiePK.collega = :collega")
+    , @NamedQuery(name = "UrsStudentrelatie.updateRelatie", query = "UPDATE UrsStudentrelatie u SET u.relatie = :relatie WHERE u.ursStudentrelatiePK.student = :student AND u.ursStudentrelatiePK.collega = :collega")})
 public class UrsStudentrelatie implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,6 +58,11 @@ public class UrsStudentrelatie implements Serializable {
 
     public UrsStudentrelatie(UrsStudentrelatiePK ursStudentrelatiePK, int relatie) {
         this.ursStudentrelatiePK = ursStudentrelatiePK;
+        this.relatie = relatie;
+    }
+    
+    public UrsStudentrelatie(int student, int collega, int relatie) {
+        this.ursStudentrelatiePK = new UrsStudentrelatiePK(student, collega);
         this.relatie = relatie;
     }
 

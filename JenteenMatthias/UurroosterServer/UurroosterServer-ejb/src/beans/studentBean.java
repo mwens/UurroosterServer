@@ -8,6 +8,7 @@ package beans;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import pakket.UrsStudent;
@@ -15,9 +16,6 @@ import pakket.UrsStudentrelatie;
 
 /**
  *
-relatie toevoegen (met check op al aanwezig, als er conflicten zijn dan heeft NIET voorrang op WEL)
-relatie verwijderen op basis van id
-
  * @author witmoca
  */
 @Stateless
@@ -61,15 +59,90 @@ public class studentBean implements studentBeanLocal {
         return l;
     }
     
+    /** relatie toevoegen
+     *
+     * @param userId student die een relatie heeft met iemand
+     * @param collegaId student met wie de relatie gevormd wordt   
+     * @param relatie status van de relatie
+     */
+    public void addRelatie(int userId, int collegaId, int relatie){
+        if(userId == collegaId)
+            return;
+        UrsStudentrelatie usr = new UrsStudentrelatie(userId, collegaId, relatie);
+        em.persist(usr);
+    }
+    
+    /** relatie verwijderen
+     *
+     * @param userId
+     * @param collegaId
+     */
+    public void deleteRelatie(int userId, int collegaId){
+        Query q = em.createNamedQuery("UrsStudentrelatie.deleteByPk");
+        q.setParameter("student",userId);
+        q.setParameter("collega",collegaId);
+        q.executeUpdate();
+    }
+    
+    /** relatie toevoegen, aanpassen of verwijderen
+     *
+     * @param userId student die een relatie heeft met iemand
+     * @param collegaId student met wie de relatie gevormd wordt   
+     * @param relatie staat waarnaartoe wordt veranderd/toegevoegd (0 indien moet worden verwijderd)
+     */
+    @Override
+    public void setRelatie(int userId, int collegaId, int relatie){
+        UrsStudentrelatie usr = this.getRelatie(userId, collegaId);
+        
+        // Case: verwijder onbestaande
+        if(usr == null && relatie == 0)
+            return;
+        
+        // Case: verwijder bestaande
+        if(relatie == 0){
+            this.deleteRelatie(userId, collegaId);
+            return;
+        }
+        
+        // Case: add onbestaande
+        if(usr == null){
+            this.addRelatie(userId, collegaId, relatie);
+            return;
+        }
+        
+        // Case: pas bstaande aan
+        Query q = em.createNamedQuery("UrsStudentrelatie.updateRelatie");
+        q.setParameter("relatie",relatie);
+        q.setParameter("student", userId);
+        q.setParameter("collega", collegaId);
+        q.executeUpdate();
+    }
+    
     /**
      *
      * @param userId de userId van de student
-     * @return UrsStudent voorstelling
+     * @return UrsStudent object
      */
-    @Override
     public UrsStudent getStudent(int userId){
         Query q = em.createNamedQuery("UrsStudent.findByUserid");
         q.setParameter("userid", userId);
         return (UrsStudent) q.getSingleResult();
+    }
+    
+    /**
+     * 
+     * @param userId student die een relatie heeft met iemand
+     * @param collegaId student met wie de relatie gevormd wordt   
+     * @return student relatie object of null als de relatie niet bestaat
+     */
+    public UrsStudentrelatie getRelatie(int userId, int collegaId){
+        Query q = em.createNamedQuery("UrsStudentrelatie.findByPk");
+        q.setParameter("student",userId);
+        q.setParameter("collega",collegaId);
+        try{
+            return (UrsStudentrelatie) q.getSingleResult();
+        } catch (NoResultException e) {  
+        }
+        return null;
     }
 }
