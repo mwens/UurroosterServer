@@ -58,5 +58,7 @@ INSERT into URS_StudentRelatie VALUES (0,1,1);
 INSERT into URS_StudentRelatie VALUES (0,14,2);
 INSERT into URS_StudentRelatie VALUES (0,16,1);
 INSERT into URS_StudentRelatie VALUES (0,3,1);
-
+INSERT into URS_StudentRelatie VALUES (1,4,2);
+INSERT into URS_StudentRelatie VALUES (1,0,2);
+INSERT into URS_StudentRelatie VALUES (1,7,1);
 

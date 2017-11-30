@@ -13,9 +13,6 @@ import javax.ejb.Local;
  */
 @Local
 public interface commonBeanLocal {
-
     public int getUserId(String userNaam);
-
     public String getUserName(int userId);
-    
 }

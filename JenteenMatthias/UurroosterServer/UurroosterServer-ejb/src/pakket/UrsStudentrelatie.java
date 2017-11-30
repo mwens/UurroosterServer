@@ -78,22 +78,6 @@ public class UrsStudentrelatie implements Serializable {
         this.relatie = relatie;
     }
 
-    public UrsGebruiker getUrsGebruiker() {
-        return ursGebruiker;
-    }
-
-    public void setUrsGebruiker(UrsGebruiker ursGebruiker) {
-        this.ursGebruiker = ursGebruiker;
-    }
-
-    public UrsGebruiker getUrsGebruiker1() {
-        return ursGebruiker1;
-    }
-
-    public void setUrsGebruiker1(UrsGebruiker ursGebruiker1) {
-        this.ursGebruiker1 = ursGebruiker1;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;

@@ -5,8 +5,10 @@
  */
 package beans;
 
+import java.util.List;
 import javax.ejb.Local;
 import pakket.UrsStudent;
+import pakket.UrsStudentrelatie;
 
 /**
  *
@@ -14,11 +16,10 @@ import pakket.UrsStudent;
  */
 @Local
 public interface studentBeanLocal {
-
-    public UrsStudent getStudent(int userId);
-
     public int getStatus(int userId);
-
     public void setStatus(int userId, int status);
     
+    public UrsStudent getStudent(int userId);
+
+    public List<UrsStudentrelatie> getRelaties(int userId);
 }

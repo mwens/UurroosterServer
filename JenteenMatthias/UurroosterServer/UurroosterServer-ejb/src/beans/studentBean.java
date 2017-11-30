@@ -5,15 +5,16 @@
  */
 package beans;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import pakket.UrsStudent;
+import pakket.UrsStudentrelatie;
 
 /**
- * 
-relaties ophalen op basis van id (enkel relaties die user zelf heeft gemaakt)
+ *
 relatie toevoegen (met check op al aanwezig, als er conflicten zijn dan heeft NIET voorrang op WEL)
 relatie verwijderen op basis van id
 
@@ -45,6 +46,19 @@ public class studentBean implements studentBeanLocal {
         q.setParameter("userid",userId);
         q.setParameter("status",status);
         q.executeUpdate();
+    }
+    
+    /** relaties ophalen op basis van id (enkel relaties die user zelf heeft gemaakt)
+     *
+     * @param userId id van student
+     * @return lijst van studentrelaties die de student zelf heeft bepaald
+     */
+    @Override
+    public List<UrsStudentrelatie> getRelaties(int userId){
+        Query q = em.createNamedQuery("UrsStudentrelatie.findByStudent");
+        q.setParameter("student",userId);
+        List<UrsStudentrelatie> l = q.getResultList();
+        return l;
     }
     
     /**

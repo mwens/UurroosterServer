@@ -9,6 +9,7 @@ import beans.commonBeanLocal;
 import beans.studentBeanLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,6 +44,10 @@ public class student extends HttpServlet {
         System.out.println(studentBean.getStatus(userId));
         studentBean.setStatus(userId, 2);
         System.out.println(studentBean.getStatus(userId));
+        List<UrsStudentrelatie> l = studentBean.getRelaties(userId);
+        for(UrsStudentrelatie sr : l){
+            System.out.println(sr.getUrsStudentrelatiePK().getCollega() + " : " + ((sr.getRelatie() == 2) ? "Niet" : "Wel"));
+        }
         gotoPage("/student/student.jsp",request, response);
     }
 
