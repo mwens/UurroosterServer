@@ -8,6 +8,14 @@ and open the template in the editor.
     Author     : Matthias Wens
 */
 
+body{
+    background-color: #8cb8ff;
+}
+
+.header{
+    background-color: #0061ff;
+}
+
 #myInput {
     background-image: url('/css/searchicon.png'); /* Add a search icon to input */
     background-position: 10px 12px; /* Position the search icon */

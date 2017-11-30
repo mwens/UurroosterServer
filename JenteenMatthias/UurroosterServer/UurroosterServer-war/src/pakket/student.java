@@ -5,18 +5,29 @@
  */
 package pakket;
 
+import beans.commonBeanLocal;
+import beans.studentBeanLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author witmoca
  */
 public class student extends HttpServlet {
+    @EJB
+    private studentBeanLocal studentBean;
+    @EJB
+    private commonBeanLocal commonBean;
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,21 +40,32 @@ public class student extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet student</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet student at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        int userId = commonBean.getUserId(request.getUserPrincipal().getName());
+        System.out.println(studentBean.getStatus(userId));
+        studentBean.setStatus(userId, 2);
+        System.out.println(studentBean.getStatus(userId));
+        List<UrsStudentrelatie> l = studentBean.getRelaties(userId);
+        System.out.println("Relaties voor:");
+        for(UrsStudentrelatie sr : l){
+            System.out.println(sr.getUrsStudentrelatiePK().getCollega() + " : " + ((sr.getRelatie() == 2) ? "Niet" : "Wel"));
         }
+        
+        studentBean.setRelatie(0, 1, 2); //Pas aan
+        studentBean.setRelatie(0, 2, 1); // Pas aan
+        studentBean.setRelatie(0, 6, 1); // Creeer
+        studentBean.setRelatie(0, 14, 0); // delete
+        System.out.println("Relaties Na:");
+        l = studentBean.getRelaties(userId);
+        for(UrsStudentrelatie sr : l){
+            System.out.println(sr.getUrsStudentrelatiePK().getCollega() + " : " + ((sr.getRelatie() == 2) ? "Niet" : "Wel"));
+        }
+        gotoPage("/student/student.jsp",request, response);
     }
 
+    public void gotoPage(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        RequestDispatcher view = request.getRequestDispatcher(jsp);
+        view.forward(request, response);
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

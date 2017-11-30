@@ -18,22 +18,45 @@
 
                 var tr = document.createElement("tr");
                 var td = document.createElement("td");            
-                var student = document.getElementsByName("studenten");
+                var student = document.getElementById("geselecteerdeStudent").value;
                 var txt = document.createTextNode(student);
+                var td2 = document.createElement("td");            
+                var txt2 = document.createTextNode("V");
 
                 td.appendChild(txt);
                 tr.appendChild(td);
+                td2.appendChild(txt2);
+                tr.appendChild(td2);
+                table.appendChild(tr);
+            }
+            
+            function verwijder(){
+                var table = document.getElementById("targettable");
+
+                var tr = document.createElement("tr");
+                var td = document.createElement("td");            
+                var student = document.getElementById("geselecteerdeStudent").value;
+                var txt = document.createTextNode(student);
+                var td2 = document.createElement("td");            
+                var txt2 = document.createTextNode("X");
+
+                td.appendChild(txt);
+                tr.appendChild(td);
+                td2.appendChild(txt2);
+                tr.appendChild(td2);
                 table.appendChild(tr);
             }
         </script>
     </head>
     <body>
+        <div class="header">
+            <h1>Studentenportaal</h1>
+        </div>
         <form>
-            <input list="Studenten" name="Studenten">
+            <input list="Studenten" name="Studenten" id="geselecteerdeStudent">
             <datalist id="Studenten">
                 <option value="Matthias Wens">
                 <option value="Jente Heremans">
-                <option value="Jeroen Streulens">
                 <option value="Jeroen Streulens">
                 <option value="Wouter Mauriën">
                 <option value="Toon Blommaerts">

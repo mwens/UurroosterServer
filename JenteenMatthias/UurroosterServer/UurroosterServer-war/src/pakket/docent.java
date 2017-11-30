@@ -7,6 +7,7 @@ package pakket;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +43,11 @@ public class docent extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         }
+    }
+    
+    public void gotoPage(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        RequestDispatcher view = request.getRequestDispatcher(jsp);
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
