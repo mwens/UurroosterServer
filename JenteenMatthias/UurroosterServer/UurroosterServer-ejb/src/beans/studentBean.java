@@ -8,13 +8,11 @@ package beans;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import pakket.UrsStudent;
 
 /**
  * 
-
-status ophalen op basis van id
-status veranderen op basis van id
-
 relaties ophalen op basis van id (enkel relaties die user zelf heeft gemaakt)
 relatie toevoegen (met check op al aanwezig, als er conflicten zijn dan heeft NIET voorrang op WEL)
 relatie verwijderen op basis van id
@@ -26,4 +24,38 @@ public class studentBean implements studentBeanLocal {
     @PersistenceContext(unitName = "UurroosterServer-ejbPU")
     private EntityManager em;
     
+    /** status ophalen op basis van id
+     *
+     * @param userId de userId van de student
+     * @return status van student
+     */
+    @Override
+    public int getStatus(int userId){
+        return this.getStudent(userId).getStatus();
+    }
+    
+    /** status veranderen op basis van id
+     *
+     * @param userId de userId van de student
+     * @param status de nieuwe status
+     */
+    @Override
+    public void setStatus(int userId, int status){
+        Query q = em.createNamedQuery("UrsStudent.updateStatus");
+        q.setParameter("userid",userId);
+        q.setParameter("status",status);
+        q.executeUpdate();
+    }
+    
+    /**
+     *
+     * @param userId de userId van de student
+     * @return UrsStudent voorstelling
+     */
+    @Override
+    public UrsStudent getStudent(int userId){
+        Query q = em.createNamedQuery("UrsStudent.findByUserid");
+        q.setParameter("userid", userId);
+        return (UrsStudent) q.getSingleResult();
+    }
 }

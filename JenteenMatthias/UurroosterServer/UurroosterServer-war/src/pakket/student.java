@@ -6,6 +6,7 @@
 package pakket;
 
 import beans.commonBeanLocal;
+import beans.studentBeanLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -21,9 +22,11 @@ import javax.servlet.http.HttpSession;
  * @author witmoca
  */
 public class student extends HttpServlet {
-
+    @EJB
+    private studentBeanLocal studentBean;
     @EJB
     private commonBeanLocal commonBean;
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,7 +40,9 @@ public class student extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int userId = commonBean.getUserId(request.getUserPrincipal().getName());
-        
+        System.out.println(studentBean.getStatus(userId));
+        studentBean.setStatus(userId, 2);
+        System.out.println(studentBean.getStatus(userId));
         gotoPage("/student/student.jsp",request, response);
     }
 

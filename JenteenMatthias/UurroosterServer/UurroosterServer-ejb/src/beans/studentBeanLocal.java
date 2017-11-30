@@ -6,6 +6,7 @@
 package beans;
 
 import javax.ejb.Local;
+import pakket.UrsStudent;
 
 /**
  *
@@ -13,5 +14,11 @@ import javax.ejb.Local;
  */
 @Local
 public interface studentBeanLocal {
+
+    public UrsStudent getStudent(int userId);
+
+    public int getStatus(int userId);
+
+    public void setStatus(int userId, int status);
     
 }
