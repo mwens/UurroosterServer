@@ -70,5 +70,9 @@
                 <th>Student</th><th>Voorkeur</th>
             </tr>           
         </table>
+        <form method="post" action="<% out.println(response.encodeURL("common/index.jsp")); %>">
+            <input type="hidden" name="stage" value="afmelden">
+            <button type="submit">Afmelden</button>
+        </form>
     </body>
 </html>
