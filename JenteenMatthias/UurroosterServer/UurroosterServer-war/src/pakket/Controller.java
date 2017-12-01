@@ -7,11 +7,13 @@ package pakket;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.faces.context.FacesContext;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,8 +31,13 @@ public class Controller extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-     
+            throws ServletException, IOException {     
+        String stage = request.getParameter("stage");
+        System.out.println(stage);
+        if("afmelden".equals(stage)){
+            HttpSession sessie = request.getSession();
+            sessie.invalidate();
+        }
         if (request.isUserInRole("student")){
             gotoPage("/student.do",request, response);
             return;
