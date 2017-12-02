@@ -68,12 +68,10 @@
             <tr>
                 <th>Student</th>
             </tr>     
-            <c:forEach var="i" items="${sessionScope['studentenRelaties']}">
-                <c:if test="${i.getRelatie()} = 1">
-                    <tr>
-                        <td><c:out value='${i.getNaam()}'/></td>
-                    </tr>
-                </c:if>
+            <c:forEach var="j" items="${sessionScope['studentenRelatiesWel']}">
+                <tr>
+                    <td><c:out value='${j}'/></td>
+                </tr> 
             </c:forEach>
         </table>
         </div>
@@ -93,12 +91,10 @@
             <tr>
                 <th>Student</th>
             </tr>
-            <c:forEach var="i" items="${sessionScope['studentenRelaties']}">
-                <c:if test="${i.getRelatie()} = 2">
-                    <tr>
-                        <td><c:out value='${i.getNaam()}'/></td>
-                    </tr>
-                </c:if>
+            <c:forEach var="j" items="${sessionScope['studentenRelatiesNiet']}">
+                <tr>
+                    <td><c:out value='${j}'/></td>
+                </tr>
             </c:forEach>
         </table>
         </div>

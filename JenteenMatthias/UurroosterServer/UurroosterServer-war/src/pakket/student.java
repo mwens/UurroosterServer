@@ -8,10 +8,9 @@ package pakket;
 import beans.commonBeanLocal;
 import beans.studentBeanLocal;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.context.FacesContext;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,16 +40,11 @@ public class student extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
         int userId = commonBean.getUserId(request.getUserPrincipal().getName());
-        System.out.println(studentBean.getStatus(userId));
         HttpSession sessie = request.getSession();   
-        studentBean.setStatus(userId, 2);
-        System.out.println(studentBean.getStatus(userId));
-        List<UrsStudentrelatie> l = studentBean.getRelaties(userId);
-        System.out.println("Relaties voor:");
-        for(UrsStudentrelatie sr : l){
-            System.out.println(sr.getUrsStudentrelatiePK().getCollega() + " : " + ((sr.getRelatie() == 2) ? "Niet" : "Wel"));
-        }
+
         
         
         /*Vanaf hier stuk nieuwe code matthias*/
@@ -72,19 +66,26 @@ public class student extends HttpServlet {
             studentBean.setRelatie(userId,collegaId, 2);
             System.out.println("relatie toegevoegd X");
         }
+       
+        // Stel nodige info op voor student .jsp
+
+        List<UrsStudentrelatie> l = studentBean.getRelaties(userId);
         
-        /*Tot hier stuk nieuwe code matthias*/
+        List<String> welCollegas = new ArrayList<String>();
+        List<String> nietCollegas = new ArrayList<String>();
         
-        //studentBean.setRelatie(0, 1, 2); //Pas aan
-        //studentBean.setRelatie(0, 2, 1); // Pas aan
-        //studentBean.setRelatie(0, 6, 1); // Creeer
-        //studentBean.setRelatie(0, 14, 0); // delete
-        System.out.println("Relaties Na:");
-        l = studentBean.getRelaties(userId);
-        sessie.setAttribute("studentenRelaties", l);
-        for(UrsStudentrelatie sr : l){
-            System.out.println(sr.getUrsStudentrelatiePK().getCollega() + " : " + ((sr.getRelatie() == 2) ? "Niet" : "Wel"));
+        for(UrsStudentrelatie usr : l){
+            if(usr.getRelatie() == 1)
+                welCollegas.add(commonBean.getUserName(usr.getUrsStudentrelatiePK().getCollega()));
+            if(usr.getRelatie() == 2)
+                nietCollegas.add(commonBean.getUserName(usr.getUrsStudentrelatiePK().getCollega()));
         }
+        System.out.println("1: " + welCollegas.size());
+        System.out.println("2: " + nietCollegas.size());
+        
+        sessie.setAttribute("studentenRelatiesWel", welCollegas);
+        sessie.setAttribute("studentenRelatiesNiet", nietCollegas);
+        
         gotoPage("/student/student.jsp",request, response);
     }
 
