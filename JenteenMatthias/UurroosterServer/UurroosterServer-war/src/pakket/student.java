@@ -41,11 +41,35 @@ public class student extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int userId = commonBean.getUserId(request.getUserPrincipal().getName());
+        System.out.println(studentBean.getStatus(userId));
+        
         HttpSession sessie = request.getSession();
         List<UrsGebruiker> studenten = commonBean.getStudentenLijst(request.getUserPrincipal().getName());
         sessie.setAttribute("studenten", studenten);
-        int userId = commonBean.getUserId(request.getUserPrincipal().getName());
-        System.out.println(studentBean.getStatus(userId));
+        String stage = request.getParameter("stage");
+        System.out.println(stage);
+        
+        if("voegtoe".equals(stage)){
+            System.out.println(request.getParameter("SelectedStudent"));
+            int collegaId = commonBean.getUserId(request.getParameter("SelectedStudent"));
+            studentBean.setRelatie(userId,collegaId, 1);
+            System.out.println("relatie toegevoegd V");
+        }
+        if("verwijder".equals(stage)){
+            System.out.println(request.getParameter("SelectedStudent"));
+            int collegaId = commonBean.getUserId(request.getParameter("SelectedStudent"));
+            studentBean.setRelatie(userId,collegaId, 2);
+            System.out.println("relatie toegevoegd X");
+        }
+        List<UrsStudentrelatie> studentenRelaties = studentBean.getRelaties(userId); 
+        sessie.setAttribute("studentenRelaties", studentenRelaties);
+        
+        
+        
+        
+        
+        
         studentBean.setStatus(userId, 2);
         System.out.println(studentBean.getStatus(userId));
         List<UrsStudentrelatie> l = studentBean.getRelaties(userId);

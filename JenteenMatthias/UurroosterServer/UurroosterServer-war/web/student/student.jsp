@@ -12,8 +12,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
         <title>Student</title>
-        <script>
-            function voegtoe(){
+        <!-- <script>
+            function voegtoe(){                
                 var table = document.getElementById("targettable");
 
                 var tr = document.createElement("tr");
@@ -46,27 +46,62 @@
                 tr.appendChild(td2);
                 table.appendChild(tr);
             }
-        </script>
+        </script> -->
     </head>
     <body>
         <div class="header">
             <h1>Studentenportaal</h1>
         </div>
+        <div class="toevoegdiv">
         <form>
-            <input list="Studenten" name="Studenten" id="geselecteerdeStudent">
+            <h2>Wel mee samen:</h2>
+            <input list="Studenten" name="SelectedStudent" id="geselecteerdeStudent">
             <datalist id="Studenten">
                 <c:forEach var="i" items="${sessionScope['studenten']}">
                     <option value="<c:out value='${i.getNaam()}'/>">
                 </c:forEach>
             </datalist>
-            <button type="button" class="toevoegen" onclick="voegtoe()">V</button>
-            <button type="button" class="verwijderen" onclick="verwijder()">X</button>
+            <input type="hidden" name="stage" value="voegtoe">
+            <button type="submit" class="toevoegen">V</button>
         </form>
-        <table id="targettable">
+        <table id="toevoegtable">
             <tr>
-                <th>Student</th><th>Voorkeur</th>
-            </tr>           
+                <th>Student</th>
+            </tr>     
+            <c:forEach var="i" items="${sessionScope['studentenRelaties']}">
+                <c:if test="${i.getRelatie()} = 1">
+                    <tr>
+                        <td><c:out value='${i.getNaam()}'/></td>
+                    </tr>
+                </c:if>
+            </c:forEach>
         </table>
+        </div>
+        <div class="verwijderdiv">
+        <form>
+            <h2>Niet mee samen:</h2>
+            <input list="Studenten" name="SelectedStudent" id="geselecteerdeStudent">
+            <datalist id="Studenten">
+                <c:forEach var="i" items="${sessionScope['studenten']}">
+                    <option value="<c:out value='${i.getNaam()}'/>">
+                </c:forEach>
+            </datalist>
+            <input type="hidden" name="stage" value="verwijder">
+            <button type="submit" class="verwijderen">X</button>
+        </form>
+        <table id="verwijdertable">
+            <tr>
+                <th>Student</th>
+            </tr>
+            <c:forEach var="i" items="${sessionScope['studentenRelaties']}">
+                <c:if test="${i.getRelatie()} = 2">
+                    <tr>
+                        <td><c:out value='${i.getNaam()}'/></td>
+                    </tr>
+                </c:if>
+            </c:forEach>
+        </table>
+        </div>
         <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
             <input type="hidden" name="stage" value="afmelden">
             <button type="submit">Afmelden</button>

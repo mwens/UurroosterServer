@@ -69,3 +69,21 @@ body{
     background-color: red;
     color: white;
 }
+
+#toevoegtable{
+    background-color: green;
+}
+
+#verwijdertable{
+    background-color: red;
+}
+
+.toevoegdiv{
+    position: absolute;
+    top: 10%;
+}
+.verwijderdiv{
+    position: absolute;
+    left: 50%;
+    top: 10%;
+}
