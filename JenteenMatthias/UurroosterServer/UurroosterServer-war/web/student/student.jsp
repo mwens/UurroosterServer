@@ -63,7 +63,7 @@
             </datalist>
             <input type="hidden" name="stage" value="voegtoe">
             <button type="submit" class="toevoegen">V</button>
-        </form>
+        </form><br/>
         <table id="toevoegtable">
             <tr>
                 <th>Student</th>
@@ -87,6 +87,7 @@
             <input type="hidden" name="stage" value="verwijder">
             <button type="submit" class="verwijderen">X</button>
         </form>
+            <br/>
         <table id="verwijdertable">
             <tr>
                 <th>Student</th>
