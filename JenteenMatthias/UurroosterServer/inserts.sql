@@ -12,7 +12,7 @@
 INSERT into URS_Gebruiker VALUES (0,'Matthias Wens','PassW0rd','student');
 INSERT into URS_Gebruiker VALUES (1,'Jente Heremans','PassW0rd','student');
 INSERT into URS_Gebruiker VALUES (2,'Jeroentje Streulens','PassW0rd','student');
-INSERT into URS_Gebruiker VALUES (3,'Wouter Mauriën','PassW0rd','student');
+INSERT into URS_Gebruiker VALUES (3,'Wouter Maurien','PassW0rd','student');
 INSERT into URS_Gebruiker VALUES (4,'Wouter Raes','PassW0rd','student');
 INSERT into URS_Gebruiker VALUES (5,'Pieterjan Peetermans','PassW0rd','student');
 INSERT into URS_Gebruiker VALUES (6,'Nele Annaert','PassW0rd','student');
