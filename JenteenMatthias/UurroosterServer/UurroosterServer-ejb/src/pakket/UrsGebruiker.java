@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "UrsGebruiker.findByUserid", query = "SELECT u FROM UrsGebruiker u WHERE u.userid = :userid")
     , @NamedQuery(name = "UrsGebruiker.findByNaam", query = "SELECT u FROM UrsGebruiker u WHERE u.naam = :naam")
     , @NamedQuery(name = "UrsGebruiker.findByWw", query = "SELECT u FROM UrsGebruiker u WHERE u.ww = :ww")
-    , @NamedQuery(name = "UrsGebruiker.findByGroep", query = "SELECT u FROM UrsGebruiker u WHERE u.groep = :groep")})
+    , @NamedQuery(name = "UrsGebruiker.findByGroep", query = "SELECT u FROM UrsGebruiker u WHERE u.groep = :groep")
+    , @NamedQuery(name = "UrsGebruiker.findOthersByGroep", query = "SELECT u FROM UrsGebruiker u WHERE u.groep = :groep and u.naam != :naam")})
 public class UrsGebruiker implements Serializable {
 
     private static final long serialVersionUID = 1L;

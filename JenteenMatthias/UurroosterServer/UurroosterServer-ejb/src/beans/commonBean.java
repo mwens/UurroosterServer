@@ -5,6 +5,7 @@
  */
 package beans;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,5 +44,19 @@ public class commonBean implements commonBeanLocal {
         q.setParameter("userid", userId);
         UrsGebruiker user = (UrsGebruiker) q.getSingleResult();
         return user.getNaam();
+    }
+    
+    /** Een lijst van alle studententen ophalen
+     * 
+     * @param naam
+     * @return Lijst van studenten
+     */
+    @Override
+    public List<UrsGebruiker> getStudentenLijst(String naam){
+        Query q = em.createNamedQuery("UrsGebruiker.findOthersByGroep");
+        q.setParameter("groep", "student");
+        q.setParameter("naam", naam);
+        List<UrsGebruiker> studenten = (List<UrsGebruiker>) q.getResultList();
+        return studenten;
     }
 }

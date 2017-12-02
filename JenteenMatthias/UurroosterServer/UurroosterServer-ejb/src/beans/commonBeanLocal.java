@@ -5,7 +5,9 @@
  */
 package beans;
 
+import java.util.List;
 import javax.ejb.Local;
+import pakket.UrsGebruiker;
 
 /**
  *
@@ -15,4 +17,6 @@ import javax.ejb.Local;
 public interface commonBeanLocal {
     public int getUserId(String userNaam);
     public String getUserName(int userId);
+
+    public List<UrsGebruiker> getStudentenLijst(String naam);
 }

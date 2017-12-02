@@ -55,12 +55,9 @@
         <form>
             <input list="Studenten" name="Studenten" id="geselecteerdeStudent">
             <datalist id="Studenten">
-                <option value="Matthias Wens">
-                <option value="Jente Heremans">
-                <option value="Jeroen Streulens">
-                <option value="Wouter Mauriën">
-                <option value="Toon Blommaerts">
-                <option value="Kristof De Ridder">
+                <c:forEach var="i" items="${sessionScope['studenten']}">
+                    <option value="<c:out value='${i.getNaam()}'/>">
+                </c:forEach>
             </datalist>
             <button type="button" class="toevoegen" onclick="voegtoe()">V</button>
             <button type="button" class="verwijderen" onclick="verwijder()">X</button>
@@ -70,7 +67,7 @@
                 <th>Student</th><th>Voorkeur</th>
             </tr>           
         </table>
-        <form method="post" action="<% out.println(response.encodeURL("common/index.jsp")); %>">
+        <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
             <input type="hidden" name="stage" value="afmelden">
             <button type="submit">Afmelden</button>
         </form>

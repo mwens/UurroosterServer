@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Docentenportaal</h1>
-        <form method="post" action="<% out.println(response.encodeURL("common/index.jsp")); %>">
+        <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
             <input type="hidden" name="stage" value="afmelden">
             <button type="submit">Afmelden</button>
         </form>

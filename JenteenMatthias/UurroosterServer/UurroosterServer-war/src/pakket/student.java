@@ -41,6 +41,9 @@ public class student extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession sessie = request.getSession();
+        List<UrsGebruiker> studenten = commonBean.getStudentenLijst(request.getUserPrincipal().getName());
+        sessie.setAttribute("studenten", studenten);
         int userId = commonBean.getUserId(request.getUserPrincipal().getName());
         System.out.println(studentBean.getStatus(userId));
         studentBean.setStatus(userId, 2);
