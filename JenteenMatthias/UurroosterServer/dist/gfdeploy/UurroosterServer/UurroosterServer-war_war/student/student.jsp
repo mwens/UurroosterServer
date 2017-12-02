@@ -69,7 +69,7 @@
                 <th>Student</th>
             </tr>     
             <c:forEach var="i" items="${sessionScope['studentenRelaties']}">
-                <c:if test="${i.getRelatie()} = 1">
+                <c:if test="${i.getRelatie()} = '1'">
                     <tr>
                         <td><c:out value='${i.getNaam()}'/></td>
                     </tr>
@@ -94,7 +94,7 @@
                 <th>Student</th>
             </tr>
             <c:forEach var="i" items="${sessionScope['studentenRelaties']}">
-                <c:if test="${i.getRelatie()} = 2">
+                <c:if test="${i.getRelatie()} = '2'">
                     <tr>
                         <td><c:out value='${i.getNaam()}'/></td>
                     </tr>
