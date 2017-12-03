@@ -12,41 +12,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
         <title>Student</title>
-        <!-- <script>
-            function voegtoe(){                
-                var table = document.getElementById("targettable");
-
-                var tr = document.createElement("tr");
-                var td = document.createElement("td");            
-                var student = document.getElementById("geselecteerdeStudent").value;
-                var txt = document.createTextNode(student);
-                var td2 = document.createElement("td");            
-                var txt2 = document.createTextNode("V");
-
-                td.appendChild(txt);
-                tr.appendChild(td);
-                td2.appendChild(txt2);
-                tr.appendChild(td2);
-                table.appendChild(tr);
-            }
-            
-            function verwijder(){
-                var table = document.getElementById("targettable");
-
-                var tr = document.createElement("tr");
-                var td = document.createElement("td");            
-                var student = document.getElementById("geselecteerdeStudent").value;
-                var txt = document.createTextNode(student);
-                var td2 = document.createElement("td");            
-                var txt2 = document.createTextNode("X");
-
-                td.appendChild(txt);
-                tr.appendChild(td);
-                td2.appendChild(txt2);
-                tr.appendChild(td2);
-                table.appendChild(tr);
-            }
-        </script> -->
     </head>
     <body>
         <div class="header">
@@ -95,6 +60,13 @@
             <c:forEach var="j" items="${sessionScope['studentenRelatiesNiet']}">
                 <tr>
                     <td><c:out value='${j}'/></td>
+		    <td>
+			<form method="post" action="<% out.println(response.encodeURL("")); %>">
+			    <input type="hidden" name="stage" value="verwijdleren">
+			    <input type="hidden" name="verwijderen" value="${j}"
+			    <button class="verwijderen" type="submit">X</button>
+			</form>
+		    </td>
                 </tr>
             </c:forEach>
         </table>

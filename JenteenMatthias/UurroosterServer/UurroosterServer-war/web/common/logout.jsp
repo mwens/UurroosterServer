@@ -12,6 +12,7 @@
         <title>Log Out</title>
     </head>
     <body>
+	<h1>Afmelden geslaagd!</h1>
         <form>
             <input type="hidden" name="stage" value="geslaagd">
         </form>
