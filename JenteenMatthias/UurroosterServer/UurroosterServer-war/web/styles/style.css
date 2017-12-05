@@ -72,10 +72,12 @@ body{
 
 #toevoegtable{
     background-color: green;
+    width: 175px;
 }
 
 #verwijdertable{
     background-color: red;
+    width: 175px;
 }
 
 .toevoegdiv{

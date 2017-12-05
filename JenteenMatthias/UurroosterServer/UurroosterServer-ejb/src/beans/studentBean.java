@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import pakket.UrsStudent;
 import pakket.UrsStudentrelatie;
+import pakket.UrsStudentrelatiePK;
 
 /**
  *
