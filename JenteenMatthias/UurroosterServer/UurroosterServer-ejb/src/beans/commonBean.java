@@ -27,10 +27,16 @@ public class commonBean implements commonBeanLocal {
      */
     @Override
     public int getUserId(String userNaam){
-        Query q = em.createNamedQuery("UrsGebruiker.findByNaam");
-        q.setParameter("naam", userNaam);
-        UrsGebruiker user = (UrsGebruiker) q.getSingleResult();
-        return user.getUserid();
+        try{
+            Query q = em.createNamedQuery("UrsGebruiker.findByNaam");
+            q.setParameter("naam", userNaam);
+            UrsGebruiker user = (UrsGebruiker) q.getSingleResult();
+            return user.getUserid();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return -1;
+        }
     }
     
     /** naam ophalen op basis van id
