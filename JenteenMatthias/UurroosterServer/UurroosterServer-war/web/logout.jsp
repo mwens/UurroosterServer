@@ -16,6 +16,6 @@
         <form>
             <input type="hidden" name="stage" value="geslaagd">
         </form>
-        <p>Afmelden geslaagd! <br> Klik <a href="common/index.jsp">hier </a> om terug aan te melden</p>
+        <p>Afmelden geslaagd! <br> Klik <a href="<% out.println(response.encodeURL("/UurroosterServer-war/")); %>">hier </a> om terug aan te melden</p>
     </body>
 </html>

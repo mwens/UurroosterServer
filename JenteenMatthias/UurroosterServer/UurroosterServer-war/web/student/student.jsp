@@ -37,7 +37,7 @@
                 <tr>
                     <td><c:out value='${j}'/></td>
                     <td>
-			<form method="post" action="<% out.println(response.encodeURL("student.do")); %>">
+			<form method="post" action="<% out.println(response.encodeURL("/student.do")); %>">
 			    <input type="hidden" name="stage" value="verwijderen">
 			    <input type="hidden" name="verwijderStudent" value="${j}">
 			    <button class="verwijderen" type="submit">X</button>
@@ -68,7 +68,7 @@
                 <tr>
                     <td><c:out value='${j}'/></td>
 		    <td>
-			<form method="post" action="<% out.println(response.encodeURL("student.do")); %>">
+			<form method="post" action="<% out.println(response.encodeURL("/student.do")); %>">
 			    <input type="hidden" name="stage" value="verwijderen">
 			    <input type="hidden" name="verwijderStudent" value="${j}">
 			    <button class="verwijderen" type="submit">X</button>
@@ -78,9 +78,15 @@
             </c:forEach>
         </table>
         </div>
-        <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
-            <input type="hidden" name="stage" value="afmelden">
-            <button type="submit">Afmelden</button>
-        </form>
+        <div class="knopjes">
+            <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/")); %>">
+                <input type="hidden" name="stage" value="afmelden">
+                <button type="submit">Afmelden</button>
+            </form>
+            <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
+                <input type="hidden" name="stage" value="bevestigen">
+                <button type="submit">Bevestigen</button>
+            </form>
+        </div>
     </body>
 </html>

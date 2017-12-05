@@ -89,3 +89,8 @@ body{
     left: 50%;
     top: 10%;
 }
+
+.knopjes{
+    position: absolute;
+    top: 90%;
+}
