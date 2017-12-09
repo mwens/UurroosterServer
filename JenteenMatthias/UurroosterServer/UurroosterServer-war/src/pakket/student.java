@@ -93,30 +93,40 @@ public String overzichtStudent(int userId, HttpSession sessie, HttpServletReques
     
  public String kiesStudent(String gotop,int userId, HttpSession sessie, HttpServletRequest request, HttpServletResponse response){
     List<UrsGebruiker> studenten = commonBean.getStudentenLijst(request.getUserPrincipal().getName());
-        sessie.setAttribute("studenten", studenten);
-        String stage = request.getParameter("stage");
-        if(stage == null)
-            stage = "";
-        else if(stage.equals("verwijderen")){
-            int collegaId = commonBean.getUserId(request.getParameter("verwijderStudent"));
-            if(collegaId != -1)
-                studentBean.setRelatie(userId,collegaId, 0);
-        }
-        else if(stage.equals("wel")){
-            int collegaId = commonBean.getUserId(request.getParameter("SelectedStudent"));
-            if(collegaId != -1)
-                studentBean.setRelatie(userId,collegaId, 1);
-        }
-        else if(stage.equals("niet")){
-            int collegaId = commonBean.getUserId(request.getParameter("SelectedStudent"));
-            if(collegaId != -1)
-                studentBean.setRelatie(userId,collegaId, 2);
-        }
-        else if(stage.equals("bevestigen")){
+    sessie.setAttribute("studenten", studenten);
+    String stage = request.getParameter("stage");
+    if(stage == null)
+        stage = "";
+    else switch (stage) {
+        case "verwijderen":
+            {
+                int collegaId = commonBean.getUserId(request.getParameter("verwijderStudent"));
+                if(collegaId != -1)
+                    studentBean.setRelatie(userId,collegaId, 0);
+                break;
+            }
+        case "wel":
+            {
+                int collegaId = commonBean.getUserId(request.getParameter("SelectedStudent"));
+                if(collegaId != -1)
+                    studentBean.setRelatie(userId,collegaId, 1);
+                break;
+            }
+        case "niet":
+            {
+                int collegaId = commonBean.getUserId(request.getParameter("SelectedStudent"));
+                if(collegaId != -1)
+                    studentBean.setRelatie(userId,collegaId, 2);
+                break;
+            }
+        case "bevestigen":
             studentBean.setStatus(userId, 1);
             gotop = "student/bevestigen.jsp";
-        }
-        return gotop;
+            break;
+        default:
+            break;
+    }
+    return gotop;
 }
     
 
