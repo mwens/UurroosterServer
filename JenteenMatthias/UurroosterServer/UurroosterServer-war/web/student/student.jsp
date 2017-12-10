@@ -37,7 +37,7 @@
                 <tr>
                     <td><c:out value='${j}'/></td>
                     <td>
-			<form method="post" action="<% out.println(response.encodeURL("/student.do")); %>">
+			<form method="post" action="<% out.println(response.encodeURL("student.do")); %>">
 			    <input type="hidden" name="stage" value="verwijderen">
 			    <input type="hidden" name="verwijderStudent" value="${j}">
 			    <button class="verwijderen" type="submit">X</button>
@@ -68,7 +68,7 @@
                 <tr>
                     <td><c:out value='${j}'/></td>
 		    <td>
-			<form method="post" action="<% out.println(response.encodeURL("/student.do")); %>">
+			<form method="post" action="<% out.println(response.encodeURL("student.do")); %>">
 			    <input type="hidden" name="stage" value="verwijderen">
 			    <input type="hidden" name="verwijderStudent" value="${j}">
 			    <button class="verwijderen" type="submit">X</button>

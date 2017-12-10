@@ -60,9 +60,12 @@ public class docent extends HttpServlet {
                 sessie.setAttribute("klassen", klassen);
                 gotoPage("/docent/docent.jsp",request, response);
                 break;
+            case "edit":
+                gotoPage("/docent/groepen.jsp",request, response);
+                break; 
             case "bevestigen":
                 gotoPage("/docent/docent.jsp",request, response);
-                break;    
+                break; 
             default:
                 gotoPage("/docent/docent.jsp",request, response);
                 break;

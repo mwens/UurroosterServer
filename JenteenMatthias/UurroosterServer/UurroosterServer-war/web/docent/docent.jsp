@@ -36,6 +36,13 @@
 			    <button class="verwijderen" type="submit">X</button>
 			</form>
 		    </td>
+                    <td>
+			<form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+			    <input type="hidden" name="stage" value="edit">
+			    <input type="hidden" name="editKlas" value="${i.getKlasid()}">
+			    <button class="edit" type="submit">Edit</button>
+			</form>
+		    </td>
                 </tr> 
             </c:forEach>
         </table>
