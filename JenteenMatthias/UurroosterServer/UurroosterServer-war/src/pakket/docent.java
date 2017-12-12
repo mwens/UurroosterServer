@@ -5,20 +5,26 @@
  */
 package pakket;
 
+import beans.commonBeanLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author witmoca
  */
 public class docent extends HttpServlet {
-
+    @EJB
+    private commonBeanLocal commonBean;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,18 +36,39 @@ public class docent extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet docent</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet docent at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String gotop = "/student/student.jsp";
+        
+        int userId = commonBean.getUserId(request.getUserPrincipal().getName());
+        if(userId == -1)
+            gotoPage("Error.jsp", request, response);
+        HttpSession sessie = request.getSession();   
+        List<UrsKlas> klassen = commonBean.getKlasLijst();
+        sessie.setAttribute("klassen", klassen);
+        String stage = request.getParameter("stage");
+        if(stage == null)
+            gotoPage("/docent/docent.jsp",request, response);
+        else switch (stage) {
+            case "verwijderen":
+                commonBean.removeKlas(Integer.parseInt(request.getParameter("verwijderKlas")));
+                klassen = commonBean.getKlasLijst();
+                sessie.setAttribute("klassen", klassen);
+                gotoPage("/docent/docent.jsp",request, response);
+                break;
+            case "voegGroepToe":
+                commonBean.addKlas();
+                klassen = commonBean.getKlasLijst();
+                sessie.setAttribute("klassen", klassen);
+                gotoPage("/docent/docent.jsp",request, response);
+                break;
+            case "edit":
+                gotoPage("/docent/groepen.jsp",request, response);
+                break; 
+            case "bevestigen":
+                gotoPage("/docent/docent.jsp",request, response);
+                break; 
+            default:
+                gotoPage("/docent/docent.jsp",request, response);
+                break;
         }
     }
     

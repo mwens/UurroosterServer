@@ -31,7 +31,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "UrsKlas.findAll", query = "SELECT u FROM UrsKlas u")
     , @NamedQuery(name = "UrsKlas.findByKlasid", query = "SELECT u FROM UrsKlas u WHERE u.klasid = :klasid")
     , @NamedQuery(name = "UrsKlas.findByNaam", query = "SELECT u FROM UrsKlas u WHERE u.naam = :naam")
-    , @NamedQuery(name = "UrsKlas.findByStatus", query = "SELECT u FROM UrsKlas u WHERE u.status = :status")})
+    , @NamedQuery(name = "UrsKlas.findByStatus", query = "SELECT u FROM UrsKlas u WHERE u.status = :status")
+    , @NamedQuery(name = "UrsKlas.removeByKlasid", query = "DELETE FROM UrsKlas u WHERE u.klasid = :klasid")
+    , @NamedQuery(name = "UrsKlas.findKlasid", query = "SELECT MAX(u.klasid) FROM UrsKlas u")})
 public class UrsKlas implements Serializable {
 
     private static final long serialVersionUID = 1L;
