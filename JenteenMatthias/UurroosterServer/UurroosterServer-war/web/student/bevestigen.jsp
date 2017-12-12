@@ -45,13 +45,27 @@
         </table>
         </div>
         <div class="knopjes">
+            <table>
+                <tr>
+                    <td>
+                        <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
+                            <input type="hidden" name="stage" value="bevestigen">
+                            <button type="submit" ${sessionScope["bevestigknop"]}>Bevestigen</button>
+                        </form>       
+                    </td>
+                    <c:if test='${empty sessionScope["bevestigknop"]}'>
+                        <td>
+                            <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
+                                <input type="hidden" name="stage" value="annuleren">
+                                <button type="submit">Annuleren</button>
+                            </form> 
+                        </td>
+                    </c:if>
+                </tr>
+            </table>
             <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/")); %>">
                 <input type="hidden" name="stage" value="afmelden">
                 <button type="submit">Afmelden</button>
-            </form>
-            <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
-                <input type="hidden" name="stage" value="bevestigen">
-                <button type="submit" ${sessionScope["bevestigknop"]}>Bevestigen</button>
             </form>
         </div>
     </body>

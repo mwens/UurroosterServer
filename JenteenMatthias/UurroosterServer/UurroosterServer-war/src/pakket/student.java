@@ -83,6 +83,10 @@ public String overzichtStudent(int userId, HttpSession sessie, HttpServletReques
     String stage = request.getParameter("stage");
     if(stage == null)
         stage="";
+    else if(stage.equals("annuleren") && studentBean.getStatus(userId)==1){
+        studentBean.setStatus(userId, 0);
+        return "/student/student.jsp";
+    }
     else if(stage.equals("bevestigen") && studentBean.getStatus(userId)==1)
         studentBean.setStatus(userId, 2);
     if(studentBean.getStatus(userId) == 2)
