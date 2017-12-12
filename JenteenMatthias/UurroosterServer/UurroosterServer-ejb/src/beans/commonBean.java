@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import pakket.UrsGebruiker;
+import pakket.UrsKlas;
 
 /**
  * @author witmoca
@@ -27,10 +28,16 @@ public class commonBean implements commonBeanLocal {
      */
     @Override
     public int getUserId(String userNaam){
-        Query q = em.createNamedQuery("UrsGebruiker.findByNaam");
-        q.setParameter("naam", userNaam);
-        UrsGebruiker user = (UrsGebruiker) q.getSingleResult();
-        return user.getUserid();
+        try{
+            Query q = em.createNamedQuery("UrsGebruiker.findByNaam");
+            q.setParameter("naam", userNaam);
+            UrsGebruiker user = (UrsGebruiker) q.getSingleResult();
+            return user.getUserid();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return -1;
+        }
     }
     
     /** naam ophalen op basis van id
@@ -58,5 +65,33 @@ public class commonBean implements commonBeanLocal {
         q.setParameter("naam", naam);
         List<UrsGebruiker> studenten = (List<UrsGebruiker>) q.getResultList();
         return studenten;
+    }
+    
+    @Override
+    public void addKlas(){
+        int klasid = 0;
+        Query q = em.createNamedQuery("UrsKlas.findKlasid");
+        try{
+            klasid = (int) q.getSingleResult();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        UrsKlas usr = new UrsKlas(klasid+1, "Groep " + Integer.toString(klasid+1), 0);
+        em.persist(usr);
+    }
+    
+    @Override
+    public List<UrsKlas> getKlasLijst(){
+        Query q = em.createNamedQuery("UrsKlas.findAll");
+        List<UrsKlas> klassen = (List<UrsKlas>) q.getResultList();
+        return klassen;
+    }
+    
+    @Override
+    public void removeKlas(int klasId){
+        Query q = em.createNamedQuery("UrsKlas.removeByKlasid");
+        q.setParameter("klasid", klasId);
+        q.executeUpdate();
     }
 }

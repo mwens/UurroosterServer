@@ -26,7 +26,7 @@
                     <option value="<c:out value='${i.getNaam()}'/>">
                 </c:forEach>
             </datalist>
-            <input type="hidden" name="stage" value="voegtoe">
+            <input type="hidden" name="stage" value="wel">
             <button type="submit" class="toevoegen">V</button>
         </form><br/>
         <table id="toevoegtable">
@@ -36,6 +36,13 @@
             <c:forEach var="j" items="${sessionScope['studentenRelatiesWel']}">
                 <tr>
                     <td><c:out value='${j}'/></td>
+                    <td>
+			<form method="post" action="<% out.println(response.encodeURL("student.do")); %>">
+			    <input type="hidden" name="stage" value="verwijderen">
+			    <input type="hidden" name="verwijderStudent" value="${j}">
+			    <button class="verwijderen" type="submit">X</button>
+			</form>
+		    </td>
                 </tr> 
             </c:forEach>
         </table>
@@ -49,7 +56,7 @@
                     <option value="<c:out value='${i.getNaam()}'/>">
                 </c:forEach>
             </datalist>
-            <input type="hidden" name="stage" value="verwijder">
+            <input type="hidden" name="stage" value="niet">
             <button type="submit" class="verwijderen">X</button>
         </form>
             <br/>
@@ -61,9 +68,9 @@
                 <tr>
                     <td><c:out value='${j}'/></td>
 		    <td>
-			<form method="post" action="<% out.println(response.encodeURL("")); %>">
-			    <input type="hidden" name="stage" value="verwijdleren">
-			    <input type="hidden" name="verwijderen" value="${j}"
+			<form method="post" action="<% out.println(response.encodeURL("student.do")); %>">
+			    <input type="hidden" name="stage" value="verwijderen">
+			    <input type="hidden" name="verwijderStudent" value="${j}">
 			    <button class="verwijderen" type="submit">X</button>
 			</form>
 		    </td>
@@ -71,9 +78,15 @@
             </c:forEach>
         </table>
         </div>
-        <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
-            <input type="hidden" name="stage" value="afmelden">
-            <button type="submit">Afmelden</button>
-        </form>
+        <div class="knopjes">
+            <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/")); %>">
+                <input type="hidden" name="stage" value="afmelden">
+                <button type="submit">Afmelden</button>
+            </form>
+            <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
+                <input type="hidden" name="stage" value="bevestigen">
+                <button type="submit">Bevestigen</button>
+            </form>
+        </div>
     </body>
 </html>

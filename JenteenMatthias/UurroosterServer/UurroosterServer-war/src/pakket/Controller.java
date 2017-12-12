@@ -37,7 +37,7 @@ public class Controller extends HttpServlet {
         if("afmelden".equals(stage)){
             HttpSession sessie = request.getSession();
             sessie.invalidate();
-            gotoPage("/common/logout.jsp", request, response);
+            gotoPage("/logout.jsp", request, response);
             return;
         }
         if (request.isUserInRole("student")){

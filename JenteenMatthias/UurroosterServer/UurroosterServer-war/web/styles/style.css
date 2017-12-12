@@ -70,6 +70,12 @@ body{
     color: white;
 }
 
+.edit {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+}
+
 #toevoegtable{
     background-color: green;
     width: 175px;
@@ -88,4 +94,9 @@ body{
     position: absolute;
     left: 50%;
     top: 10%;
+}
+
+.knopjes{
+    position: absolute;
+    top: 90%;
 }

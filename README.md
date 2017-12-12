@@ -1,10 +1,10 @@
 # UurroosterServer
-##TODO
+## TODO
 - Verwijder button moet verder geimplementeerd worden.
 - Docent pagina
 - overzichtspagina
 - bevestigen pagina
 - Afmeldknop laten werken
 
-##OMSCHRIJVING
+## OMSCHRIJVING
 Zie applicatie Architecturen Project pdf
