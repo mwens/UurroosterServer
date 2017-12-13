@@ -33,4 +33,6 @@ public interface commonBeanLocal {
     public List<UrsStudent> getOverigeStudenten();
 
     public UrsKlas getKlas(int klasid);
+
+    public void updateKlas(UrsKlas klas, int userId);
 }

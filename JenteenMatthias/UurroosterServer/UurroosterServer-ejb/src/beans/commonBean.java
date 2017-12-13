@@ -117,4 +117,12 @@ public class commonBean implements commonBeanLocal {
         q.setParameter("klasid", klasid);
         return (UrsKlas)q.getSingleResult(); 
     }
+    
+    @Override
+    public void updateKlas(UrsKlas klas, int userId){
+        Query q = em.createNamedQuery("UrsStudent.updateKlas");
+        q.setParameter("userid",userId);
+        q.setParameter("klasid",klas);
+        q.executeUpdate();
+    }
 }

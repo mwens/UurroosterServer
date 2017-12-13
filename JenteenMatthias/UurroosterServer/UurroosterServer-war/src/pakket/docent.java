@@ -64,20 +64,21 @@ public class docent extends HttpServlet {
                 gotoPage("/docent/docent.jsp",request, response);
                 break;
             case "voegtoeStudent":
-                studentBean.getStudent(Integer.parseInt(request.getParameter("voegtoeStudent"))).setKlasid(commonBean.getKlas(Integer.parseInt(request.getParameter("editKlas"))));
+                commonBean.updateKlas(commonBean.getKlas(Integer.parseInt((String)sessie.getAttribute("klasnummer"))), Integer.parseInt(request.getParameter("voegtoeStudent")));
                 sessie.setAttribute("overige", commonBean.getOverigeStudenten());
-                sessie.setAttribute("klas", commonBean.getKlasStudenten(Integer.parseInt(request.getParameter("editKlas"))));
+                sessie.setAttribute("klas", commonBean.getKlasStudenten(Integer.parseInt((String)sessie.getAttribute("klasnummer"))));
                 gotoPage("/docent/groepen.jsp",request, response);
                 break;
             case "verwijderenStudent":
-                studentBean.getStudent(Integer.parseInt(request.getParameter("voegtoeStudent"))).setKlasid(null);
+                commonBean.updateKlas(null, Integer.parseInt(request.getParameter("voegtoeStudent")));
                 sessie.setAttribute("overige", commonBean.getOverigeStudenten());
-                sessie.setAttribute("klas", commonBean.getKlasStudenten(Integer.parseInt(request.getParameter("editKlas"))));
+                sessie.setAttribute("klas", commonBean.getKlasStudenten(Integer.parseInt((String)sessie.getAttribute("klasnummer"))));
                 gotoPage("/docent/groepen.jsp",request, response);
                 break;
             case "edit":
                 sessie.setAttribute("overige", commonBean.getOverigeStudenten());
                 sessie.setAttribute("klas", commonBean.getKlasStudenten(Integer.parseInt(request.getParameter("editKlas"))));
+                sessie.setAttribute("klasnummer", request.getParameter("editKlas"));
                 gotoPage("/docent/groepen.jsp",request, response);
                 break; 
             case "bevestigen":
