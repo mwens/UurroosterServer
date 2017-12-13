@@ -6,6 +6,7 @@
 package pakket;
 
 import beans.commonBeanLocal;
+import beans.studentBeanLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -24,7 +25,9 @@ import javax.servlet.http.HttpSession;
  */
 public class docent extends HttpServlet {
     @EJB
-    private commonBeanLocal commonBean;
+    private commonBeanLocal commonBean; 
+    @EJB
+    private studentBeanLocal studentBean;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -60,7 +63,21 @@ public class docent extends HttpServlet {
                 sessie.setAttribute("klassen", klassen);
                 gotoPage("/docent/docent.jsp",request, response);
                 break;
+            case "voegtoeStudent":
+                studentBean.getStudent(Integer.parseInt(request.getParameter("voegtoeStudent"))).setKlasid(commonBean.getKlas(Integer.parseInt(request.getParameter("editKlas"))));
+                sessie.setAttribute("overige", commonBean.getOverigeStudenten());
+                sessie.setAttribute("klas", commonBean.getKlasStudenten(Integer.parseInt(request.getParameter("editKlas"))));
+                gotoPage("/docent/groepen.jsp",request, response);
+                break;
+            case "verwijderenStudent":
+                studentBean.getStudent(Integer.parseInt(request.getParameter("voegtoeStudent"))).setKlasid(null);
+                sessie.setAttribute("overige", commonBean.getOverigeStudenten());
+                sessie.setAttribute("klas", commonBean.getKlasStudenten(Integer.parseInt(request.getParameter("editKlas"))));
+                gotoPage("/docent/groepen.jsp",request, response);
+                break;
             case "edit":
+                sessie.setAttribute("overige", commonBean.getOverigeStudenten());
+                sessie.setAttribute("klas", commonBean.getKlasStudenten(Integer.parseInt(request.getParameter("editKlas"))));
                 gotoPage("/docent/groepen.jsp",request, response);
                 break; 
             case "bevestigen":

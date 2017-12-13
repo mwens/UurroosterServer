@@ -100,3 +100,14 @@ body{
     position: absolute;
     top: 90%;
 }
+
+#klasgroep{
+    position: absolute;
+    top: 10%;
+}
+
+#overigeStudenten{
+    position: absolute;
+    left: 50%;
+    top: 10%;
+}

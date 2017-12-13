@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import pakket.UrsGebruiker;
 import pakket.UrsKlas;
+import pakket.UrsStudent;
 
 /**
  * @author witmoca
@@ -93,5 +94,27 @@ public class commonBean implements commonBeanLocal {
         Query q = em.createNamedQuery("UrsKlas.removeByKlasid");
         q.setParameter("klasid", klasId);
         q.executeUpdate();
+    }
+    
+    @Override
+    public List<UrsStudent> getKlasStudenten(Integer klasId){
+        Query q = em.createNamedQuery("UrsGebruiker.findStudentByKlas");
+        q.setParameter("klasid", klasId);
+        List<UrsStudent> studenten = (List<UrsStudent>) q.getResultList();
+        return studenten;
+    }
+    
+    @Override
+    public List<UrsStudent> getOverigeStudenten(){
+        Query q = em.createNamedQuery("UrsGebruiker.findStudentZonderKlas");
+        List<UrsStudent> studenten = (List<UrsStudent>) q.getResultList();
+        return studenten;
+    }
+    
+    @Override
+    public UrsKlas getKlas(int klasid){
+        Query q = em.createNamedQuery("UrsKlas.findByKlasid");
+        q.setParameter("klasid", klasid);
+        return (UrsKlas)q.getSingleResult(); 
     }
 }

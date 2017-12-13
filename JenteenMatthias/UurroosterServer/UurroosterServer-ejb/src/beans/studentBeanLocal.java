@@ -7,6 +7,7 @@ package beans;
 
 import java.util.List;
 import javax.ejb.Local;
+import pakket.UrsStudent;
 import pakket.UrsStudentrelatie;
 
 /**
@@ -20,4 +21,8 @@ public interface studentBeanLocal {
 
     public List<UrsStudentrelatie> getRelaties(int userId);
     public void setRelatie(int userId, int collegaId, int relatie);
+
+    public UrsStudent getStudent(int userId);
+
+    public UrsStudentrelatie getRelatie(int userId, int collegaId);
 }

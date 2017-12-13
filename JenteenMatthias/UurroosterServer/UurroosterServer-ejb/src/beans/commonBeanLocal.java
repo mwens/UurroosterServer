@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Local;
 import pakket.UrsGebruiker;
 import pakket.UrsKlas;
+import pakket.UrsStudent;
 
 /**
  *
@@ -26,4 +27,10 @@ public interface commonBeanLocal {
     public void addKlas();
 
     public void removeKlas(int klasId);
+
+    public List<UrsStudent> getKlasStudenten(Integer klasId);
+
+    public List<UrsStudent> getOverigeStudenten();
+
+    public UrsKlas getKlas(int klasid);
 }
