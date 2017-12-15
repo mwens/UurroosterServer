@@ -11,10 +11,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
-        <title>Groepen</title>
+        <title><c:out value="${sessionScope['klasnaam']}" /></title>
     </head>
     <body>
-        <h1>Groep</h1>
+        <h1><c:out value="${sessionScope['klasnaam']}" /></h1>
         <table id="klasgroep">
             <tr>
                 <th>Studenten</th>
@@ -27,7 +27,6 @@
 			<form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
 			    <input type="hidden" name="stage" value="verwijderenStudent">
 			    <input type="hidden" name="verwijderStudent" value="${i.getUserid()}">
-                            <input type="hidden" name="editKlas" value="${sessionScope['editKlas']}">
 			    <button class="verwijderen" type="submit">X</button>
 			</form>
 		    </td>
@@ -43,14 +42,24 @@
                 <tr>
                     <td><c:out value='${i.getNaam()}'/></td>
                     <td>
-			<form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
-			    <input type="hidden" name="stage" value="voegtoeStudent">
-			    <input type="hidden" name="voegtoeStudent" value="${i.getUserid()}">
-			    <button class="toevoegen" type="submit">V</button>
-			</form>
-		    </td>
+                        <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+                            <input type="hidden" name="stage" value="voegtoeStudent">
+                            <input type="hidden" name="voegtoeStudent" value="${i.getUserid()}">
+                            <button class="toevoegen" type="submit">V</button>
+                        </form>
+                    </td>
                 </tr> 
             </c:forEach>
         </table>
+        <div class="knopjes">
+            <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+                <input type="hidden" name="stage" value="null">
+                <button class="terug" type="submit">Terug</button>
+            </form>
+            <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
+                <input type="hidden" name="stage" value="afmelden">
+                <button type="submit">Afmelden</button>
+            </form>
+        </div>
     </body>
 </html>

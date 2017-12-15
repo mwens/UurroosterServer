@@ -78,12 +78,12 @@ body{
 
 #toevoegtable{
     background-color: green;
-    width: 175px;
+    width: 300px;
 }
 
 #verwijdertable{
     background-color: red;
-    width: 175px;
+    width: 300px;
 }
 
 .toevoegdiv{
@@ -104,10 +104,12 @@ body{
 #klasgroep{
     position: absolute;
     top: 10%;
+    width: 300px;
 }
 
 #overigeStudenten{
     position: absolute;
     left: 50%;
     top: 10%;
+    width: 300px;
 }

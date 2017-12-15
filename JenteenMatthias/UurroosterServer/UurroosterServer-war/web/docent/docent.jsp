@@ -14,7 +14,7 @@
         <title>Docent</title>
     </head>
     <body>
-        <h1>Docentenportaal</h1>
+        <h1>Docentenportaal <c:out value="${sessionScope['docentnaam']}" /></h1>
         
         <form method="post" action="<% out.println(response.encodeURL("")); %>">
             <input type="hidden" name="stage" value="voegGroepToe">
@@ -47,14 +47,15 @@
             </c:forEach>
         </table>
             
-        <form method="post" action="<% out.println(response.encodeURL("")); %>">
-            <input type="hidden" name="stage" value="bevestigen">
-            <button type="submit">Bevestigen</button>
-        </form>
-        
-        <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
-            <input type="hidden" name="stage" value="afmelden">
-            <button type="submit">Afmelden</button>
-        </form>
+        <div class="knopjes">
+            <form method="post" action="<% out.println(response.encodeURL("")); %>">
+                <input type="hidden" name="stage" value="bevestigen">
+                <button type="submit">Bevestigen</button>
+            </form>
+            <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
+                <input type="hidden" name="stage" value="afmelden">
+                <button type="submit">Afmelden</button>
+            </form>
+        </div>
     </body>
 </html>

@@ -47,6 +47,7 @@ public class student extends HttpServlet {
             gotoPage("Error.jsp", request, response);
         HttpSession sessie = request.getSession();   
         sessie.setAttribute("bevestigknop", "");
+        sessie.setAttribute("studentnaam",request.getUserPrincipal().getName());
         int userStatus = studentBean.getStatus(userId);
         System.out.println(userStatus);
         switch(userStatus){

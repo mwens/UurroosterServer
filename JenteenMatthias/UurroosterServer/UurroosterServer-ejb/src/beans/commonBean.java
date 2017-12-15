@@ -86,6 +86,10 @@ public class commonBean implements commonBeanLocal {
     public List<UrsKlas> getKlasLijst(){
         Query q = em.createNamedQuery("UrsKlas.findAll");
         List<UrsKlas> klassen = (List<UrsKlas>) q.getResultList();
+        for(int i=0;i<klassen.size();i++){
+            if(klassen.get(i).getKlasid() == 0)
+                klassen.remove(i);
+        }
         return klassen;
     }
     
@@ -106,7 +110,8 @@ public class commonBean implements commonBeanLocal {
     
     @Override
     public List<UrsStudent> getOverigeStudenten(){
-        Query q = em.createNamedQuery("UrsGebruiker.findStudentZonderKlas");
+        Query q = em.createNamedQuery("UrsGebruiker.findStudentByKlas");
+        q.setParameter("klasid", 0);
         List<UrsStudent> studenten = (List<UrsStudent>) q.getResultList();
         return studenten;
     }
