@@ -42,7 +42,7 @@ create table URS_Student(
 create table URS_StudentRelatie(
         student int             not null,
         collega int             not null,
-        /* 0 = enkel voor test, 1 = WEL samen, 2 = NIET samen */
+        /* 0 = Interne doeleinden (=geen relatie), 1 = WEL samen, 2 = NIET samen */
         relatie int             not null,
         foreign key(student) references URS_Gebruiker,
         foreign key(collega) references URS_Gebruiker,

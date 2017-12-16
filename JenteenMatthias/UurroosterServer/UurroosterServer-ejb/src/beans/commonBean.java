@@ -5,14 +5,11 @@
  */
 package beans;
 
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import pakket.UrsGebruiker;
-import pakket.UrsKlas;
-import pakket.UrsStudent;
 
 /**
  * @author witmoca
@@ -52,5 +49,17 @@ public class commonBean implements commonBeanLocal {
         q.setParameter("userid", userId);
         UrsGebruiker user = (UrsGebruiker) q.getSingleResult();
         return user.getNaam();
+    }
+    
+    /** Zoek het UrsGebruiker object gerelateerd aan userId
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public UrsGebruiker getGebruiker (int userId){
+        Query q = em.createNamedQuery("UrsGebruiker.findByUserid");
+        q.setParameter("userid", userId);
+        return (UrsGebruiker) q.getSingleResult();
     }
 }

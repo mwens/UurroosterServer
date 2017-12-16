@@ -5,13 +5,18 @@
  */
 package beans;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import pakket.UrsGebruiker;
 import pakket.UrsKlas;
 import pakket.UrsStudent;
+import pakket.UrsStudentrelatie;
 
 /**
  *
@@ -19,11 +24,11 @@ import pakket.UrsStudent;
  */
 @Stateless
 public class docentBean implements docentBeanLocal {
+    @EJB
+    private commonBeanLocal commonBean;
     @PersistenceContext(unitName = "UurroosterServer-ejbPU")
     private EntityManager em;
 
-    
-    
     // KLAS
     /** Selecteer alle klassen
      * 
@@ -100,6 +105,43 @@ public class docentBean implements docentBeanLocal {
     @Override
     public List<UrsStudent> getKlaslozeStudenten(){
         return (List<UrsStudent>) em.createNamedQuery("UrsStudent.findStudentZonderKlas").getResultList();
+    }
+    
+    /** Zoek alle studenten die nog niet in een klas zitten
+     * Gesorteerd op voorkeur (Een relatie NIET heeft voorrang op WEL)
+     * 
+     *
+     * @param klasId
+     * @return Map van UrsGebruikers met Integers als relatie (0 = neutraal, 1 = VOORKEUR, 2 = NIET)
+     */
+    @Override
+    public Map<UrsGebruiker, Integer> getKlaslozeStudentenVoorkeur(int klasId){
+        Map<UrsGebruiker, Integer> vMap = new HashMap<UrsGebruiker, Integer>();
+        List<UrsStudent> studentenInKlas = this.getStudentenInKlas(klasId);
+        List<UrsStudent> zonderKlasStu = (List<UrsStudent>) em.createNamedQuery("UrsStudent.findStudentZonderKlas").getResultList();
+        
+        // Geen relatie
+        for(UrsStudent stud : zonderKlasStu)
+            vMap.put(stud.getUrsGebruiker(), 0);
+        
+        for(UrsStudent stud : studentenInKlas){
+            List<UrsStudentrelatie> relsStud = (List<UrsStudentrelatie>) stud.getUrsGebruiker().getUrsStudentrelatieCollection();
+            List<UrsStudentrelatie> relsCol = (List<UrsStudentrelatie>) stud.getUrsGebruiker().getUrsStudentrelatieCollection1();
+            
+            for(UrsStudentrelatie relS : relsStud){
+                UrsGebruiker studd = commonBean.getGebruiker(relS.getUrsStudentrelatiePK().getStudent());
+                if(vMap.containsKey(studd))
+                    vMap.put(studd, relS.getRelatie());
+            }
+            
+            for(UrsStudentrelatie relC : relsCol){
+                UrsGebruiker collega = commonBean.getGebruiker(relC.getUrsStudentrelatiePK().getCollega());
+                Integer rel = vMap.get(collega);
+                if(rel != null && rel < relC.getRelatie() && vMap.containsKey(collega))
+                    vMap.put(collega,relC.getRelatie());           
+            }
+        }
+        return vMap;
     }
     
     

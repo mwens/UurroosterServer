@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "UrsStudentrelatie.findByStudent", query = "SELECT u FROM UrsStudentrelatie u WHERE u.ursStudentrelatiePK.student = :student")
     , @NamedQuery(name = "UrsStudentrelatie.findByCollega", query = "SELECT u FROM UrsStudentrelatie u WHERE u.ursStudentrelatiePK.collega = :collega")
     , @NamedQuery(name = "UrsStudentrelatie.findByRelatie", query = "SELECT u FROM UrsStudentrelatie u WHERE u.relatie = :relatie")
+    , @NamedQuery(name = "UrsStudentrelatie.findByRelatieMetStudentOfCollega", query = "SELECT u FROM UrsStudentrelatie u WHERE u.ursStudentrelatiePK.student = :student OR u.ursStudentrelatiePK.collega = :student")
     , @NamedQuery(name = "UrsStudentrelatie.findByPk", query = "SELECT u FROM UrsStudentrelatie u WHERE u.ursStudentrelatiePK.student = :student AND u.ursStudentrelatiePK.collega = :collega")
     , @NamedQuery(name = "UrsStudentrelatie.deleteByPk", query = "DELETE FROM UrsStudentrelatie u WHERE u.ursStudentrelatiePK.student = :student AND u.ursStudentrelatiePK.collega = :collega")
     , @NamedQuery(name = "UrsStudentrelatie.updateRelatie", query = "UPDATE UrsStudentrelatie u SET u.relatie = :relatie WHERE u.ursStudentrelatiePK.student = :student AND u.ursStudentrelatiePK.collega = :collega")})

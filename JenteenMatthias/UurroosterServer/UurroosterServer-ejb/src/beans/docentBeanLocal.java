@@ -6,7 +6,9 @@
 package beans;
 
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Local;
+import pakket.UrsGebruiker;
 import pakket.UrsKlas;
 import pakket.UrsStudent;
 
@@ -25,6 +27,7 @@ public interface docentBeanLocal {
     // STUDENTEN IN KLAS
     public List<UrsStudent> getStudentenInKlas(int klasId);
     public List<UrsStudent> getKlaslozeStudenten();
+    public Map<UrsGebruiker, Integer> getKlaslozeStudentenVoorkeur(int klasId);
     public void setStudentKlas(int userId, int klasId);
     
     // STATUS

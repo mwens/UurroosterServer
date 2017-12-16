@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -73,7 +74,7 @@ public class docent extends HttpServlet {
             case "voegtoeStudent":
                 int voegtoeStudent = commonBean.getUserId(request.getParameter("SelectedStudent"));
                 docentBean.setStudentKlas(voegtoeStudent, Integer.parseInt((String)sessie.getAttribute("klasnummer")));
-                sessie.setAttribute("overige", docentBean.getKlaslozeStudenten());
+                sessie.setAttribute("overige", docentBean.getKlaslozeStudenten());                
                 sessie.setAttribute("klas", docentBean.getStudentenInKlas(Integer.parseInt((String)sessie.getAttribute("klasnummer"))));
                 gotoPage("/docent/groepen.jsp",request, response);
                 break;
