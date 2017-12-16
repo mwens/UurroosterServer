@@ -20,7 +20,7 @@
         <table>
             <c:forEach var="i" items="${sessionScope['klas']}">
                 <tr>
-                    <td><c:out value='${i.getNaam()}'/></td>
+                    <td><c:out value='${i.getUrsGebruiker().getNaam()}'/></td>
                     <td>
 			<form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
 			    <input type="hidden" name="stage" value="verwijderenStudent">
@@ -37,7 +37,7 @@
             <input list="Studenten" name="SelectedStudent" id="geselecteerdeStudent" autocomplete="off">
             <datalist id="Studenten">
                 <c:forEach var="i" items="${sessionScope['overige']}">
-                    <option value="<c:out value='${i.getNaam()}'/>">
+                    <option value="<c:out value='${i.getUrsGebruiker().getNaam()}'/>">
                 </c:forEach>
             </datalist>
             <input type="hidden" name="stage" value="voegtoeStudent">

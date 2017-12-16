@@ -97,7 +97,7 @@ public String overzichtStudent(int userId, HttpSession sessie, HttpServletReques
 }
     
  public String kiesStudent(String gotop,int userId, HttpSession sessie, HttpServletRequest request, HttpServletResponse response){
-    List<UrsGebruiker> studenten = commonBean.getStudentenLijst(request.getUserPrincipal().getName());
+    List<UrsGebruiker> studenten = studentBean.getAndereStudenten(request.getUserPrincipal().getName());
     sessie.setAttribute("studenten", studenten);
     String stage = request.getParameter("stage");
     if(stage == null)

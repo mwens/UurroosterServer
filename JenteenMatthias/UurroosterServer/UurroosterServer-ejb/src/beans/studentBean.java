@@ -11,9 +11,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import pakket.UrsGebruiker;
 import pakket.UrsStudent;
 import pakket.UrsStudentrelatie;
-import pakket.UrsStudentrelatiePK;
 
 /**
  *
@@ -23,6 +23,8 @@ import pakket.UrsStudentrelatiePK;
 public class studentBean implements studentBeanLocal {
     @PersistenceContext(unitName = "UurroosterServer-ejbPU")
     private EntityManager em;
+    
+    // STATUS
     
     /** status ophalen op basis van id
      *
@@ -47,6 +49,10 @@ public class studentBean implements studentBeanLocal {
         q.executeUpdate();
     }
     
+    
+    
+    // RELATIES
+    
     /** relaties ophalen op basis van id (enkel relaties die user zelf heeft gemaakt)
      *
      * @param userId id van student
@@ -58,6 +64,24 @@ public class studentBean implements studentBeanLocal {
         q.setParameter("student",userId);
         List<UrsStudentrelatie> l = q.getResultList();
         return l;
+    }
+    
+     /**
+     * 
+     * @param userId student die een relatie heeft met iemand
+     * @param collegaId student met wie de relatie gevormd wordt   
+     * @return student relatie object of null als de relatie niet bestaat
+     */
+    @Override
+    public UrsStudentrelatie getRelatie(int userId, int collegaId){
+        Query q = em.createNamedQuery("UrsStudentrelatie.findByPk");
+        q.setParameter("student",userId);
+        q.setParameter("collega",collegaId);
+        try{
+            return (UrsStudentrelatie) q.getSingleResult();
+        } catch (NoResultException e) {  
+        }
+        return null;
     }
     
     /** relatie toevoegen
@@ -119,6 +143,8 @@ public class studentBean implements studentBeanLocal {
         q.executeUpdate();
     }
     
+    // STUDENTEN
+    
     /**
      *
      * @param userId de userId van de student
@@ -129,21 +155,19 @@ public class studentBean implements studentBeanLocal {
         q.setParameter("userid", userId);
         return (UrsStudent) q.getSingleResult();
     }
-    
-    /**
+
+     
+    /** Een lijst van alle studententen ophalen
      * 
-     * @param userId student die een relatie heeft met iemand
-     * @param collegaId student met wie de relatie gevormd wordt   
-     * @return student relatie object of null als de relatie niet bestaat
+     * @param naam
+     * @return Lijst van studenten
      */
-    public UrsStudentrelatie getRelatie(int userId, int collegaId){
-        Query q = em.createNamedQuery("UrsStudentrelatie.findByPk");
-        q.setParameter("student",userId);
-        q.setParameter("collega",collegaId);
-        try{
-            return (UrsStudentrelatie) q.getSingleResult();
-        } catch (NoResultException e) {  
-        }
-        return null;
+    @Override
+    public List<UrsGebruiker> getAndereStudenten(String naam){
+        Query q = em.createNamedQuery("UrsGebruiker.findOthersByGroep");
+        q.setParameter("groep", "student");
+        q.setParameter("naam", naam);
+        List<UrsGebruiker> studenten = (List<UrsGebruiker>) q.getResultList();
+        return studenten;
     }
 }
