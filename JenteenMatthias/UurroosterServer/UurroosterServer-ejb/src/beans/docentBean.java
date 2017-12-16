@@ -62,10 +62,17 @@ public class docentBean implements docentBeanLocal {
     @Override
     public void addKlas(String klasNaam){
         if(klasNaam.trim().equalsIgnoreCase("")){return;}
-        int klasid = (int) em.createNamedQuery("UrsKlas.findMaxKlasid").getSingleResult();
-        try{ 
-            em.persist(new UrsKlas(klasid+1, klasNaam, 0));
-        } catch (Exception e){/* Negeren (dubbele keys, memory errors etc) */}
+        Integer klasid = (Integer) em.createNamedQuery("UrsKlas.findMaxKlasid").getSingleResult();
+        if(klasid == null){
+            klasid = 0;
+        }
+        
+        // Negeer als klas al bestaat
+        Query qExists = em.createNamedQuery("UrsKlas.findByNaam");
+        qExists.setParameter("naam",klasNaam);
+        if(!qExists.getResultList().isEmpty())
+            return;
+        em.persist(new UrsKlas(klasid+1, klasNaam, 0));
     }
     /** Verwijder klas (en studenten uit die klas zetten)
      * 
