@@ -35,4 +35,6 @@ public interface commonBeanLocal {
     public UrsKlas getKlas(int klasid);
 
     public void updateKlas(UrsKlas klas, int userId);
+
+    public void eindeKeuzes();
 }

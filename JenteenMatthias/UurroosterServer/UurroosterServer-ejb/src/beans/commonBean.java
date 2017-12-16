@@ -130,4 +130,10 @@ public class commonBean implements commonBeanLocal {
         q.setParameter("klasid",klas);
         q.executeUpdate();
     }
+    
+    @Override
+    public void eindeKeuzes(){
+        Query q = em.createNamedQuery("UrsStudent.updateStatusEindeKeuze");
+        q.executeUpdate();
+    }
 }

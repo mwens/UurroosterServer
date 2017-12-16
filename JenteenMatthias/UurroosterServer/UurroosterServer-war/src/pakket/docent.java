@@ -52,6 +52,10 @@ public class docent extends HttpServlet {
         if(stage == null)
             gotoPage("/docent/docent.jsp",request, response);
         else switch (stage) {
+            case "eindeKeuzes":
+                commonBean.eindeKeuzes();
+                gotoPage("/docent/docent.jsp",request, response);
+                break;
             case "verwijderen":
                 commonBean.removeKlas(Integer.parseInt(request.getParameter("verwijderKlas")));
                 klassen = commonBean.getKlasLijst();
