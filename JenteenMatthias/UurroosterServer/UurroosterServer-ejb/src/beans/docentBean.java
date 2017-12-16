@@ -49,34 +49,15 @@ public class docentBean implements docentBeanLocal {
 
     /** Nieuwe klas aanmaken
      *
-     * @deprecated setKls
-     */
-    @Override
-    public void addKlas(){
-        int klasid = 0;
-        Query q = em.createNamedQuery("UrsKlas.findKlasid");
-        try{
-            klasid = (int) q.getSingleResult();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        UrsKlas usr = new UrsKlas(klasid+1, "Groep " + Integer.toString(klasid+1), 0);
-        em.persist(usr);
-    }
-    
-    /**
      * 
-     * @param klas
-     * @param userId 
-     * @deprecated setKlas
+     * @param klasNaam
      */
     @Override
-    public void updateKlas(UrsKlas klas, int userId){
-        Query q = em.createNamedQuery("UrsStudent.updateKlas");
-        q.setParameter("userid",userId);
-        q.setParameter("klasid",klas);
-        q.executeUpdate();
+    public void addKlas(String klasNaam){
+        Query q = em.createNamedQuery("UrsKlas.findMaxKlasid");
+        int klasid = (int) q.getSingleResult();
+        UrsKlas usr = new UrsKlas(klasid+1, klasNaam, 0);
+        em.persist(usr);
     }
     /**
      * 
@@ -113,6 +94,10 @@ public class docentBean implements docentBeanLocal {
         return (List<UrsStudent>) em.createNamedQuery("UrsStudent.findStudentZonderKlas").getResultList();
     }
     
+    
+    /** Schrijft de student in een bepaalde klas in
+     * Indien de klas -1 is, dan wordt de student een klasloze student
+     */
     @Override
     public void setStudentKlas(int userId, int klasId) {
         Query q = em.createNamedQuery("UrsStudent.setStudentKlas");
@@ -122,6 +107,9 @@ public class docentBean implements docentBeanLocal {
     }
     
     // STATUS
+    /**
+     * Alle Studenten verliezen de mogelijkheid om te kiezen
+     */
     @Override
     public void eindeKeuzes(){
         em.createNamedQuery("UrsStudent.updateStatusEindeKeuze").executeUpdate();

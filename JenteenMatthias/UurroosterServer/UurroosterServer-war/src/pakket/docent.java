@@ -65,7 +65,7 @@ public class docent extends HttpServlet {
                 gotoPage("/docent/docent.jsp",request, response);
                 break;
             case "voegGroepToe":
-                docentBean.addKlas();
+                docentBean.addKlas("test");
                 klassen = docentBean.getKlasLijst();
                 sessie.setAttribute("klassen", klassen);
                 gotoPage("/docent/docent.jsp",request, response);

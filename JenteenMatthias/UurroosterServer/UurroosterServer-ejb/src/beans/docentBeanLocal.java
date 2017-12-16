@@ -20,8 +20,7 @@ public interface docentBeanLocal {
     public List<UrsKlas> getKlasLijst();
     public UrsKlas getKlas(int klasid);
     /* VERANDER NAAR SetKlas */
-    public void addKlas();
-    public void updateKlas(UrsKlas klas, int userId);
+    public void addKlas(String klasNaam);
     public void removeKlas(int klasId);
     
     // STUDENTEN IN KLAS
