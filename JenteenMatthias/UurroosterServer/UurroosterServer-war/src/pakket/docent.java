@@ -42,62 +42,72 @@ public class docent extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String gotop = "/student/student.jsp";
         
-        int userId = commonBean.getUserId(request.getUserPrincipal().getName());
-        if(userId == -1)
+        String gotoPage;
+        if(commonBean.getUserId(request.getUserPrincipal().getName()) == -1){
             gotoPage("Error.jsp", request, response);
-        HttpSession sessie = request.getSession();   
-        List<UrsKlas> klassen = docentBean.getKlasLijst();
-        sessie.setAttribute("klassen", klassen);
-        sessie.setAttribute("docentnaam",request.getUserPrincipal().getName());
+            return;
+        }
+
         String stage = request.getParameter("stage");
         if(stage == null)
-            gotoPage("/docent/docent.jsp",request, response);
-        else switch (stage) {
+            stage = "index";
+        switch (stage) {
+            case "eindeKeuzes":
+            case "verwijderen":
+            case "bevestigen":
+            case "voegGroepToe":
+            case "index":
+            default:
+                gotoPage = this.docentOverzicht(stage, request, response);
+                break;
+            case "voegtoeStudent":
+            case "verwijderenStudent":
+            case "edit":
+                gotoPage = this.groepOverzicht(stage, request, response);
+                break; 
+        }
+        this.gotoPage(gotoPage, request, response);
+    }
+    
+    public String docentOverzicht(String stage, HttpServletRequest request, HttpServletResponse response){
+        HttpSession sessie = request.getSession();   
+        switch (stage) {
             case "eindeKeuzes":
                 docentBean.eindeKeuzes();
-                gotoPage("/docent/docent.jsp",request, response);
                 break;
             case "verwijderen":
                 docentBean.removeKlas(Integer.parseInt(request.getParameter("verwijderKlas")));
-                klassen = docentBean.getKlasLijst();
-                sessie.setAttribute("klassen", klassen);
-                gotoPage("/docent/docent.jsp",request, response);
                 break;
             case "voegGroepToe":
-                docentBean.addKlas(request.getParameter("nieuweGroepNaam"));
-                klassen = docentBean.getKlasLijst();
-                sessie.setAttribute("klassen", klassen);
-                gotoPage("/docent/docent.jsp",request, response);
+                docentBean.addKlas((String) request.getParameter("nieuweGroepNaam"));
                 break;
-            case "voegtoeStudent":
-                int voegtoeStudent = commonBean.getUserId(request.getParameter("SelectedStudent"));
-                docentBean.setStudentKlas(voegtoeStudent, Integer.parseInt((String)sessie.getAttribute("klasnummer")));
-                sessie.setAttribute("overige", docentBean.getKlaslozeStudenten());                
-                sessie.setAttribute("klas", docentBean.getStudentenInKlas(Integer.parseInt((String)sessie.getAttribute("klasnummer"))));
-                gotoPage("/docent/groepen.jsp",request, response);
-                break;
-            case "verwijderenStudent":
-                docentBean.setStudentKlas(Integer.parseInt(request.getParameter("verwijderStudent")), -1);
-                sessie.setAttribute("overige", docentBean.getKlaslozeStudenten());
-                sessie.setAttribute("klas", docentBean.getStudentenInKlas(Integer.parseInt((String)sessie.getAttribute("klasnummer"))));
-                gotoPage("/docent/groepen.jsp",request, response);
-                break;
-            case "edit":
-                sessie.setAttribute("overige", docentBean.getKlaslozeStudenten());
-                sessie.setAttribute("klas", docentBean.getStudentenInKlas(Integer.parseInt(request.getParameter("editKlas"))));
-                sessie.setAttribute("klasnummer", request.getParameter("editKlas"));
-                sessie.setAttribute("klasnaam", docentBean.getKlas(Integer.parseInt((String)sessie.getAttribute("klasnummer"))).getNaam());
-                gotoPage("/docent/groepen.jsp",request, response);
-                break; 
             case "bevestigen":
-                gotoPage("/docent/docent.jsp",request, response);
-                break; 
             default:
-                gotoPage("/docent/docent.jsp",request, response);
                 break;
         }
+        sessie.setAttribute("docentnaam",request.getUserPrincipal().getName());
+        sessie.setAttribute("klassen",docentBean.getKlasLijst());
+        return "/docent/docent.jsp";
+    }
+    
+    public String groepOverzicht(String stage, HttpServletRequest request, HttpServletResponse response){
+        HttpSession sessie = request.getSession(); 
+        switch (stage) {
+        case "voegtoeStudent":
+            docentBean.setStudentKlas(commonBean.getUserId(request.getParameter("SelectedStudent")), (int) sessie.getAttribute("klasnummer") );
+            break;
+        case "verwijderenStudent":
+            docentBean.setStudentKlas(Integer.parseInt(request.getParameter("verwijderStudent")), -1);
+            break;
+        case "edit":
+            sessie.setAttribute("klasnummer", Integer.parseInt(request.getParameter("editKlas")));
+            break;             
+        }
+        sessie.setAttribute("overige", docentBean.getKlaslozeStudenten());
+        sessie.setAttribute("klas", docentBean.getStudentenInKlas((int) sessie.getAttribute("klasnummer")));
+        sessie.setAttribute("klasnaam", docentBean.getKlas((int) sessie.getAttribute("klasnummer")).getNaam());
+        return "/docent/groepen.jsp";
     }
     
     public void gotoPage(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
