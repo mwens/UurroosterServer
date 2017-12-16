@@ -31,27 +31,26 @@ INSERT into URS_Gebruiker VALUES (18,'Herman Crauwels','IH8Toledo', 'docent');
 INSERT into URS_Gebruiker VALUES (19,'Joost Vennekens','IH8Toledo', 'docent');
 
 /*                         klasId, naam, status */
-INSERT into URS_Klas VALUES (0,'NULLKLAS',0);
 INSERT into URS_Klas VALUES (1,'Groep 1',0);
 
 /*                        userId | klas | status */
-INSERT into URS_Student VALUES (0, 0, 0);
-INSERT into URS_Student VALUES (1, 0, 0);
-INSERT into URS_Student VALUES (2, 0, 0);
-INSERT into URS_Student VALUES (3, 0, 0);
-INSERT into URS_Student VALUES (4, 0,0);
-INSERT into URS_Student VALUES (5, 0, 0);
-INSERT into URS_Student VALUES (6, 0, 0);
-INSERT into URS_Student VALUES (7, 0, 0);
-INSERT into URS_Student VALUES (8, 0, 0);
-INSERT into URS_Student VALUES (9, 0, 0);
-INSERT into URS_Student VALUES (10, 0, 0);
-INSERT into URS_Student VALUES (11, 0, 0);
-INSERT into URS_Student VALUES (12, 0, 0);
-INSERT into URS_Student VALUES (13, 0, 0);
-INSERT into URS_Student VALUES (14, 0, 0);
-INSERT into URS_Student VALUES (15, 0, 0);
-INSERT into URS_Student VALUES (16, 0, 0);
+INSERT into URS_Student VALUES (0, NULL, 0);
+INSERT into URS_Student VALUES (1, NULL, 0);
+INSERT into URS_Student VALUES (2, NULL, 0);
+INSERT into URS_Student VALUES (3, NULL, 0);
+INSERT into URS_Student VALUES (4, NULL,0);
+INSERT into URS_Student VALUES (5, NULL, 0);
+INSERT into URS_Student VALUES (6, NULL, 0);
+INSERT into URS_Student VALUES (7, NULL, 0);
+INSERT into URS_Student VALUES (8, NULL, 0);
+INSERT into URS_Student VALUES (9, NULL, 0);
+INSERT into URS_Student VALUES (10, NULL, 0);
+INSERT into URS_Student VALUES (11, NULL, 0);
+INSERT into URS_Student VALUES (12, NULL, 0);
+INSERT into URS_Student VALUES (13, NULL, 0);
+INSERT into URS_Student VALUES (14, NULL, 0);
+INSERT into URS_Student VALUES (15, NULL, 0);
+INSERT into URS_Student VALUES (16, NULL, 0);
 
 /*                                student | collega | status */
 INSERT into URS_StudentRelatie VALUES (0,2,2);
