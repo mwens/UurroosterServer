@@ -22,6 +22,7 @@
         <br/>
         
         <form method="post" action="<% out.println(response.encodeURL("")); %>">
+            <input type="text" name="nieuweGroepNaam">
             <input type="hidden" name="stage" value="voegGroepToe">
             <button type="submit">Groep toevoegen +</button>
         </form>

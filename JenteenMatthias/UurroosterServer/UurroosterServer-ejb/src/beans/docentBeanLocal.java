@@ -19,7 +19,6 @@ public interface docentBeanLocal {
     // KLAS
     public List<UrsKlas> getKlasLijst();
     public UrsKlas getKlas(int klasid);
-    /* VERANDER NAAR SetKlas */
     public void addKlas(String klasNaam);
     public void removeKlas(int klasId);
     

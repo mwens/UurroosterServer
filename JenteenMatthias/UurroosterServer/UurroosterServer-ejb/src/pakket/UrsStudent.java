@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "UrsStudent.updateStatus", query = "UPDATE UrsStudent u SET u.status = :status WHERE u.userid = :userid")
     , @NamedQuery(name = "UrsStudent.updateStatusEindeKeuze", query = "UPDATE UrsStudent u SET u.status = 2")
     , @NamedQuery(name = "UrsStudent.setStudentKlas", query = "UPDATE UrsStudent u SET u.klasid = :klasid WHERE u.userid = :userid")
+    , @NamedQuery(name = "UrsStudent.setKlasToNull", query = "UPDATE UrsStudent u SET u.klasid = null WHERE u.klasid = :klasid") 
     , @NamedQuery(name = "UrsStudent.findStudentByKlas", query = "SELECT s FROM UrsStudent s WHERE s.klasid = :klasid")
     , @NamedQuery(name = "UrsStudent.findStudentZonderKlas", query = "SELECT s FROM UrsStudent s WHERE s.klasid IS NULL")
     })

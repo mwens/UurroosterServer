@@ -49,23 +49,31 @@ public class docentBean implements docentBeanLocal {
 
     /** Nieuwe klas aanmaken
      *
+     * Indien de klas al bestaat, of de klasNaam is leeg
+     * dan is deze functie een nuloperatie
      * 
      * @param klasNaam
      */
     @Override
     public void addKlas(String klasNaam){
-        Query q = em.createNamedQuery("UrsKlas.findMaxKlasid");
-        int klasid = (int) q.getSingleResult();
-        UrsKlas usr = new UrsKlas(klasid+1, klasNaam, 0);
-        em.persist(usr);
+        if(klasNaam.trim().equalsIgnoreCase("")){return;}
+        int klasid = (int) em.createNamedQuery("UrsKlas.findMaxKlasid").getSingleResult();
+        try{ 
+            em.persist(new UrsKlas(klasid+1, klasNaam, 0));
+        } catch (Exception e){/* Negeren (dubbele keys, memory errors etc) */}
     }
-    /**
+    /** Verwijder klas (en studenten uit die klas zetten)
      * 
      * @param klasId 
-     * @deprecated setKlas
      */
     @Override
     public void removeKlas(int klasId){
+        // Verwijder studenten uit klas
+        Query nq = em.createNamedQuery("UrsStudent.setKlasToNull");
+        nq.setParameter("klasid", this.getKlas(klasId));
+        nq.executeUpdate();
+        
+        // Verwijder klas
         Query q = em.createNamedQuery("UrsKlas.removeByKlasid");
         q.setParameter("klasid", klasId);
         q.executeUpdate();
