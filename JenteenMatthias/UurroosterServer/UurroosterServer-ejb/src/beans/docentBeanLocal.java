@@ -25,8 +25,9 @@ public interface docentBeanLocal {
     public void removeKlas(int klasId);
     
     // STUDENTEN IN KLAS
-    public List<UrsStudent> getStudentenInKlas(Integer klasId);
+    public List<UrsStudent> getStudentenInKlas(int klasId);
     public List<UrsStudent> getKlaslozeStudenten();
+    public void setStudentKlas(int userId, int klasId);
     
     // STATUS
     public void eindeKeuzes();

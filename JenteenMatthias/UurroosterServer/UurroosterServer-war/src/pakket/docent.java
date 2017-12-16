@@ -72,15 +72,13 @@ public class docent extends HttpServlet {
                 break;
             case "voegtoeStudent":
                 int voegtoeStudent = commonBean.getUserId(request.getParameter("SelectedStudent"));
-                docentBean.updateKlas(docentBean.getKlas(Integer.parseInt((String)sessie.getAttribute("klasnummer"))), voegtoeStudent);
+                docentBean.setStudentKlas(voegtoeStudent, Integer.parseInt((String)sessie.getAttribute("klasnummer")));
                 sessie.setAttribute("overige", docentBean.getKlaslozeStudenten());
                 sessie.setAttribute("klas", docentBean.getStudentenInKlas(Integer.parseInt((String)sessie.getAttribute("klasnummer"))));
                 gotoPage("/docent/groepen.jsp",request, response);
                 break;
             case "verwijderenStudent":
-                System.err.println(request.getParameter("verwijderStudent"));
-                System.err.println(docentBean.getKlas(0).toString());
-                docentBean.updateKlas(docentBean.getKlas(0), Integer.parseInt(request.getParameter("verwijderStudent")));
+                docentBean.setStudentKlas(Integer.parseInt(request.getParameter("verwijderStudent")), -1);
                 sessie.setAttribute("overige", docentBean.getKlaslozeStudenten());
                 sessie.setAttribute("klas", docentBean.getStudentenInKlas(Integer.parseInt((String)sessie.getAttribute("klasnummer"))));
                 gotoPage("/docent/groepen.jsp",request, response);

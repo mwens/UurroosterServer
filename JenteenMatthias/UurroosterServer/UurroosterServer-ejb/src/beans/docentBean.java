@@ -5,7 +5,6 @@
  */
 package beans;
 
-import static java.sql.Types.NULL;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -99,7 +98,7 @@ public class docentBean implements docentBeanLocal {
      * @return Lijst van UrsStudent die alle studenten uit die klas bevat
      */
     @Override
-    public List<UrsStudent> getStudentenInKlas(Integer klasId){
+    public List<UrsStudent> getStudentenInKlas(int klasId){
         Query q = em.createNamedQuery("UrsStudent.findStudentByKlas");
         q.setParameter("klasid", this.getKlas(klasId));
         return (List<UrsStudent>) q.getResultList();
@@ -114,10 +113,17 @@ public class docentBean implements docentBeanLocal {
         return (List<UrsStudent>) em.createNamedQuery("UrsStudent.findStudentZonderKlas").getResultList();
     }
     
+    @Override
+    public void setStudentKlas(int userId, int klasId) {
+        Query q = em.createNamedQuery("UrsStudent.setStudentKlas");
+        q.setParameter("userid",userId);
+        q.setParameter("klasid",klasId == -1 ? null : this.getKlas(klasId));
+        q.executeUpdate();
+    }
+    
     // STATUS
     @Override
     public void eindeKeuzes(){
         em.createNamedQuery("UrsStudent.updateStatusEindeKeuze").executeUpdate();
-    }
-    
+    }    
 }
