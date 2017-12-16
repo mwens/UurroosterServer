@@ -15,11 +15,9 @@
     </head>
     <body>
         <h1><c:out value="${sessionScope['klasnaam']}" /></h1>
-        <table id="klasgroep">
-            <tr>
-                <th>Studenten</th>
-                <th></th>
-            </tr>
+        <div id="klasgroep">
+        <h2>Studenten in klasgroep</h2>
+        <table>
             <c:forEach var="i" items="${sessionScope['klas']}">
                 <tr>
                     <td><c:out value='${i.getNaam()}'/></td>
@@ -33,24 +31,18 @@
                 </tr> 
             </c:forEach>
         </table>
-        <table id="overigeStudenten">
-            <tr>
-                <th>Overige Studenten</th>
-                <th></th>
-            </tr>
-            <c:forEach var="i" items="${sessionScope['overige']}">
-                <tr>
-                    <td><c:out value='${i.getNaam()}'/></td>
-                    <td>
-                        <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
-                            <input type="hidden" name="stage" value="voegtoeStudent">
-                            <input type="hidden" name="voegtoeStudent" value="${i.getUserid()}">
-                            <button class="toevoegen" type="submit">V</button>
-                        </form>
-                    </td>
-                </tr> 
-            </c:forEach>
-        </table>
+        </div>
+        <form id="overigeStudenten" method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+            <h2>Overige Studenten</h2>
+            <input list="Studenten" name="SelectedStudent" id="geselecteerdeStudent" autocomplete="off">
+            <datalist id="Studenten">
+                <c:forEach var="i" items="${sessionScope['overige']}">
+                    <option value="<c:out value='${i.getNaam()}'/>">
+                </c:forEach>
+            </datalist>
+            <input type="hidden" name="stage" value="voegtoeStudent">
+            <button type="submit" class="toevoegen">V</button>
+        </form>
         <div class="knopjes">
             <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
                 <input type="hidden" name="stage" value="null">

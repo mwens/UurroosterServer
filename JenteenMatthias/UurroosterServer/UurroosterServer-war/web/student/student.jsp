@@ -20,7 +20,7 @@
         <div class="toevoegdiv">
         <form>
             <h2>Wel mee samen:</h2>
-            <input list="Studenten" name="SelectedStudent" id="geselecteerdeStudent">
+            <input list="Studenten" name="SelectedStudent" id="geselecteerdeStudent" autocomplete="off">
             <datalist id="Studenten">
                 <c:forEach var="i" items="${sessionScope['studenten']}">
                     <option value="<c:out value='${i.getNaam()}'/>">
@@ -50,7 +50,7 @@
         <div class="verwijderdiv">
         <form>
             <h2>Niet mee samen:</h2>
-            <input list="Studenten" name="SelectedStudent" id="geselecteerdeStudent">
+            <input list="Studenten" name="SelectedStudent" id="geselecteerdeStudent" autocomplete="off">
             <datalist id="Studenten">
                 <c:forEach var="i" items="${sessionScope['studenten']}">
                     <option value="<c:out value='${i.getNaam()}'/>">
