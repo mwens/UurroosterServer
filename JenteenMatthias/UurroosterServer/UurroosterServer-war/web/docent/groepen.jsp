@@ -37,7 +37,19 @@
             <input list="Studenten" name="SelectedStudent" id="geselecteerdeStudent" autocomplete="off">
             <datalist id="Studenten">
                 <c:forEach var="i" items="${sessionScope['overige']}">
-                    <option value="<c:out value='${i.getUrsGebruiker().getNaam()}'/>">
+                    <c:if test="${i.getValue()}.equals('1')">
+                        <option value="<c:out value='${i.getKey.getUrsGebruiker().getNaam()}'/>">
+                    </c:if>
+                </c:forEach>
+                <c:forEach var="i" items="${sessionScope['overige']}">
+                    <c:if test="${i.getValue()}.equals('0')">
+                        <option value="<c:out value='${i.getKey.getUrsGebruiker().getNaam()}'/>">
+                    </c:if>
+                </c:forEach>
+                <c:forEach var="i" items="${sessionScope['overige']}">
+                    <c:if test="${i.getValue()}.equals('2')">
+                        <option value="<c:out value='${i.getKey.getUrsGebruiker().getNaam()}'/>">
+                    </c:if>
                 </c:forEach>
             </datalist>
             <input type="hidden" name="stage" value="voegtoeStudent">

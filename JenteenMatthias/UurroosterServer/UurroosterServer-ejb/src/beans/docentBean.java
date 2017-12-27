@@ -126,10 +126,10 @@ public class docentBean implements docentBeanLocal {
         Map<UrsGebruiker, Integer> vMap = new HashMap<UrsGebruiker, Integer>();
         List<UrsStudent> studentenInKlas = this.getStudentenInKlas(klasId);
         List<UrsStudent> zonderKlasStu = (List<UrsStudent>) em.createNamedQuery("UrsStudent.findStudentZonderKlas").getResultList();
-        
         // Geen relatie
-        for(UrsStudent stud : zonderKlasStu)
+        for(UrsStudent stud : zonderKlasStu){
             vMap.put(stud.getUrsGebruiker(), 0);
+        }
         
         for(UrsStudent stud : studentenInKlas){
             List<UrsStudentrelatie> relsStud = (List<UrsStudentrelatie>) stud.getUrsGebruiker().getUrsStudentrelatieCollection();
