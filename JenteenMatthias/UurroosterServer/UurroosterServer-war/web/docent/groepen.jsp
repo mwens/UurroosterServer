@@ -12,6 +12,28 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
         <title><c:out value="${sessionScope['klasnaam']}" /></title>
+        <script>
+        function myFunction() {
+          // Declare variables 
+          var input, filter, table, tr, td, i;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            } 
+          }
+        }
+        </script>
     </head>
     <body>
         <h1><c:out value="${sessionScope['klasnaam']}" /></h1>
@@ -34,14 +56,16 @@
         </div>
         <div id="overigeStudenten">
             <h2>Overige Studenten</h2>
-            <table>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+
+            <table id="myTable">
                 <c:forEach var="i" items="${sessionScope['overige']}">
                     <c:if test="${i.value == 1}">
                         <tr style="background-color: green">
                             <form id="overigeStudenten" method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+                                <input type="hidden" name="SelectedStudent" value="<c:out value='${i.key.getNaam()}'/>">
+                                <input type="hidden" name="stage" value="voegtoeStudent">
                                 <td>
-                                    <input type="hidden" name="SelectedStudent" value="<c:out value='${i.key.getNaam()}'/>">
-                                    <input type="hidden" name="stage" value="voegtoeStudent">
                                     ${i.key.getNaam()}
                                 </td>
                                 <td>
@@ -55,9 +79,9 @@
                     <c:if test="${i.value == 0}">
                         <tr>
                             <form id="overigeStudenten" method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+                                <input type="hidden" name="SelectedStudent" value="<c:out value='${i.key.getNaam()}'/>">
+                                <input type="hidden" name="stage" value="voegtoeStudent">
                                 <td>
-                                    <input type="hidden" name="SelectedStudent" value="<c:out value='${i.key.getNaam()}'/>">
-                                    <input type="hidden" name="stage" value="voegtoeStudent">
                                     ${i.key.getNaam()}
                                 </td>
                                 <td>
@@ -71,9 +95,9 @@
                     <c:if test="${i.value == 2}">
                         <tr  style="background-color: red">
                             <form id="overigeStudenten" method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+                                <input type="hidden" name="SelectedStudent" value="<c:out value='${i.key.getNaam()}'/>">
+                                <input type="hidden" name="stage" value="voegtoeStudent">
                                 <td>
-                                    <input type="hidden" name="SelectedStudent" value="<c:out value='${i.key.getNaam()}'/>">
-                                    <input type="hidden" name="stage" value="voegtoeStudent">
                                     ${i.key.getNaam()}
                                 </td>
                                 <td>
