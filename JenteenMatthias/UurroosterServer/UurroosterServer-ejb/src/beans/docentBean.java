@@ -135,9 +135,10 @@ public class docentBean implements docentBeanLocal {
             
             for(UrsStudentrelatie relC : relsCol){
                 UrsGebruiker collega = commonBean.getGebruiker(relC.getUrsStudentrelatiePK().getCollega());
-                Integer rel = vMap.get(collega);
-                if(rel != null && rel < relC.getRelatie() && vMap.containsKey(collega))
-                    vMap.put(collega,relC.getRelatie());           
+                if( vMap.containsKey(collega) ){
+                    if(vMap.get(collega) < relC.getRelatie())
+                        vMap.put(collega,relC.getRelatie());   
+                }
             }
         }
         return vMap;
