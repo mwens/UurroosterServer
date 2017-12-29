@@ -8,6 +8,7 @@ package beans;
 import java.util.List;
 import javax.ejb.Local;
 import pakket.UrsGebruiker;
+import pakket.UrsKlas;
 import pakket.UrsStudent;
 import pakket.UrsStudentrelatie;
 

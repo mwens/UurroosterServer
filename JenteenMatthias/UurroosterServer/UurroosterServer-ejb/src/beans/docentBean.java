@@ -208,7 +208,28 @@ public class docentBean implements docentBeanLocal {
     @Override
     public void eindeKeuzes(){
         em.createNamedQuery("UrsStudent.updateStatusEindeKeuze").executeUpdate();
-    }    
+    }  
+    
+    // STATUS
+    /**
+     * Alle Studenten verliezen de mogelijkheid om te kiezen
+     * @return -1 als fout, anders 0
+     */
+    @Override
+    public int bevestigen(){
+        Query q = em.createNamedQuery("UrsStudent.findByStatus");
+        q.setParameter("status",0);
+        if(!q.getResultList().isEmpty())
+            return -1;
+        q.setParameter("status",1);
+        if(!q.getResultList().isEmpty())
+            return -1;
+        q.setParameter("status",3);
+        if(!q.getResultList().isEmpty())
+            return -1;
+        em.createNamedQuery("UrsStudent.updateStatusBevestigd").executeUpdate();
+        return 0;
+    } 
     
     
     @Override

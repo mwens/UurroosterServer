@@ -5,11 +5,15 @@
  */
 package beans;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import pakket.UrsGebruiker;
+import pakket.UrsKlas;
+import pakket.UrsStudent;
 
 /**
  * @author witmoca
@@ -61,5 +65,22 @@ public class commonBean implements commonBeanLocal {
         Query q = em.createNamedQuery("UrsGebruiker.findByUserid");
         q.setParameter("userid", userId);
         return (UrsGebruiker) q.getSingleResult();
+    }
+    
+        /**
+     *
+     * @param klas
+     * @return Alle studenten in de klas van de huidige student
+     */
+    @Override
+    public ArrayList<String> getKlasStudenten(UrsKlas klas){
+        ArrayList<String> result;
+        Query q = em.createNamedQuery("UrsStudent.findStudentByKlas");
+        q.setParameter("klasid", klas);
+        List<UrsStudent> ursstudenten = (List<UrsStudent>) q.getResultList();
+        result = new ArrayList<>();
+        for(int i=0;i<ursstudenten.size();i++)
+            result.add(this.getUserName(ursstudenten.get(i).getUserid()));
+        return result;
     }
 }

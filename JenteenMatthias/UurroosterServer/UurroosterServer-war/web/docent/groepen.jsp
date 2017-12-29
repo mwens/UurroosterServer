@@ -37,10 +37,10 @@
     </head>
     <body>
         <div class="header">
-            <h1><c:out value="${sessionScope['klasnaam']}" /></h1>
+            <h1>Docentenportaal <c:out value="${sessionScope['docentnaam']}" /></h1>
         </div>
         <div id="klasgroep">
-        <h2>Studenten in klasgroep</h2>
+        <h2>Studenten in <c:out value="${sessionScope['klasnaam']}" /></h2>
         <table>
             <c:forEach var="i" items="${sessionScope['klas']}">
                 <tr>

@@ -15,7 +15,7 @@
     </head>
     <body>
         <div class="header">
-            <h1>Studentenportaal</h1>
+            <h1>Studentenportaal <c:out value="${sessionScope['studentnaam']}" /></h1>
         </div>
         <div class="toevoegdiv">
         <h2>Wel mee samen:</h2>

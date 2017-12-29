@@ -5,8 +5,10 @@
  */
 package beans;
 
+import java.util.ArrayList;
 import javax.ejb.Local;
 import pakket.UrsGebruiker;
+import pakket.UrsKlas;
 
 /**
  *
@@ -17,4 +19,6 @@ public interface commonBeanLocal {
     public int getUserId(String userNaam);
     public String getUserName(int userId);
     public UrsGebruiker getGebruiker(int userId);
+
+    public ArrayList<String> getKlasStudenten(UrsKlas klas);
 }
