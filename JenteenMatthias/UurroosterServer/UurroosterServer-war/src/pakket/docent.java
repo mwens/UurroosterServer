@@ -39,6 +39,7 @@ public class docent extends HttpServlet {
             throws ServletException, IOException {
         
         String gotoPage;
+        request.setAttribute("aantalToegewezenStudenten", (int)((float)docentBean.aantalToegewezenStudenten()*100/(float)docentBean.aantalStudenten()));
         if(commonBean.getUserId(request.getUserPrincipal().getName()) == -1){
             gotoPage("Error.jsp", request, response);
             return;

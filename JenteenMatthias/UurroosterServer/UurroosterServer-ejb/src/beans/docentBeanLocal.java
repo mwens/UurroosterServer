@@ -34,4 +34,8 @@ public interface docentBeanLocal {
     
     // STATUS
     public void eindeKeuzes();
+
+    public int aantalToegewezenStudenten();
+
+    public int aantalStudenten();
 }
