@@ -5,6 +5,7 @@
  */
 package beans;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,8 @@ import pakket.UrsStudentrelatie;
 @Stateless
 public class docentBean implements docentBeanLocal {
     @EJB
+    private studentBeanLocal studentBean;
+    @EJB
     private commonBeanLocal commonBean;
     @PersistenceContext(unitName = "UurroosterServer-ejbPU")
     private EntityManager em;
@@ -38,6 +41,21 @@ public class docentBean implements docentBeanLocal {
     public List<UrsKlas> getKlasLijst(){
         Query q = em.createNamedQuery("UrsKlas.findAll");
         return (List<UrsKlas>) q.getResultList();
+    }
+    
+    /** Selecteer alle klassen (en map hun warnings aantal daarbij)
+     * 
+     * @return lijst met klassen
+     */
+    @Override
+    public Map<UrsKlas, Integer> getKlasLijstMetWarnings(){
+        List<UrsKlas> klassen = (List<UrsKlas>) em.createNamedQuery("UrsKlas.findAll").getResultList();
+        Map<UrsKlas, Integer> klasMap = new HashMap<UrsKlas, Integer>();
+        for(UrsKlas uk : klassen){
+            //System.out.println("Klas " + uk.getNaam() + " : " + uk.getKlasid() + " - " + this.getViolatedRelaties(uk.getKlasid()).size());
+            klasMap.put(uk, this.getViolatedRelaties(uk.getKlasid()).size());
+        }
+        return klasMap;
     }
     
     /** Vertaal klasId naar UrsKlas object
@@ -105,7 +123,6 @@ public class docentBean implements docentBeanLocal {
         return (List<UrsStudent>) q.getResultList();
     }
     
-    
     /** Zoek alle studenten die nog niet in een klas zitten
      * Gesorteerd op voorkeur (Een relatie NIET heeft voorrang op WEL)
      * 
@@ -154,6 +171,34 @@ public class docentBean implements docentBeanLocal {
         q.setParameter("userid",userId);
         q.setParameter("klasid",klasId == -1 ? null : this.getKlas(klasId));
         q.executeUpdate();
+    }
+    
+    /** Maak een lijst van relaties die verbroken zijn in deze klas
+     *
+     * @param klasId
+     * @return
+     */
+    @Override
+    public List<UrsStudentrelatie> getViolatedRelaties(int klasId){
+        List<UrsStudent> studenten =  getStudentenInKlas(klasId);
+        List<UrsStudentrelatie> rels = em.createNamedQuery("UrsStudentrelatie.findAll").getResultList();
+        List<UrsStudentrelatie> errors = new ArrayList<UrsStudentrelatie>();
+        
+        for(UrsStudentrelatie rel : rels){
+            UrsStudent collegaSt = studentBean.getStudent(rel.getUrsStudentrelatiePK().getCollega());
+            UrsStudent studentSt = studentBean.getStudent(rel.getUrsStudentrelatiePK().getStudent());
+            
+            // 1 : relatie moet bestaan
+            // 2 : relatie mag niet bestaan
+            if( (rel.getRelatie() == 1 && (!studenten.contains(collegaSt) || !studenten.contains(studentSt))) ||
+                (rel.getRelatie() == 2 && (studenten.contains(collegaSt)  &&  studenten.contains(studentSt))) )
+                    errors.add(rel); 
+        }
+        
+        // TODO: Fouten in vorig statement bij rel = 1
+        // TODO OPKUISEN errors (dubbele)
+        
+        return errors;
     }
     
     // STATUS

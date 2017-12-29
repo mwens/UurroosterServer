@@ -7,12 +7,7 @@ package pakket;
 
 import beans.commonBeanLocal;
 import beans.docentBeanLocal;
-import beans.studentBeanLocal;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -87,6 +82,7 @@ public class docent extends HttpServlet {
                 break;
         }
         sessie.setAttribute("docentnaam",request.getUserPrincipal().getName());
+        docentBean.getKlasLijstMetWarnings();
         sessie.setAttribute("klassen",docentBean.getKlasLijst());
         return "/docent/docent.jsp";
     }
@@ -105,6 +101,7 @@ public class docent extends HttpServlet {
             break;             
         }
         sessie.setAttribute("overige", docentBean.getKlaslozeStudentenVoorkeur((int) sessie.getAttribute("klasnummer")));
+        System.out.println(docentBean.getKlaslozeStudentenVoorkeur((int) sessie.getAttribute("klasnummer")));
         sessie.setAttribute("klas", docentBean.getStudentenInKlas((int) sessie.getAttribute("klasnummer")));
         sessie.setAttribute("klasnaam", docentBean.getKlas((int) sessie.getAttribute("klasnummer")).getNaam());
         return "/docent/groepen.jsp";

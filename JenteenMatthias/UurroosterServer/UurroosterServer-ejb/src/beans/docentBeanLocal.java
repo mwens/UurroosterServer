@@ -11,6 +11,7 @@ import javax.ejb.Local;
 import pakket.UrsGebruiker;
 import pakket.UrsKlas;
 import pakket.UrsStudent;
+import pakket.UrsStudentrelatie;
 
 /**
  *
@@ -20,6 +21,7 @@ import pakket.UrsStudent;
 public interface docentBeanLocal {
     // KLAS
     public List<UrsKlas> getKlasLijst();
+    public Map<UrsKlas, Integer> getKlasLijstMetWarnings();
     public UrsKlas getKlas(int klasid);
     public void addKlas(String klasNaam);
     public void removeKlas(int klasId);
@@ -28,6 +30,7 @@ public interface docentBeanLocal {
     public List<UrsStudent> getStudentenInKlas(int klasId);
     public Map<UrsGebruiker, Integer> getKlaslozeStudentenVoorkeur(int klasId);
     public void setStudentKlas(int userId, int klasId);
+    public List<UrsStudentrelatie> getViolatedRelaties(int klasId);
     
     // STATUS
     public void eindeKeuzes();
