@@ -102,7 +102,6 @@ public class docent extends HttpServlet {
             break;             
         }
         sessie.setAttribute("overige", docentBean.getKlaslozeStudentenVoorkeur((int) sessie.getAttribute("klasnummer")));
-        System.out.println(docentBean.getKlaslozeStudentenVoorkeur((int) sessie.getAttribute("klasnummer")));
         sessie.setAttribute("klas", docentBean.getStudentenInKlas((int) sessie.getAttribute("klasnummer")));
         sessie.setAttribute("klasnaam", docentBean.getKlas((int) sessie.getAttribute("klasnummer")).getNaam());
         return "/docent/groepen.jsp";
