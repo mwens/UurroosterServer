@@ -217,6 +217,18 @@ public class docentBean implements docentBeanLocal {
      */
     @Override
     public int bevestigen(){
+        if(this.periodeGestopt() == -1)
+            return this.periodeGestopt();
+        em.createNamedQuery("UrsStudent.updateStatusBevestigd").executeUpdate();
+        return 0;
+    } 
+    
+    /**
+     *
+     * @return
+     */
+    @Override
+    public int periodeGestopt(){
         Query q = em.createNamedQuery("UrsStudent.findByStatus");
         q.setParameter("status",0);
         if(!q.getResultList().isEmpty())
@@ -227,7 +239,25 @@ public class docentBean implements docentBeanLocal {
         q.setParameter("status",3);
         if(!q.getResultList().isEmpty())
             return -1;
-        em.createNamedQuery("UrsStudent.updateStatusBevestigd").executeUpdate();
+        return 0;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    @Override
+    public int bevestigd(){
+        Query q = em.createNamedQuery("UrsStudent.findByStatus");
+        q.setParameter("status",0);
+        if(!q.getResultList().isEmpty())
+            return -1;
+        q.setParameter("status",1);
+        if(!q.getResultList().isEmpty())
+            return -1;
+        q.setParameter("status",2);
+        if(!q.getResultList().isEmpty())
+            return -1;
         return 0;
     } 
     

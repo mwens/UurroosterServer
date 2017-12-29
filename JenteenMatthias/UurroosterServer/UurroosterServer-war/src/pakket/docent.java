@@ -46,8 +46,12 @@ public class docent extends HttpServlet {
         }
 
         String stage = request.getParameter("stage");
-        if(stage == null)
+        if(stage == null){
             stage = "index";
+            HttpSession sessie = request.getSession(); 
+            sessie.setAttribute("bevestigd", docentBean.bevestigd());
+            sessie.setAttribute("periodeGestopt", docentBean.periodeGestopt());
+        }
         switch (stage) {
             case "eindeKeuzes":
             case "verwijderen":
@@ -72,6 +76,7 @@ public class docent extends HttpServlet {
         switch (stage) {
             case "eindeKeuzes":
                 docentBean.eindeKeuzes();
+                sessie.setAttribute("periodeGestopt", docentBean.periodeGestopt());
                 break;
             case "verwijderen":
                 docentBean.removeKlas(Integer.parseInt(request.getParameter("verwijderKlas")));
@@ -82,6 +87,8 @@ public class docent extends HttpServlet {
             case "bevestigen":
                 if(docentBean.bevestigen() == -1)
                     sessie.setAttribute("alert", 1);
+                else
+                    sessie.setAttribute("bevestigd", docentBean.bevestigd());
                 break;
             default:
                 break;

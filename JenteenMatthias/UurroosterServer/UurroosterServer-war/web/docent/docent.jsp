@@ -18,17 +18,20 @@
         <div class="header">
             <h1>Docentenportaal <c:out value="${sessionScope['docentnaam']}" /></h1>
         </div>
-        <form method="post" action="<% out.println(response.encodeURL("")); %>">
-            <input type="hidden" name="stage" value="eindeKeuzes">
-            <button type="submit" class="verwijderen">Keuzetermijn studenten afsluiten</button>
-        </form>
+        <c:if test="${sessionScope['bevestigd'] != 0 && sessionScope['periodeGestopt'] != 0}">
+            <form method="post" action="<% out.println(response.encodeURL("")); %>">
+                <input type="hidden" name="stage" value="eindeKeuzes">
+                <button type="submit" class="verwijderen">Keuzetermijn studenten afsluiten</button>
+            </form>
+        </c:if>
         <br/>
-        
-        <form method="post" action="<% out.println(response.encodeURL("")); %>">
-            <input type="text" name="nieuweGroepNaam">
-            <input type="hidden" name="stage" value="voegGroepToe">
-            <button type="submit">Groep toevoegen +</button>
-        </form>
+        <c:if test="${sessionScope['bevestigd'] != 0}">
+            <form method="post" action="<% out.println(response.encodeURL("")); %>">
+                <input type="text" name="nieuweGroepNaam">
+                <input type="hidden" name="stage" value="voegGroepToe">
+                <button type="submit">Groep toevoegen +</button>
+            </form>
+        </c:if>
             
             
         <table>
@@ -38,18 +41,25 @@
             <c:forEach var="i" items="${sessionScope['klassen']}">
                 <tr>
                     <td><c:out value='${i.getNaam()}'/></td>
-                    <td>
-			<form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
-			    <input type="hidden" name="stage" value="verwijderen">
-			    <input type="hidden" name="verwijderKlas" value="${i.getKlasid()}">
-			    <button class="verwijderen" type="submit">X</button>
-			</form>
-		    </td>
+                    <c:if test="${sessionScope['bevestigd'] != 0}">
+                        <td>
+                            <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+                                <input type="hidden" name="stage" value="verwijderen">
+                                <input type="hidden" name="verwijderKlas" value="${i.getKlasid()}">
+                                <button class="verwijderen" type="submit">X</button>
+                            </form>
+                        </td>
+                    </c:if>
                     <td>
 			<form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
 			    <input type="hidden" name="stage" value="edit">
 			    <input type="hidden" name="editKlas" value="${i.getKlasid()}">
-			    <button class="edit" type="submit">Edit</button>
+                            <c:if test="${sessionScope['bevestigd'] != 0}">
+                                <button class="edit" type="submit">Edit</button>
+                            </c:if>
+                            <c:if test="${sessionScope['bevestigd'] == 0}">
+                                <button class="edit" type="submit">View</button>
+                            </c:if>
 			</form>
 		    </td>
                 </tr> 
@@ -62,13 +72,15 @@
             </div>    
         </div>
         <div class="knopjes">
-            <form method="post" action="<% out.println(response.encodeURL("")); %>">
-                <input type="hidden" name="stage" value="bevestigen">
-                <c:if test="${sessionScope['alert'] == 1}">
-                    <p style="font-weight: bold; color: red;">BEVESTIGEN NOG NIET MOGELIJK!</p>
-                </c:if>
-                <button type="submit">Bevestigen</button>
-            </form>
+            <c:if test="${sessionScope['bevestigd'] != 0}">
+                <form method="post" action="<% out.println(response.encodeURL("")); %>">
+                    <input type="hidden" name="stage" value="bevestigen">
+                    <c:if test="${sessionScope['alert'] == 1}">
+                        <p style="font-weight: bold; color: red;">BEVESTIGEN NOG NIET MOGELIJK!</p>
+                    </c:if>
+                    <button type="submit">Bevestigen</button>
+                </form>
+            </c:if>
             <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
                 <input type="hidden" name="stage" value="afmelden">
                 <button type="submit">Afmelden</button>

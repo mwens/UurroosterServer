@@ -40,4 +40,8 @@ public interface docentBeanLocal {
     public int aantalStudenten();
 
     public int bevestigen();
+
+    public int bevestigd();
+
+    public int periodeGestopt();
 }
