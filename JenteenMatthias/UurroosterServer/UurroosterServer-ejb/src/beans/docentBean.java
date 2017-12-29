@@ -171,4 +171,18 @@ public class docentBean implements docentBeanLocal {
     public void eindeKeuzes(){
         em.createNamedQuery("UrsStudent.updateStatusEindeKeuze").executeUpdate();
     }    
+    
+    
+    @Override
+    public int aantalToegewezenStudenten(){
+        Query q = em.createNamedQuery("UrsStudent.countKlasNotNull");
+        return Integer.parseInt(q.getSingleResult().toString());
+    }
+    
+    
+    @Override
+    public int aantalStudenten(){
+        Query q = em.createNamedQuery("UrsStudent.countStudenten");
+        return Integer.parseInt(q.getSingleResult().toString());
+    }
 }

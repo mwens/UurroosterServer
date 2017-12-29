@@ -6,6 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,7 +55,12 @@
                 </tr> 
             </c:forEach>
         </table>
-            
+        <div class="progress">
+            <p style="font-weight: bold;">Toegewezen:</p>
+            <div class="container">
+                <div style="width: <%=request.getAttribute("aantalToegewezenStudenten") %>%" class="afgewerkt"><%=request.getAttribute("aantalToegewezenStudenten") %>%</div>
+            </div>    
+        </div>
         <div class="knopjes">
             <form method="post" action="<% out.println(response.encodeURL("")); %>">
                 <input type="hidden" name="stage" value="bevestigen">
