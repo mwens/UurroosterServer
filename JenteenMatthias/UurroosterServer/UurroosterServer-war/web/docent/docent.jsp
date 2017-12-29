@@ -14,7 +14,9 @@
         <title>Docent</title>
     </head>
     <body>
-        <h1>Docentenportaal <c:out value="${sessionScope['docentnaam']}" /></h1>
+        <div class="header">
+            <h1>Docentenportaal <c:out value="${sessionScope['docentnaam']}" /></h1>
+        </div>
         <form method="post" action="<% out.println(response.encodeURL("")); %>">
             <input type="hidden" name="stage" value="eindeKeuzes">
             <button type="submit" class="verwijderen">Keuzetermijn studenten afsluiten</button>

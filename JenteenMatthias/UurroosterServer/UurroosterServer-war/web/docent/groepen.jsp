@@ -36,7 +36,9 @@
         </script>
     </head>
     <body>
-        <h1><c:out value="${sessionScope['klasnaam']}" /></h1>
+        <div class="header">
+            <h1><c:out value="${sessionScope['klasnaam']}" /></h1>
+        </div>
         <div id="klasgroep">
         <h2>Studenten in klasgroep</h2>
         <table>
