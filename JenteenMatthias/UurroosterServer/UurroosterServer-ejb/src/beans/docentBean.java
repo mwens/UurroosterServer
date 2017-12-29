@@ -18,6 +18,7 @@ import pakket.UrsGebruiker;
 import pakket.UrsKlas;
 import pakket.UrsStudent;
 import pakket.UrsStudentrelatie;
+import pakket.UrsStudentrelatiePK;
 
 /**
  *
@@ -52,7 +53,6 @@ public class docentBean implements docentBeanLocal {
         List<UrsKlas> klassen = (List<UrsKlas>) em.createNamedQuery("UrsKlas.findAll").getResultList();
         Map<UrsKlas, Integer> klasMap = new HashMap<UrsKlas, Integer>();
         for(UrsKlas uk : klassen){
-            //System.out.println("Klas " + uk.getNaam() + " : " + uk.getKlasid() + " - " + this.getViolatedRelaties(uk.getKlasid()).size());
             klasMap.put(uk, this.getViolatedRelaties(uk.getKlasid()).size());
         }
         return klasMap;
@@ -181,24 +181,64 @@ public class docentBean implements docentBeanLocal {
     @Override
     public List<UrsStudentrelatie> getViolatedRelaties(int klasId){
         List<UrsStudent> studenten =  getStudentenInKlas(klasId);
-        List<UrsStudentrelatie> rels = em.createNamedQuery("UrsStudentrelatie.findAll").getResultList();
+        List<UrsStudentrelatie> rels = this.cleanRelPrioriteiten(em.createNamedQuery("UrsStudentrelatie.findAll").getResultList());
         List<UrsStudentrelatie> errors = new ArrayList<UrsStudentrelatie>();
         
         for(UrsStudentrelatie rel : rels){
             UrsStudent collegaSt = studentBean.getStudent(rel.getUrsStudentrelatiePK().getCollega());
             UrsStudent studentSt = studentBean.getStudent(rel.getUrsStudentrelatiePK().getStudent());
             
-            // 1 : relatie moet bestaan
+            // 1 : ofwel alle 2 erin, ofwel geen van de 2
             // 2 : relatie mag niet bestaan
-            if( (rel.getRelatie() == 1 && (!studenten.contains(collegaSt) || !studenten.contains(studentSt))) ||
-                (rel.getRelatie() == 2 && (studenten.contains(collegaSt)  &&  studenten.contains(studentSt))) )
+            if( (rel.getRelatie() == 1 && (studenten.contains(collegaSt) ^ studenten.contains(studentSt))) ||
+                (rel.getRelatie() == 2 && (studenten.contains(collegaSt) &&  studenten.contains(studentSt))) )
                     errors.add(rel); 
         }
         
         // TODO: Fouten in vorig statement bij rel = 1
         // TODO OPKUISEN errors (dubbele)
+        System.out.println("Klas: " + klasId);
+        for(UrsStudentrelatie r : errors){
+            System.out.println(commonBean.getUserName(r.getUrsStudentrelatiePK().getStudent()) + " - " + commonBean.getUserName(r.getUrsStudentrelatiePK().getCollega()) + " : " + r.getRelatie());
+        }
         
         return errors;
+    }
+    
+    /** Verwijder alle dubbele paren ([student collega] = [collega student]) uit de lijst
+     *  en check en pas de relatie prioriteit aan
+     * @param rels
+     * @return 
+     */
+    public List<UrsStudentrelatie> cleanRelPrioriteiten(List<UrsStudentrelatie> rels){
+        // Converteer naar relatieMap
+        Map<UrsStudentrelatiePK, Integer> relsMap = new HashMap<UrsStudentrelatiePK, Integer>();
+        for(UrsStudentrelatie r : rels){
+            int student = r.getUrsStudentrelatiePK().getStudent();
+            int collega = r.getUrsStudentrelatiePK().getCollega();
+            // switch zodat student altijd kleiner is dan collega
+            if(collega < student){
+                int temp = collega;
+                collega = student;
+                student = temp;
+            }
+            UrsStudentrelatiePK primaryKey = new UrsStudentrelatiePK(student,collega);
+            
+            if(relsMap.containsKey(primaryKey)){ 
+                Integer prev = relsMap.get(primaryKey);
+                if(prev < r.getRelatie())
+                    relsMap.put(primaryKey, r.getRelatie());
+            } else {
+                relsMap.put(primaryKey,r.getRelatie()); 
+            }
+        }
+        
+        // Herconverteer
+        List<UrsStudentrelatie> result = new ArrayList<UrsStudentrelatie>();
+        for(UrsStudentrelatiePK upk : relsMap.keySet()){
+            result.add(new UrsStudentrelatie(upk, relsMap.get(upk)));
+        }
+        return result;
     }
     
     // STATUS
