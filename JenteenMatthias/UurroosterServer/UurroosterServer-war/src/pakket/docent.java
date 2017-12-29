@@ -83,8 +83,7 @@ public class docent extends HttpServlet {
                 break;
         }
         sessie.setAttribute("docentnaam",request.getUserPrincipal().getName());
-        docentBean.getKlasLijstMetWarnings();
-        sessie.setAttribute("klassen",docentBean.getKlasLijst());
+        sessie.setAttribute("klassen",docentBean.getKlasLijstMetWarnings());
         return "/docent/docent.jsp";
     }
     
