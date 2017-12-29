@@ -26,7 +26,6 @@ public interface docentBeanLocal {
     
     // STUDENTEN IN KLAS
     public List<UrsStudent> getStudentenInKlas(int klasId);
-    public List<UrsStudent> getKlaslozeStudenten();
     public Map<UrsGebruiker, Integer> getKlaslozeStudentenVoorkeur(int klasId);
     public void setStudentKlas(int userId, int klasId);
     

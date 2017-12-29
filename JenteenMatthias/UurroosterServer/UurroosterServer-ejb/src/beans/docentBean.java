@@ -105,14 +105,6 @@ public class docentBean implements docentBeanLocal {
         return (List<UrsStudent>) q.getResultList();
     }
     
-    /** Zoek alle studenten die nog niet in een klas zitten
-     * 
-     * @return Lijst van UrsStudent die alle studenten niet in een klas bevat
-     */
-    @Override
-    public List<UrsStudent> getKlaslozeStudenten(){
-        return (List<UrsStudent>) em.createNamedQuery("UrsStudent.findStudentZonderKlas").getResultList();
-    }
     
     /** Zoek alle studenten die nog niet in een klas zitten
      * Gesorteerd op voorkeur (Een relatie NIET heeft voorrang op WEL)
