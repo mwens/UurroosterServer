@@ -32,7 +32,7 @@ create table URS_Klas(
 create table URS_Student(
         userId  int             not null,
         klasId  int,
-        /* 0 = Select, 1 = Bevestig + overzicht, 2 = overzicht */
+        /* 0 = Select, 1 = Bevestig + overzicht, 2 = overzicht, 3 = definitief aan klas toegevoegd */
         status  int             not null,
         foreign key(userId) references URS_Gebruiker,
         foreign key(klasId) references URS_Klas,

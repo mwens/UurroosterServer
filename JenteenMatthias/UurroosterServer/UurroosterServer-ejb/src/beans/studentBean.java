@@ -5,6 +5,7 @@
  */
 package beans;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import pakket.UrsGebruiker;
+import pakket.UrsKlas;
 import pakket.UrsStudent;
 import pakket.UrsStudentrelatie;
 
@@ -167,7 +169,6 @@ public class studentBean implements studentBeanLocal {
         Query q = em.createNamedQuery("UrsGebruiker.findOthersByGroep");
         q.setParameter("groep", "student");
         q.setParameter("naam", naam);
-        List<UrsGebruiker> studenten = (List<UrsGebruiker>) q.getResultList();
-        return studenten;
+        return (List<UrsGebruiker>) q.getResultList();
     }
 }

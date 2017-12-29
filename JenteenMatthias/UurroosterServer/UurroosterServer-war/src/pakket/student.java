@@ -54,6 +54,9 @@ public class student extends HttpServlet {
             case 0:
                 gotop = kiesStudent(gotop,userId,sessie,request,response);
                 break;
+            case 3:
+                gotop = bevestigdeKlas(userId,sessie,request,response);
+                break;
             case 2:
             case 1:
                 gotop = overzichtStudent(userId,sessie,request,response);
@@ -93,7 +96,14 @@ public String overzichtStudent(int userId, HttpSession sessie, HttpServletReques
     if(studentBean.getStatus(userId) == 2)
         sessie.setAttribute("bevestigknop", "disabled");
     return "/student/bevestigen.jsp";
-        
+}
+
+public String bevestigdeKlas(int userId, HttpSession sessie, HttpServletRequest request, HttpServletResponse response){
+    UrsStudent student = studentBean.getStudent(userId);
+    UrsKlas klas = student.getKlasid();
+    sessie.setAttribute("klasnaam", klas.getNaam());
+    sessie.setAttribute("klas", commonBean.getKlasStudenten(klas));
+    return "/student/klas.jsp";
 }
     
  public String kiesStudent(String gotop,int userId, HttpSession sessie, HttpServletRequest request, HttpServletResponse response){

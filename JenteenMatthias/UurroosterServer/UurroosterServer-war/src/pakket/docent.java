@@ -67,7 +67,8 @@ public class docent extends HttpServlet {
     }
     
     public String docentOverzicht(String stage, HttpServletRequest request, HttpServletResponse response){
-        HttpSession sessie = request.getSession();   
+        HttpSession sessie = request.getSession(); 
+        sessie.setAttribute("alert", 0);
         switch (stage) {
             case "eindeKeuzes":
                 docentBean.eindeKeuzes();
@@ -79,6 +80,9 @@ public class docent extends HttpServlet {
                 docentBean.addKlas((String) request.getParameter("nieuweGroepNaam"));
                 break;
             case "bevestigen":
+                if(docentBean.bevestigen() == -1)
+                    sessie.setAttribute("alert", 1);
+                break;
             default:
                 break;
         }
