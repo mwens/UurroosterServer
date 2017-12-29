@@ -123,6 +123,34 @@ public class docentBean implements docentBeanLocal {
         return (List<UrsStudent>) q.getResultList();
     }
     
+    /** Zelfde als getStudentenInKlas, maar dan gemaped op aantal problemen
+     *
+     * @param klasId
+     * @return
+     */
+    @Override
+    public Map<UrsStudent,Integer> getErroredStudentenInKlas(int klasId){
+        List<UrsStudent> studenten = this.getStudentenInKlas(klasId);
+        Map<UrsStudent,Integer> studMap = new HashMap<>();
+        // copy lijst in map met init waarde
+        for(UrsStudent student : studenten){
+            studMap.put(student, 0);
+        }
+
+        List<UrsStudentrelatie> rel = this.getViolatedRelaties(klasId);
+        for(UrsStudentrelatie r : rel){
+            UrsStudent collegaSt = studentBean.getStudent(r.getUrsStudentrelatiePK().getCollega());
+            UrsStudent studentSt = studentBean.getStudent(r.getUrsStudentrelatiePK().getStudent());
+            if(studMap.containsKey(studentSt)){
+                studMap.put(studentSt, studMap.get(studentSt) + 1);
+            }
+            if(studMap.containsKey(collegaSt)){
+                studMap.put(collegaSt, studMap.get(collegaSt) + 1);
+            }
+        }
+        return studMap;
+    }
+    
     /** Zoek alle studenten die nog niet in een klas zitten
      * Gesorteerd op voorkeur (Een relatie NIET heeft voorrang op WEL)
      * 
@@ -195,14 +223,21 @@ public class docentBean implements docentBeanLocal {
                     errors.add(rel); 
         }
         
-        // TODO: Fouten in vorig statement bij rel = 1
-        // TODO OPKUISEN errors (dubbele)
-        System.out.println("Klas: " + klasId);
-        for(UrsStudentrelatie r : errors){
-            System.out.println(commonBean.getUserName(r.getUrsStudentrelatiePK().getStudent()) + " - " + commonBean.getUserName(r.getUrsStudentrelatiePK().getCollega()) + " : " + r.getRelatie());
-        }
-        
         return errors;
+    }
+    
+    /** Maakt een convenience klasse om gemakkelijk te kunnen afdrukken in jsp
+     *
+     * @param li
+     * @return
+     */
+    @Override
+    public List<RelatieWrapper> wrapRelaties(List<UrsStudentrelatie> li){
+        List<RelatieWrapper> rw  = new ArrayList<>();
+        for(UrsStudentrelatie rl : li){
+            rw.add(new RelatieWrapper(commonBean.getUserName(rl.getUrsStudentrelatiePK().getStudent()),commonBean.getUserName(rl.getUrsStudentrelatiePK().getCollega() ), rl.getRelatie() ));
+        }
+        return rw;
     }
     
     /** Verwijder alle dubbele paren ([student collega] = [collega student]) uit de lijst

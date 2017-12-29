@@ -37,21 +37,30 @@
     </head>
     <body>
         <div class="header">
-            <h1><c:out value="${sessionScope['klasnaam']}" /></h1>
+            <h1><c:out value="${sessionScope['klasnaam']}" />
+                <c:if test="${sessionScope['klasTotaalErrors'] != 0}">
+                    - <c:out value="${sessionScope['klasTotaalErrors']}"/> errors &#9888;
+                </c:if>
+            </h1>
         </div>
         <div id="klasgroep">
         <h2>Studenten in klasgroep</h2>
         <table>
             <c:forEach var="i" items="${sessionScope['klas']}">
                 <tr>
-                    <td><c:out value='${i.getUrsGebruiker().getNaam()}'/></td>
+                    <td><c:out value='${i.key.getUrsGebruiker().getNaam()}'/></td>
                     <td>
 			<form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
 			    <input type="hidden" name="stage" value="verwijderenStudent">
-			    <input type="hidden" name="verwijderStudent" value="${i.getUserid()}">
+			    <input type="hidden" name="verwijderStudent" value="${i.key.getUserid()}">
 			    <button class="verwijderen" type="submit">X</button>
 			</form>
 		    </td>
+                    <c:if test="${i.value != 0}">
+                        <td>
+                            <c:out value='${i.value}'/> errors &#9888;
+                        </td>
+                    </c:if>
                 </tr> 
             </c:forEach>
         </table>
@@ -108,6 +117,18 @@
                             </form>
                         </tr>
                     </c:if>
+                </c:forEach>
+            </table>
+        </div>
+        <div id="relatieErrors">
+            <h2>Errors:</h2>
+            <table>
+                <tr><th>Student 1</th><th>Student 2</th></tr>
+                <c:forEach var="i" items="${sessionScope['errors']}">
+                    <tr <c:if test="${i.getRELATIE() == 1}"> style="background-color: green"</c:if><c:if test="${i.getRELATIE() == 2}"> style="background-color: red"</c:if>>
+                        <td><c:out value='${i.getSTUDENT_NAAM_1()}' /></td>
+                        <td><c:out value='${i.getSTUDENT_NAAM_2()}' /></td>
+                    </tr>
                 </c:forEach>
             </table>
         </div>
