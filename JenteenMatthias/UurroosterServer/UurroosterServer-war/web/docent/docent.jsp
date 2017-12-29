@@ -65,7 +65,7 @@
             <form method="post" action="<% out.println(response.encodeURL("")); %>">
                 <input type="hidden" name="stage" value="bevestigen">
                 <c:if test="${sessionScope['alert'] == 1}">
-                    <p style="font-weight: bold; font-color: red;">BEVESTIGEN NOG NIET MOGELIJK!</p>
+                    <p style="font-weight: bold; color: red;">BEVESTIGEN NOG NIET MOGELIJK!</p>
                 </c:if>
                 <button type="submit">Bevestigen</button>
             </form>
