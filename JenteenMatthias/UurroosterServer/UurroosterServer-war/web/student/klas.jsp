@@ -22,16 +22,18 @@
         <h2 class="w3-blue">Studenten in <c:out value="${sessionScope['klasnaam']}" /></h2>
         <table>
             <c:forEach var="i" items="${sessionScope['klas']}">
-                <c:if test="${i == sessionScope['studentnaam']}">
-                    <tr style="background-color: #75aaff">
-                        <td><c:out value='${i}'/></td>
-                    </tr> 
-                </c:if>
-                <c:if test="${i != sessionScope['studentnaam']}">
-                    <tr>
-                        <td><c:out value='${i}'/></td>
-                    </tr> 
-                </c:if>
+                <c:choose>
+                    <c:when test="${i == sessionScope['studentnaam']}">
+                        <tr style="background-color: #75aaff">
+                            <td><c:out value='${i}'/></td>
+                        </tr> 
+                    </c:when>
+                    <c:when test="${i != sessionScope['studentnaam']}">
+                        <tr>
+                            <td><c:out value='${i}'/></td>
+                        </tr> 
+                    </c:when>
+                </c:choose>
             </c:forEach>
         </table>
         </div>
