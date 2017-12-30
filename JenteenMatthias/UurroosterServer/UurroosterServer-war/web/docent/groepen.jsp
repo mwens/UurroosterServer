@@ -37,21 +37,30 @@
     </head>
     <body>
         <div class="header">
-            <h1>Docentenportaal <c:out value="${sessionScope['docentnaam']}" /></h1>
+            <h1>Docentenportaal <c:out value="${sessionScope['klasnaam']}" />
+                <c:if test="${sessionScope['klasTotaalErrors'] != 0}">
+                    - <c:out value="${sessionScope['klasTotaalErrors']}"/> errors &#9888;
+                </c:if>
+            </h1>
         </div>
         <div id="klasgroep">
         <h2>Studenten in <c:out value="${sessionScope['klasnaam']}" /></h2>
         <table>
             <c:forEach var="i" items="${sessionScope['klas']}">
                 <tr>
-                    <td><c:out value='${i.getUrsGebruiker().getNaam()}'/></td>
+                    <td><c:out value='${i.key.getUrsGebruiker().getNaam()}'/></td>
                     <c:if test="${sessionScope['bevestigd'] != 0}">
                         <td>
                             <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
                                 <input type="hidden" name="stage" value="verwijderenStudent">
-                                <input type="hidden" name="verwijderStudent" value="${i.getUserid()}">
+                                <input type="hidden" name="verwijderStudent" value="${i.key.getUserid()}">
                                 <button class="verwijderen" type="submit">X</button>
                             </form>
+                        </td>
+                    </c:if>
+                    <c:if test="${i.value != 0}">
+                        <td>
+                            <c:out value='${i.value}'/> errors &#9888;
                         </td>
                     </c:if>
                 </tr> 
@@ -63,58 +72,70 @@
                 <h2>Overige Studenten</h2>
                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
 
-                <table id="myTable">
-                    <c:forEach var="i" items="${sessionScope['overige']}">
-                        <c:if test="${i.value == 1}">
-                            <tr style="background-color: green">
-                                <form id="overigeStudenten" method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
-                                    <input type="hidden" name="SelectedStudent" value="<c:out value='${i.key.getNaam()}'/>">
-                                    <input type="hidden" name="stage" value="voegtoeStudent">
-                                    <td>
-                                        ${i.key.getNaam()}
-                                    </td>
-                                    <td>
-                                        <button type="submit" class="toevoegen">V</button>
-                                    </td>
-                                </form>
-                            </tr>
-                        </c:if>
-                    </c:forEach>
-                    <c:forEach var="i" items="${sessionScope['overige']}">
-                        <c:if test="${i.value == 0}">
-                            <tr>
-                                <form id="overigeStudenten" method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
-                                    <input type="hidden" name="SelectedStudent" value="<c:out value='${i.key.getNaam()}'/>">
-                                    <input type="hidden" name="stage" value="voegtoeStudent">
-                                    <td>
-                                        ${i.key.getNaam()}
-                                    </td>
-                                    <td>
-                                        <button type="submit" class="toevoegen">V</button>
-                                    </td>
-                                </form>
-                            </tr>
-                        </c:if>
-                    </c:forEach>
-                    <c:forEach var="i" items="${sessionScope['overige']}">
-                        <c:if test="${i.value == 2}">
-                            <tr  style="background-color: red">
-                                <form id="overigeStudenten" method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
-                                    <input type="hidden" name="SelectedStudent" value="<c:out value='${i.key.getNaam()}'/>">
-                                    <input type="hidden" name="stage" value="voegtoeStudent">
-                                    <td>
-                                        ${i.key.getNaam()}
-                                    </td>
-                                    <td>
-                                        <button type="submit" class="toevoegen">V</button>
-                                    </td>
-                                </form>
-                            </tr>
-                        </c:if>
-                    </c:forEach>
-                </table>
-            </div>
+            <table id="myTable">
+                <c:forEach var="i" items="${sessionScope['overige']}">
+                    <c:if test="${i.value == 1}">
+                        <tr style="background-color: green">
+                            <form id="overigeStudenten" method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+                                <input type="hidden" name="SelectedStudent" value="<c:out value='${i.key.getNaam()}'/>">
+                                <input type="hidden" name="stage" value="voegtoeStudent">
+                                <td>
+                                    ${i.key.getNaam()}
+                                </td>
+                                <td>
+                                    <button type="submit" class="toevoegen">V</button>
+                                </td>
+                            </form>
+                        </tr>
+                    </c:if>
+                </c:forEach>
+                <c:forEach var="i" items="${sessionScope['overige']}">
+                    <c:if test="${i.value == 0}">
+                        <tr>
+                            <form id="overigeStudenten" method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+                                <input type="hidden" name="SelectedStudent" value="<c:out value='${i.key.getNaam()}'/>">
+                                <input type="hidden" name="stage" value="voegtoeStudent">
+                                <td>
+                                    ${i.key.getNaam()}
+                                </td>
+                                <td>
+                                    <button type="submit" class="toevoegen">V</button>
+                                </td>
+                            </form>
+                        </tr>
+                    </c:if>
+                </c:forEach>
+                <c:forEach var="i" items="${sessionScope['overige']}">
+                    <c:if test="${i.value == 2}">
+                        <tr  style="background-color: red">
+                            <form id="overigeStudenten" method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+                                <input type="hidden" name="SelectedStudent" value="<c:out value='${i.key.getNaam()}'/>">
+                                <input type="hidden" name="stage" value="voegtoeStudent">
+                                <td>
+                                    ${i.key.getNaam()}
+                                </td>
+                                <td>
+                                    <button type="submit" class="toevoegen">V</button>
+                                </td>
+                            </form>
+                        </tr>
+                    </c:if>
+                </c:forEach>
+            </table>
         </c:if>
+        </div>
+        <div id="relatieErrors">
+            <h2>Errors:</h2>
+            <table>
+                <tr><th>Student 1</th><th>Student 2</th></tr>
+                <c:forEach var="i" items="${sessionScope['errors']}">
+                    <tr <c:if test="${i.getRELATIE() == 1}"> style="background-color: green"</c:if><c:if test="${i.getRELATIE() == 2}"> style="background-color: red"</c:if>>
+                        <td><c:out value='${i.getSTUDENT_NAAM_1()}' /></td>
+                        <td><c:out value='${i.getSTUDENT_NAAM_2()}' /></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
         <div class="knopjes">
             <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
                 <input type="hidden" name="stage" value="null">

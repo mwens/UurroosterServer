@@ -40,12 +40,12 @@
             </tr>     
             <c:forEach var="i" items="${sessionScope['klassen']}">
                 <tr>
-                    <td><c:out value='${i.getNaam()}'/></td>
+                    <td><c:out value='${i.key.getNaam()}'/></td>
                     <c:if test="${sessionScope['bevestigd'] != 0}">
                         <td>
                             <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
                                 <input type="hidden" name="stage" value="verwijderen">
-                                <input type="hidden" name="verwijderKlas" value="${i.getKlasid()}">
+                                <input type="hidden" name="verwijderKlas" value="${i.key.getKlasid()}">
                                 <button class="verwijderen" type="submit">X</button>
                             </form>
                         </td>
@@ -53,7 +53,7 @@
                     <td>
 			<form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
 			    <input type="hidden" name="stage" value="edit">
-			    <input type="hidden" name="editKlas" value="${i.getKlasid()}">
+			    <input type="hidden" name="editKlas" value="${i.key.getKlasid()}">
                             <c:if test="${sessionScope['bevestigd'] != 0}">
                                 <button class="edit" type="submit">Edit</button>
                             </c:if>
@@ -62,6 +62,11 @@
                             </c:if>
 			</form>
 		    </td>
+                    <c:if test="${i.value != 0}">
+                        <td>
+                            <c:out value='${i.value}'/> errors &#9888;
+                        </td>
+                    </c:if>
                 </tr> 
             </c:forEach>
         </table>

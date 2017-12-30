@@ -94,8 +94,7 @@ public class docent extends HttpServlet {
                 break;
         }
         sessie.setAttribute("docentnaam",request.getUserPrincipal().getName());
-        docentBean.getKlasLijstMetWarnings();
-        sessie.setAttribute("klassen",docentBean.getKlasLijst());
+        sessie.setAttribute("klassen",docentBean.getKlasLijstMetWarnings());
         return "/docent/docent.jsp";
     }
     
@@ -112,10 +111,12 @@ public class docent extends HttpServlet {
             sessie.setAttribute("klasnummer", Integer.parseInt(request.getParameter("editKlas")));
             break;             
         }
-        sessie.setAttribute("overige", docentBean.getKlaslozeStudentenVoorkeur((int) sessie.getAttribute("klasnummer")));
-        System.out.println(docentBean.getKlaslozeStudentenVoorkeur((int) sessie.getAttribute("klasnummer")));
-        sessie.setAttribute("klas", docentBean.getStudentenInKlas((int) sessie.getAttribute("klasnummer")));
-        sessie.setAttribute("klasnaam", docentBean.getKlas((int) sessie.getAttribute("klasnummer")).getNaam());
+        int klasNummer = (int) sessie.getAttribute("klasnummer");
+        sessie.setAttribute("overige", docentBean.getKlaslozeStudentenVoorkeur(klasNummer));
+        sessie.setAttribute("klas", docentBean.getErroredStudentenInKlas(klasNummer));
+        sessie.setAttribute("klasnaam", docentBean.getKlas(klasNummer).getNaam());
+        sessie.setAttribute("errors", docentBean.wrapRelaties(docentBean.getViolatedRelaties(klasNummer)));
+        sessie.setAttribute("klasTotaalErrors", docentBean.getViolatedRelaties(klasNummer).size());
         return "/docent/groepen.jsp";
     }
     

@@ -28,17 +28,16 @@ public interface docentBeanLocal {
     
     // STUDENTEN IN KLAS
     public List<UrsStudent> getStudentenInKlas(int klasId);
+    public Map<UrsStudent,Integer> getErroredStudentenInKlas(int klasId);
     public Map<UrsGebruiker, Integer> getKlaslozeStudentenVoorkeur(int klasId);
     public void setStudentKlas(int userId, int klasId);
     public List<UrsStudentrelatie> getViolatedRelaties(int klasId);
+    public List<RelatieWrapper> wrapRelaties(List<UrsStudentrelatie> li);
     
     // STATUS
     public void eindeKeuzes();
-
     public int aantalToegewezenStudenten();
-
-    public int aantalStudenten();
-
+    public int aantalStudenten(); 
     public int bevestigen();
 
     public int bevestigd();

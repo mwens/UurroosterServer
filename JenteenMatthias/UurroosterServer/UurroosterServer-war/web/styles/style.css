@@ -137,6 +137,11 @@ body{
     width: 300px;
 }
 
+#relatieErrors{
+    position: absolute;
+    top: 90%;
+    width: 300px;
+}
 
 /* Make sure that padding behaves as expected */
 * {box-sizing:border-box}
