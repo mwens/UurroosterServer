@@ -90,6 +90,14 @@
                     <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Bevestigen</button>
                 </form>
             </c:if>
+            <c:if test="${sessionScope['bevestigd'] == 0}">
+                <c:if test="${sessionScope['docentnaam'] == 'admin'}">
+                    <form method="post" action="<% out.println(response.encodeURL("")); %>">
+                        <input type="hidden" name="stage" value="bevestigenOngedaan">
+                        <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Bevestigen Ongedaan Maken</button>
+                    </form>
+                </c:if>
+            </c:if>
             <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
                 <input type="hidden" name="stage" value="afmelden">
                 <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Afmelden</button>

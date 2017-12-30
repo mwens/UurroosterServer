@@ -17,6 +17,8 @@
         <form>
             <input type="hidden" name="stage" value="geslaagd">
         </form>
-        <p>Afmelden geslaagd! <br> Klik <a href="<% out.println(response.encodeURL("/UurroosterServer-war/")); %>">hier </a> om terug aan te melden</p>
+        <p>Afmelden geslaagd! U wordt binnen 3 seconden automatisch doorverwezen!</p>
+        <p>Indien dit niet werkt, klik <a href='<% out.println(response.encodeURL("/UurroosterServer-war/")); %>'>HIER</a></p>
+        <meta http-equiv="refresh" content="3;url=<% out.println(response.encodeURL("/UurroosterServer-war/")); %>" />
     </body>
 </html>
