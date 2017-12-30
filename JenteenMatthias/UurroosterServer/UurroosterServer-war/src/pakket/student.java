@@ -54,12 +54,12 @@ public class student extends HttpServlet {
             case 0:
                 gotop = kiesStudent(gotop,userId,sessie,request,response);
                 break;
-            case 3:
-                gotop = bevestigdeKlas(userId,sessie,request,response);
-                break;
             case 2:
             case 1:
                 gotop = overzichtStudent(userId,sessie,request,response);
+                break;
+            case 3:
+                gotop = bevestigdeKlas(userId,sessie,request,response);
                 break;
         }
         

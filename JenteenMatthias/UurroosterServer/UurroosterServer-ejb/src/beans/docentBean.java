@@ -294,9 +294,10 @@ public class docentBean implements docentBeanLocal {
     public int bevestigen(){
         if(this.aantalStudenten() != this.aantalToegewezenStudenten())
             return -1;
-        if(this.periodeGestopt() == 0)
-            em.createNamedQuery("UrsStudent.updateStatusBevestigd").executeUpdate();
-        return this.periodeGestopt();
+        if(this.periodeGestopt() != 0)
+            return -1;
+        em.createNamedQuery("UrsStudent.updateStatusBevestigd").executeUpdate();
+        return 0;
     } 
     
     /**
