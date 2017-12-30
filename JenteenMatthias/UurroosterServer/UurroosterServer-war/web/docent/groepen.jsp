@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <title><c:out value="${sessionScope['klasnaam']}" /></title>
         <script>
         function myFunction() {
@@ -44,7 +45,7 @@
             </h1>
         </div>
         <div id="klasgroep">
-        <h2>Studenten in <c:out value="${sessionScope['klasnaam']}" /></h2>
+        <h2 class="w3-blue">Studenten in <c:out value="${sessionScope['klasnaam']}" /></h2>
         <table>
             <c:forEach var="i" items="${sessionScope['klas']}">
                 <tr>
@@ -54,7 +55,7 @@
                             <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
                                 <input type="hidden" name="stage" value="verwijderenStudent">
                                 <input type="hidden" name="verwijderStudent" value="${i.key.getUserid()}">
-                                <button class="verwijderen" type="submit">X</button>
+                                <button type="submit" class="w3-button w3-large w3-red w3-card-4">-</button>
                             </form>
                         </td>
                     </c:if>
@@ -69,7 +70,7 @@
         </div>
         <c:if test="${sessionScope['bevestigd'] != 0}">
             <div id="overigeStudenten">
-                <h2>Overige Studenten</h2>
+                <h2 class="w3-blue">Overige Studenten</h2>
                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
 
             <table id="myTable">
@@ -83,7 +84,7 @@
                                     ${i.key.getNaam()}
                                 </td>
                                 <td>
-                                    <button type="submit" class="toevoegen">V</button>
+                                    <button type="submit" class="w3-button w3-large w3-green w3-card-4">+</button>
                                 </td>
                             </form>
                         </tr>
@@ -99,7 +100,7 @@
                                     ${i.key.getNaam()}
                                 </td>
                                 <td>
-                                    <button type="submit" class="toevoegen">V</button>
+                                    <button type="submit" class="w3-button w3-large w3-green w3-card-4">+</button>
                                 </td>
                             </form>
                         </tr>
@@ -115,7 +116,7 @@
                                     ${i.key.getNaam()}
                                 </td>
                                 <td>
-                                    <button type="submit" class="toevoegen">V</button>
+                                    <button type="submit" class="w3-button w3-large w3-green w3-card-4">+</button>
                                 </td>
                             </form>
                         </tr>
@@ -125,7 +126,7 @@
         </c:if>
         </div>
         <div id="relatieErrors">
-            <h2>Errors:</h2>
+            <h2 class="w3-blue">Errors:</h2>
             <table>
                 <tr><th>Student 1</th><th>Student 2</th></tr>
                 <c:forEach var="i" items="${sessionScope['errors']}">
@@ -139,11 +140,11 @@
         <div class="knopjes">
             <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
                 <input type="hidden" name="stage" value="null">
-                <button class="terug" type="submit">Terug</button>
+                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Terug</button>
             </form>
             <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
                 <input type="hidden" name="stage" value="afmelden">
-                <button type="submit">Afmelden</button>
+                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Afmelden</button>
             </form>
         </div>
     </body>

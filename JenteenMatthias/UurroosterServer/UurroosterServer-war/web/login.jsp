@@ -11,17 +11,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <title>Login</title>
     </head>
-    <body>
-        <h1>Welkom</h1>
+    <body style="background-color: #8cb8ff;">
+        <h1 style="background-color: #0061ff;">Welkom</h1>
         <p> Log je hier in:
         <form method=post action="j_security_check">
             <table>
                 <tr> <td> Naam: </td> <td> <input type="text" name="j_username" /></td></tr>
                 <tr> <td> Paswoord:</td><td><input type="password" name="j_password" /></td></tr>
             </table>
-            <button type="submit">Log in</button>
+            <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Log in</button>
         </form>
     </body>
 </html>

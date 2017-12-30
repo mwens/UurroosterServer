@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <title><c:out value="${sessionScope['klasnaam']}" /></title>
     </head>
     <body>
@@ -18,7 +19,7 @@
             <h1>Studentenportaal <c:out value="${sessionScope['studentnaam']}" /></h1>
         </div>
         <div id="klasgroep">
-        <h2>Studenten in <c:out value="${sessionScope['klasnaam']}" /></h2>
+        <h2 class="w3-blue">Studenten in <c:out value="${sessionScope['klasnaam']}" /></h2>
         <table>
             <c:forEach var="i" items="${sessionScope['klas']}">
                 <tr>
@@ -30,7 +31,7 @@
         <div class="knopjes">
             <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
                 <input type="hidden" name="stage" value="afmelden">
-                <button type="submit">Afmelden</button>
+                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Afmelden</button>
             </form>
         </div>
     </body>

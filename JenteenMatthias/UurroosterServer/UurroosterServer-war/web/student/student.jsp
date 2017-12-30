@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <title>Student</title>
     </head>
     <body>
@@ -19,7 +20,7 @@
         </div>
         <div class="toevoegdiv">
         <form>
-            <h2>Wel mee samen:</h2>
+            <h2 class="w3-blue">Wel mee samen:</h2>
             <input list="Studenten" name="SelectedStudent" id="geselecteerdeStudent" autocomplete="off">
             <datalist id="Studenten">
                 <c:forEach var="i" items="${sessionScope['studenten']}">
@@ -27,9 +28,9 @@
                 </c:forEach>
             </datalist>
             <input type="hidden" name="stage" value="wel">
-            <button type="submit" class="toevoegen">V</button>
+            <button type="submit" class="w3-button w3-large w3-green w3-card-4">+</button>
         </form><br/>
-        <table id="toevoegtable">
+        <table style="background-color: green">
             <tr>
                 <th>Student</th>
             </tr>     
@@ -40,7 +41,7 @@
 			<form method="post" action="<% out.println(response.encodeURL("student.do")); %>">
 			    <input type="hidden" name="stage" value="verwijderen">
 			    <input type="hidden" name="verwijderStudent" value="${j}">
-			    <button class="verwijderen" type="submit">X</button>
+			    <button type="submit" class="w3-button w3-large w3-red w3-card-4">-</button>
 			</form>
 		    </td>
                 </tr> 
@@ -49,7 +50,7 @@
         </div>
         <div class="verwijderdiv">
         <form>
-            <h2>Niet mee samen:</h2>
+            <h2 class="w3-blue">Niet mee samen:</h2>
             <input list="Studenten" name="SelectedStudent" id="geselecteerdeStudent" autocomplete="off">
             <datalist id="Studenten">
                 <c:forEach var="i" items="${sessionScope['studenten']}">
@@ -57,10 +58,10 @@
                 </c:forEach>
             </datalist>
             <input type="hidden" name="stage" value="niet">
-            <button type="submit" class="verwijderen">X</button>
+            <button type="submit" class="w3-button w3-large w3-red w3-card-4">-</button>
         </form>
             <br/>
-        <table id="verwijdertable">
+        <table style="background-color: red">
             <tr>
                 <th>Student</th>
             </tr>
@@ -71,7 +72,7 @@
 			<form method="post" action="<% out.println(response.encodeURL("student.do")); %>">
 			    <input type="hidden" name="stage" value="verwijderen">
 			    <input type="hidden" name="verwijderStudent" value="${j}">
-			    <button class="verwijderen" type="submit">X</button>
+			    <button type="submit" class="w3-button w3-large w3-red w3-card-4">-</button>
 			</form>
 		    </td>
                 </tr>
@@ -81,11 +82,11 @@
         <div class="knopjes">
             <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
                 <input type="hidden" name="stage" value="bevestigen">
-                <button type="submit">Bevestigen</button>
+                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Bevestigen</button>
             </form>       
             <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/")); %>">
                 <input type="hidden" name="stage" value="afmelden">
-                <button type="submit">Afmelden</button>
+                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Afmelden</button>
             </form>
         </div>
     </body>

@@ -12,16 +12,23 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <title>Docent</title>
     </head>
     <body>
+        <c:if test="${sessionScope['alert'] == 1}">
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>Opgelet!</strong> Bevestigen is nog niet mogelijk!
+            </div>
+        </c:if>
         <div class="header">
             <h1>Docentenportaal <c:out value="${sessionScope['docentnaam']}" /></h1>
         </div>
         <c:if test="${sessionScope['bevestigd'] != 0 && sessionScope['periodeGestopt'] != 0}">
             <form method="post" action="<% out.println(response.encodeURL("")); %>">
                 <input type="hidden" name="stage" value="eindeKeuzes">
-                <button type="submit" class="verwijderen">Keuzetermijn studenten afsluiten</button>
+                <button type="submit" class="w3-button w3-large w3-red w3-card-4">Keuzetermijn studenten afsluiten</button>
             </form>
         </c:if>
         <br/>
@@ -29,15 +36,13 @@
             <form method="post" action="<% out.println(response.encodeURL("")); %>">
                 <input type="text" name="nieuweGroepNaam">
                 <input type="hidden" name="stage" value="voegGroepToe">
-                <button type="submit">Groep toevoegen +</button>
+                <button type="submit" class="w3-button w3-large w3-green w3-card-4">+</button>
             </form>
         </c:if>
             
-            
+        <br/>
+        <h2 class="w3-blue">Klassen</h2>   
         <table>
-            <tr>
-                <th>Klassen</th>
-            </tr>     
             <c:forEach var="i" items="${sessionScope['klassen']}">
                 <tr>
                     <td><c:out value='${i.key.getNaam()}'/></td>
@@ -46,7 +51,7 @@
                             <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
                                 <input type="hidden" name="stage" value="verwijderen">
                                 <input type="hidden" name="verwijderKlas" value="${i.key.getKlasid()}">
-                                <button class="verwijderen" type="submit">X</button>
+                                <button type="submit" class="w3-button w3-large w3-red w3-card-4">-</button>
                             </form>
                         </td>
                     </c:if>
@@ -55,10 +60,10 @@
 			    <input type="hidden" name="stage" value="edit">
 			    <input type="hidden" name="editKlas" value="${i.key.getKlasid()}">
                             <c:if test="${sessionScope['bevestigd'] != 0}">
-                                <button class="edit" type="submit">Edit</button>
+                                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Edit</button>
                             </c:if>
                             <c:if test="${sessionScope['bevestigd'] == 0}">
-                                <button class="edit" type="submit">View</button>
+                                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">View</button>
                             </c:if>
 			</form>
 		    </td>
@@ -80,15 +85,12 @@
             <c:if test="${sessionScope['bevestigd'] != 0}">
                 <form method="post" action="<% out.println(response.encodeURL("")); %>">
                     <input type="hidden" name="stage" value="bevestigen">
-                    <c:if test="${sessionScope['alert'] == 1}">
-                        <p style="font-weight: bold; color: red;">BEVESTIGEN NOG NIET MOGELIJK!</p>
-                    </c:if>
-                    <button type="submit">Bevestigen</button>
+                    <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Bevestigen</button>
                 </form>
             </c:if>
             <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
                 <input type="hidden" name="stage" value="afmelden">
-                <button type="submit">Afmelden</button>
+                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Afmelden</button>
             </form>
         </div>
     </body>

@@ -85,10 +85,12 @@ public class docent extends HttpServlet {
                 docentBean.addKlas((String) request.getParameter("nieuweGroepNaam"));
                 break;
             case "bevestigen":
-                if(docentBean.bevestigen() == -1)
-                    sessie.setAttribute("alert", 1);
-                else
+                if(docentBean.bevestigen() != -1){
+                    sessie.setAttribute("alert", 0);
                     sessie.setAttribute("bevestigd", docentBean.bevestigd());
+                }
+                else
+                    sessie.setAttribute("alert", 1);
                 break;
             default:
                 break;

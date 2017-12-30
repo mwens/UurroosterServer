@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <title>Student</title>
     </head>
     <body>
@@ -18,8 +19,8 @@
             <h1>Studentenportaal <c:out value="${sessionScope['studentnaam']}" /></h1>
         </div>
         <div class="toevoegdiv">
-        <h2>Wel mee samen:</h2>
-        <table id="toevoegtable">
+        <h2 class="w3-blue">Wel mee samen:</h2>
+        <table style="background-color: green">
             <tr>
                 <th>Student</th>
             </tr>     
@@ -31,9 +32,9 @@
         </table>
         </div>
         <div class="verwijderdiv">
-        <h2>Niet mee samen:</h2>
+        <h2 class="w3-blue">Niet mee samen:</h2>
         <br/>
-        <table id="verwijdertable">
+        <table style="background-color: red">
             <tr>
                 <th>Student</th>
             </tr>
@@ -50,14 +51,14 @@
                     <td>
                         <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
                             <input type="hidden" name="stage" value="bevestigen">
-                            <button type="submit" ${sessionScope["bevestigknop"]}>Bevestigen</button>
+                            <button type="submit" class="w3-button w3-large w3-blue w3-card-4" ${sessionScope["bevestigknop"]}>Bevestigen</button>
                         </form>       
                     </td>
                     <c:if test='${empty sessionScope["bevestigknop"]}'>
                         <td>
                             <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
                                 <input type="hidden" name="stage" value="annuleren">
-                                <button type="submit">Annuleren</button>
+                                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Annuleren</button>
                             </form> 
                         </td>
                     </c:if>
@@ -65,7 +66,7 @@
             </table>
             <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/")); %>">
                 <input type="hidden" name="stage" value="afmelden">
-                <button type="submit">Afmelden</button>
+                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Afmelden</button>
             </form>
         </div>
     </body>

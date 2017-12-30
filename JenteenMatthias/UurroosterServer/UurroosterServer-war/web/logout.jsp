@@ -9,10 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <title>Log Out</title>
     </head>
-    <body>
-	<h1>Afmelden geslaagd!</h1>
+    <body style="background-color: #8cb8ff;">
+	<h1 style="background-color: #0061ff;">Afmelden geslaagd!</h1>
         <form>
             <input type="hidden" name="stage" value="geslaagd">
         </form>
