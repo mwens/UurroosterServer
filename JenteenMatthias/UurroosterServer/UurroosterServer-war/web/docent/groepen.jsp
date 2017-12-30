@@ -125,18 +125,20 @@
             </table>
         </c:if>
         </div>
-        <div id="relatieErrors">
-            <h2 class="w3-blue">Errors:</h2>
-            <table>
-                <tr><th>Student 1</th><th>Student 2</th></tr>
-                <c:forEach var="i" items="${sessionScope['errors']}">
-                    <tr <c:if test="${i.getRELATIE() == 1}"> style="background-color: green"</c:if><c:if test="${i.getRELATIE() == 2}"> style="background-color: red"</c:if>>
-                        <td><c:out value='${i.getSTUDENT_NAAM_1()}' /></td>
-                        <td><c:out value='${i.getSTUDENT_NAAM_2()}' /></td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
+        <c:if test="${sessionScope['klasTotaalErrors'] != 0}">
+            <div id="relatieErrors">
+                <h2 class="w3-blue">Errors:</h2>
+                <table>
+                    <tr><th>Student 1</th><th>Student 2</th></tr>
+                    <c:forEach var="i" items="${sessionScope['errors']}">
+                        <tr <c:if test="${i.getRELATIE() == 1}"> style="background-color: green"</c:if><c:if test="${i.getRELATIE() == 2}"> style="background-color: red"</c:if>>
+                            <td><c:out value='${i.getSTUDENT_NAAM_1()}' /></td>
+                            <td><c:out value='${i.getSTUDENT_NAAM_2()}' /></td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </c:if>
         <div class="knopjes">
             <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
                 <input type="hidden" name="stage" value="null">

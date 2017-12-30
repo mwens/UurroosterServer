@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <title>Docent</title>
+        <title><c:out value="${sessionScope['docentnaam']}" /></title>
     </head>
     <body>
         <c:if test="${sessionScope['alert'] == 1}">
@@ -75,12 +75,14 @@
                 </tr> 
             </c:forEach>
         </table>
+        <c:if test="${sessionScope['bevestigd'] != 0}">
         <div class="progress">
             <p style="font-weight: bold;">Toegewezen:</p>
             <div class="container">
                 <div style="width: <%=request.getAttribute("aantalToegewezenStudenten") %>%" class="afgewerkt"><%=request.getAttribute("aantalToegewezenStudenten") %>%</div>
             </div>    
         </div>
+        </c:if>
         <div class="knopjes">
             <c:if test="${sessionScope['bevestigd'] != 0}">
                 <form method="post" action="<% out.println(response.encodeURL("")); %>">

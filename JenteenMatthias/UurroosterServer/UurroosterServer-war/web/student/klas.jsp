@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <title><c:out value="${sessionScope['klasnaam']}" /></title>
+        <title><c:out value="${sessionScope['studentnaam']}" /></title>
     </head>
     <body>
         <div class="header">
@@ -22,9 +22,16 @@
         <h2 class="w3-blue">Studenten in <c:out value="${sessionScope['klasnaam']}" /></h2>
         <table>
             <c:forEach var="i" items="${sessionScope['klas']}">
-                <tr>
-                    <td><c:out value='${i}'/></td>
-                </tr> 
+                <c:if test="${i == sessionScope['studentnaam']}">
+                    <tr style="background-color: #75aaff">
+                        <td><c:out value='${i}'/></td>
+                    </tr> 
+                </c:if>
+                <c:if test="${i != sessionScope['studentnaam']}">
+                    <tr>
+                        <td><c:out value='${i}'/></td>
+                    </tr> 
+                </c:if>
             </c:forEach>
         </table>
         </div>

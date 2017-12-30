@@ -40,18 +40,23 @@ body{
 
 .knopjes{
     position: fixed;
-    top: 90%;
+    bottom: 0%;
+    right: 0%;
+}
+
+.knopjes button {
+    width: 200px;
 }
 
 #klasgroep{
     position: absolute;
     top: 10%;
+    left: 30%;
     width: 300px;
 }
 
 #overigeStudenten{
     position: absolute;
-    left: 60%;
     top: 10%;
     width: 350px;
 }
@@ -63,7 +68,7 @@ h2 {
 #relatieErrors{
     position: absolute;
     top: 10%;
-    left:30%;
+    left:60%;
     width: 300px;
 }
 
