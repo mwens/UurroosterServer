@@ -17,4 +17,5 @@ public interface printBeanRemote {
     
     public List<String> getKlassen();
     public List<String> getStudentenInKlas(String klas);
+    public boolean isGefinaliseerd();
 }

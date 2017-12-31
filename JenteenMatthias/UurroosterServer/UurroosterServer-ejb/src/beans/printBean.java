@@ -68,5 +68,22 @@ public class printBean implements printBeanRemote {
         return result;
     }
     
-    
+    /** True wanneer de groepslijst gefinaliseerd is
+     * 
+     * @return
+     */
+    @Override
+    public boolean isGefinaliseerd(){
+        Query q = em.createNamedQuery("UrsStudent.findByStatus");
+        q.setParameter("status",0);
+        if(!q.getResultList().isEmpty())
+            return false;
+        q.setParameter("status",1);
+        if(!q.getResultList().isEmpty())
+            return false;
+        q.setParameter("status",2);
+        if(!q.getResultList().isEmpty())
+            return false;
+        return true;
+    }
 }
