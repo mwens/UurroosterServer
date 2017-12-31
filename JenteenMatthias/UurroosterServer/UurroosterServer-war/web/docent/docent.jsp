@@ -19,7 +19,7 @@
         <c:if test="${sessionScope['alert'] == 1}">
             <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                <strong>Opgelet!</strong> Bevestigen is nog niet mogelijk!
+                <strong>Opgelet!</strong> Bevestigen is nog niet mogelijk! Voeg iedereen aan een groep toe!
             </div>
         </c:if>
         <c:if test="${sessionScope['alert'] == 2}">
@@ -37,12 +37,6 @@
         <div class="header">
             <h1>Docentenportaal <c:out value="${sessionScope['docentnaam']}" /></h1>
         </div>
-        <c:if test="${sessionScope['bevestigd'] != 0 && sessionScope['periodeGestopt'] != 0}">
-            <form method="post" action="<% out.println(response.encodeURL("")); %>">
-                <input type="hidden" name="stage" value="eindeKeuzes">
-                <button type="submit" class="w3-button w3-large w3-red w3-card-4">Keuzetermijn studenten afsluiten</button>
-            </form>
-        </c:if>
         <br/>
         <c:if test="${sessionScope['bevestigd'] != 0}">
             <form method="post" action="<% out.println(response.encodeURL("")); %>">
@@ -53,7 +47,7 @@
         </c:if>
             
         <br/>
-        <h2 class="w3-blue">Klassen</h2>   
+        <h2 class="w3-blue">Groepen</h2>   
         <table>
             <c:forEach var="i" items="${sessionScope['klassen']}">
                 <tr>
@@ -96,7 +90,13 @@
         </div>
         </c:if>
         <div class="knopjes">
-            <c:if test="${sessionScope['bevestigd'] != 0}">
+            <c:if test="${sessionScope['bevestigd'] != 0 && sessionScope['periodeGestopt'] != 0}">
+                <form method="post" action="<% out.println(response.encodeURL("")); %>">
+                    <input type="hidden" name="stage" value="eindeKeuzes">
+                    <button type="submit" class="w3-button w3-large w3-red w3-card-4">Einde keuze</button>
+                </form>
+            </c:if>
+            <c:if test="${sessionScope['bevestigd'] != 0 && sessionScope['periodeGestopt'] == 0}">
                 <form method="post" action="<% out.println(response.encodeURL("")); %>">
                     <input type="hidden" name="stage" value="bevestigen">
                     <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Bevestigen</button>
