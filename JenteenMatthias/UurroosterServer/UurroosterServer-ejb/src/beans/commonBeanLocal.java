@@ -21,4 +21,6 @@ public interface commonBeanLocal {
     public UrsGebruiker getGebruiker(int userId);
 
     public ArrayList<String> getKlasStudenten(UrsKlas klas);
+
+    public int wijzigWW(int userId, String old, String new1, String new2);
 }

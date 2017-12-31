@@ -83,4 +83,25 @@ public class commonBean implements commonBeanLocal {
             result.add(this.getUserName(ursstudenten.get(i).getUserid()));
         return result;
     }
+    
+    /**
+     *
+     * @param userId
+     * @param old
+     * @param new1
+     * @param new2
+     * @return
+     */
+    @Override
+    public int wijzigWW(int userId, String old, String new1, String new2){
+        if(!new1.equals(new2))
+            return -1;
+        if(this.getGebruiker(userId).getWw().equals(old)){
+            this.getGebruiker(userId).setWw(new1);
+            return 1;
+        }
+        return 0;
+            
+        
+    }
 }

@@ -39,6 +39,8 @@ public class docent extends HttpServlet {
             throws ServletException, IOException {
         
         String gotoPage;
+        HttpSession sessie = request.getSession(); 
+        int userId = commonBean.getUserId(request.getUserPrincipal().getName());
         request.setAttribute("aantalToegewezenStudenten", (int)((float)docentBean.aantalToegewezenStudenten()*100/(float)docentBean.aantalStudenten()));
         if(commonBean.getUserId(request.getUserPrincipal().getName()) == -1){
             gotoPage("Error.jsp", request, response);
@@ -48,7 +50,6 @@ public class docent extends HttpServlet {
         String stage = request.getParameter("stage");
         if(stage == null){
             stage = "index";
-            HttpSession sessie = request.getSession(); 
             sessie.setAttribute("bevestigd", docentBean.bevestigd());
             sessie.setAttribute("periodeGestopt", docentBean.periodeGestopt());
         }
@@ -67,6 +68,17 @@ public class docent extends HttpServlet {
                 gotoPage = this.groepOverzicht(stage, request, response);
                 break; 
         }
+        sessie.setAttribute("alert_ww", -2);
+        if(stage.equals("ww")){
+            int alert_ww = commonBean.wijzigWW(userId, request.getParameter("password_old"), request.getParameter("password_new"), request.getParameter("password_new2"));
+            sessie.setAttribute("alert_ww", alert_ww);
+            if(alert_ww == 1)
+                gotoPage =  "/docent/docent.jsp";
+            else
+                gotoPage = "/docent/changeww.jsp";
+        }
+        else if(stage.equals("wachtwoordwijzigen"))
+            gotoPage = "/docent/changeww.jsp";
         this.gotoPage(gotoPage, request, response);
     }
     

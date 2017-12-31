@@ -82,12 +82,16 @@
         <div class="knopjes">
             <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
                 <input type="hidden" name="stage" value="bevestigen">
-                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Bevestigen</button>
+                <button type="submit" class="w3-button w3-large w3-green w3-card-4">Bevestigen</button>
             </form>  
             <br/>
             <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/")); %>">
                 <input type="hidden" name="stage" value="afmelden">
                 <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Afmelden</button>
+            </form>
+            <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/")); %>">
+                <input type="hidden" name="stage" value="wachtwoordwijzigen">
+                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Wijzig wachtwoord</button>
             </form>
         </div>
     </body>
