@@ -58,7 +58,7 @@
                 </c:forEach>
             </datalist>
             <input type="hidden" name="stage" value="niet">
-            <button type="submit" class="w3-button w3-large w3-red w3-card-4">-</button>
+            <button type="submit" class="w3-button w3-large w3-red w3-card-4">+</button>
         </form>
             <br/>
         <table style="background-color: red">
@@ -83,7 +83,8 @@
             <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
                 <input type="hidden" name="stage" value="bevestigen">
                 <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Bevestigen</button>
-            </form>       
+            </form>  
+            <br/>
             <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/")); %>">
                 <input type="hidden" name="stage" value="afmelden">
                 <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Afmelden</button>

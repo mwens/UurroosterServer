@@ -19,8 +19,8 @@
         <p> Log je hier in:
         <form method=post action="j_security_check">
             <table>
-                <tr> <td> Naam: </td> <td> <input type="text" name="j_username" /></td></tr>
-                <tr> <td> Paswoord:</td><td><input type="password" name="j_password" /></td></tr>
+                <tr> <td> Naam: </td> <td> <input required type="text" name="j_username" /></td></tr>
+                <tr> <td> Wachtwoord:</td><td><input required type="password" name="j_password" /></td></tr>
             </table>
             <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Log in</button>
         </form>

@@ -88,11 +88,11 @@ public class docent extends HttpServlet {
                 docentBean.eindeKeuzes();
                 sessie.setAttribute("periodeGestopt", docentBean.periodeGestopt());
                 sessie.setAttribute("bevestigd", -1);
-                sessie.setAttribute("alert", 0);
+                sessie.setAttribute("alert", 3);
                 break;
             case "bevestigen":
                 if(docentBean.bevestigen() == 0){
-                    sessie.setAttribute("alert", 0);
+                    sessie.setAttribute("alert", 2);
                     sessie.setAttribute("bevestigd", docentBean.bevestigd());
                 }
                 else

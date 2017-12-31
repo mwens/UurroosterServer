@@ -46,24 +46,17 @@
         </table>
         </div>
         <div class="knopjes">
-            <table>
-                <tr>
-                    <c:if test='${empty sessionScope["bevestigknop"]}'>
-                        <td>
-                            <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
-                                <input type="hidden" name="stage" value="bevestigen">
-                                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Bevestigen</button>
-                            </form>       
-                        </td>
-                        <td>
-                            <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
-                                <input type="hidden" name="stage" value="annuleren">
-                                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Annuleren</button>
-                            </form> 
-                        </td>
-                    </c:if>
-                </tr>
-            </table>
+            <c:if test='${empty sessionScope["bevestigknop"]}'>
+                <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
+                    <input type="hidden" name="stage" value="bevestigen">
+                    <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Bevestigen</button>
+                </form>       
+                <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/student.do")); %>">
+                    <input type="hidden" name="stage" value="annuleren">
+                    <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Annuleren</button>
+                </form> 
+            </c:if>
+            <br/>
             <form method="post" action="<% out.println(response.encodeURL("/UurroosterServer-war/")); %>">
                 <input type="hidden" name="stage" value="afmelden">
                 <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Afmelden</button>
