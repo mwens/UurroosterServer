@@ -21,6 +21,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -51,6 +53,12 @@ public class printListener implements ActionListener{
             int go = JOptionPane.showConfirmDialog(PARENT,"De groepslijsten zijn nog niet gefinaliseerd. Toch Printen?","Waarschuwing",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
             if(go != JOptionPane.OK_OPTION)
                 return;
+        }
+        
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(printListener.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         JFileChooser fc = new JFileChooser();
