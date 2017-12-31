@@ -24,14 +24,33 @@
             <c:forEach var="i" items="${sessionScope['klas']}">
                 <c:choose>
                     <c:when test="${i == sessionScope['studentnaam']}">
-                        <tr style="background-color: #75aaff">
+                        <tr style="font-weight: bolder">
                             <td><c:out value='${i}'/></td>
                         </tr> 
                     </c:when>
                     <c:when test="${i != sessionScope['studentnaam']}">
-                        <tr>
-                            <td><c:out value='${i}'/></td>
-                        </tr> 
+                        <% int ok=0; %>
+                        <c:forEach var="j" items="${sessionScope['studentenRelatiesWel']}">
+                            <c:if test="${j == i}">
+                                <% ok=1; %>
+                                <tr>
+                                    <td style="background-color: green"><c:out value='${i}'/></td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                        <c:forEach var="j" items="${sessionScope['studentenRelatiesNiet']}">
+                            <c:if test="${j == i}">
+                                <% ok=1; %>
+                                <tr>
+                                    <td style="background-color: red"><c:out value='${i}'/></td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                        <% if(ok == 0){%> 
+                            <tr>
+                                <td><c:out value='${i}'/></td>
+                            </tr>    
+                        <%}%>
                     </c:when>
                 </c:choose>
             </c:forEach>
