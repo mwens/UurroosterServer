@@ -71,7 +71,7 @@
         <c:if test="${sessionScope['bevestigd'] != 0}">
             <div id="overigeStudenten">
                 <h2 class="w3-blue">Overige Studenten</h2>
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names...">
 
             <table id="myTable">
                 <c:forEach var="i" items="${sessionScope['overige']}">
@@ -144,6 +144,7 @@
                 <input type="hidden" name="stage" value="null">
                 <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Terug</button>
             </form>
+            <br/>
             <form method="post" action="<% out.println(response.encodeURL("common/logout.jsp")); %>">
                 <input type="hidden" name="stage" value="afmelden">
                 <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Afmelden</button>
