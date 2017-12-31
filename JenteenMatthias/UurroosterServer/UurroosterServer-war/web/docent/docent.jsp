@@ -22,6 +22,18 @@
                 <strong>Opgelet!</strong> Bevestigen is nog niet mogelijk!
             </div>
         </c:if>
+        <c:if test="${sessionScope['alert'] == 2}">
+            <div class="success">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>Succes!</strong> Bevestigen geslaagd!
+            </div>
+        </c:if>
+        <c:if test="${sessionScope['alert'] == 3}">
+            <div class="warning">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>Opgelet!</strong> Bevestigen ongedaan gemaakt!
+            </div>
+        </c:if>
         <div class="header">
             <h1>Docentenportaal <c:out value="${sessionScope['docentnaam']}" /></h1>
         </div>

@@ -118,6 +118,18 @@ table tr {
     color: white;
 }
 
+.success {
+    padding: 10px;
+    background-color: #42f436;
+    color: white;
+}
+
+.warning {
+    padding: 10px;
+    background-color: #f4bb36;
+    color: white;
+}
+
 .closebtn {
     margin-left: 15px;
     color: white;
