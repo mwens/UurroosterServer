@@ -33,7 +33,6 @@
         </div>
         <div class="verwijderdiv">
         <h2 class="w3-blue">Niet mee samen:</h2>
-        <br/>
         <table style="background-color: red">
             <tr>
                 <th>Student</th>
