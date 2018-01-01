@@ -64,6 +64,8 @@ public class docent extends HttpServlet {
                 break;
             case "voegtoeStudent":
             case "verwijderenStudent":
+            case "changenaam":
+            case "oknaam":
             case "edit":
                 gotoPage = this.groepOverzicht(stage, request, response);
                 break; 
@@ -118,12 +120,20 @@ public class docent extends HttpServlet {
     
     public String groepOverzicht(String stage, HttpServletRequest request, HttpServletResponse response){
         HttpSession sessie = request.getSession(); 
+        sessie.setAttribute("verandergroep", 0);
         switch (stage) {
         case "voegtoeStudent":
             docentBean.setStudentKlas(commonBean.getUserId(request.getParameter("SelectedStudent")), (int) sessie.getAttribute("klasnummer") );
             break;
         case "verwijderenStudent":
             docentBean.setStudentKlas(Integer.parseInt(request.getParameter("verwijderStudent")), -1);
+            break;
+        case "oknaam":
+            sessie.setAttribute("verandergroep", 0);
+            docentBean.getKlas((int) sessie.getAttribute("klasnummer")).setNaam(request.getParameter("groepsnaam_nieuw"));
+            break;
+        case "changenaam":
+            sessie.setAttribute("verandergroep", 1);
             break;
         case "edit":
             sessie.setAttribute("klasnummer", Integer.parseInt(request.getParameter("editKlas")));

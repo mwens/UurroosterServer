@@ -66,7 +66,7 @@
 			    <input type="hidden" name="stage" value="edit">
 			    <input type="hidden" name="editKlas" value="${i.key.getKlasid()}">
                             <c:if test="${sessionScope['bevestigd'] != 0}">
-                                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Edit</button>
+                                <button type="submit" class="w3-button w3-large w3-blue w3-card-4">&#9998;</button>
                             </c:if>
                             <c:if test="${sessionScope['bevestigd'] == 0}">
                                 <button type="submit" class="w3-button w3-large w3-blue w3-card-4">View</button>
