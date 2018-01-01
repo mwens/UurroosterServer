@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
         <title>Error</title>
     </head>
-    <body>
-        Error404
+    <body style="background-color: #DDE7F0;">
+        <h1 style="background-color: #2196F3;">Oops! Login Failed</h1>
     </body>
 </html>

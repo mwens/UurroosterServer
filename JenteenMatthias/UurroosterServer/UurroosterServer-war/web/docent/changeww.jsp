@@ -39,5 +39,9 @@
             <input type="hidden" name="stage" value="ww">
             <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Wijzigen</button>
         </form>
+        <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+            <input type="hidden" name="stage" value="null">
+            <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Annuleren</button>
+        </form>
     </body>
 </html>

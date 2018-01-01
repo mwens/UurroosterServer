@@ -8,12 +8,21 @@ and open the template in the editor.
     Author     : Matthias Wens
 */
 
+html{
+    height: 100%;
+}
+
 body{
-    background-color: #8cb8ff;
+    background-image: url('img.jpg');
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
 }
 
 .header{
-    background-color: #0061ff;
+    background-color: #2196F3;
 }
 
 #myInput {
@@ -86,7 +95,7 @@ h2 {
     padding-right: 20px; /* Add some right padding */
     line-height: 20px; /* Set the line-height to center the text inside the skill bar, and to expand the height of the container */
     color: white; /* White text color */
-    background-color: #0061ff;
+    background-color: #2196F3;
 }
 
 .progress {

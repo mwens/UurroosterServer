@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <title>Log Out</title>
     </head>
-    <body style="background-color: #8cb8ff;">
+    <body style="background-color: #DDE7F0;">
 	<h1 style="background-color: #0061ff;">Afmelden geslaagd!</h1>
         <form>
             <input type="hidden" name="stage" value="geslaagd">
