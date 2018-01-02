@@ -47,7 +47,7 @@
                         <button name="edit_groep" type="submit" class="buttonlijktgeenbutton">&#9998;</button>
                     </c:if>
                     <c:if test="${sessionScope['verandergroep'] == 1}">
-                        <input type="text" name="groepsnaam_nieuw">
+                        <input type="text" name="groepsnaam_nieuw" value="<c:out value="${sessionScope['klasnaam']}" />">
                         <input type="hidden" name="stage" value="oknaam">
                         <button name="edit_groep" type="submit" class="w3-button w3-large w3-blue w3-card-4">Submit</button>
                     </c:if>
