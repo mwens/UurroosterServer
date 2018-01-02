@@ -74,6 +74,10 @@
             <role-name>docent</role-name>
             <role-name>student</role-name>
         </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
