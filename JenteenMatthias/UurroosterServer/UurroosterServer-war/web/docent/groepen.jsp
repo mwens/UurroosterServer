@@ -51,10 +51,10 @@
                         <input type="hidden" name="stage" value="oknaam">
                         <button name="edit_groep" type="submit" class="w3-button w3-large w3-blue w3-card-4">Submit</button>
                     </c:if>
-                </form>
-                <c:if test="${sessionScope['klasTotaalErrors'] != 0}">
+                    <c:if test="${sessionScope['klasTotaalErrors'] != 0}">
                     - <c:out value="${sessionScope['klasTotaalErrors']}"/> errors &#9888;
-                </c:if>
+                    </c:if>
+                </form>
             </h1>
         </div>
         <div id="klasgroep">
