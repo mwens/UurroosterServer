@@ -62,18 +62,7 @@ public class student extends HttpServlet {
                 gotop = bevestigdeKlas(userId,sessie,request,response);
                 break;
         }
-        String stage = request.getParameter("stage");
-        sessie.setAttribute("alert_ww", -2);
-        if(stage == null)
-            stage="";
-        else if(stage.equals("ww")){
-            int alert_ww = commonBean.wijzigWW(userId, request.getParameter("password_old"), request.getParameter("password_new"), request.getParameter("password_new2"));
-            sessie.setAttribute("alert_ww", alert_ww);
-            if(alert_ww != 1)
-                gotop = "/student/changeww.jsp";
-        }
-        else if(stage.equals("wachtwoordwijzigen"))
-            gotop = "/student/changeww.jsp";
+       
         
         
         // Stel nodige info op voor student .jsp

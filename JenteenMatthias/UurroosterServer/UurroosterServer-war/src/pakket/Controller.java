@@ -5,9 +5,9 @@
  */
 package pakket;
 
+import beans.commonBeanLocal;
 import java.io.IOException;
-import java.io.PrintWriter;
-import javax.faces.context.FacesContext;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +21,9 @@ import javax.servlet.http.HttpSession;
  */
 public class Controller extends HttpServlet {
 
+    @EJB
+    private commonBeanLocal commonBean;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,17 +36,30 @@ public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {     
         String stage = request.getParameter("stage");
-        System.out.println(stage);
         if("afmelden".equals(stage)){
             HttpSession sessie = request.getSession();
             sessie.invalidate();
             gotoPage("/logout.jsp", request, response);
             return;
         }
-        if("wachtwoordwijzigen".equalsIgnoreCase(stage)){
+        
+        // PASSWOORD CHANGE DEEL
+        HttpSession sessie = request.getSession();
+        sessie.setAttribute("alert_ww", -2);
+        if("ww".equals(stage)){
+            int userId = commonBean.getUserId(request.getUserPrincipal().getName());
+            int alert_ww = commonBean.wijzigWW(userId, request.getParameter("password_old"), request.getParameter("password_new"), request.getParameter("password_new2"));
+            sessie.setAttribute("alert_ww", alert_ww);
+            if(alert_ww != 1){
+                gotoPage("/changeww.jsp", request, response);
+                return;
+            }
+        } else if("wachtwoordwijzigen".equalsIgnoreCase(stage)){
             gotoPage("/changeww.jsp", request, response);
             return;
         }
+        
+        // STUUR NAAR INDIVIDUELE CONTROLLERS
         if (request.isUserInRole("student")){
             gotoPage("/student.do",request, response);
             return;
