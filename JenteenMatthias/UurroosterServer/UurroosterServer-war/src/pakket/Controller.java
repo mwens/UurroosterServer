@@ -40,6 +40,10 @@ public class Controller extends HttpServlet {
             gotoPage("/logout.jsp", request, response);
             return;
         }
+        if("wachtwoordwijzigen".equalsIgnoreCase(stage)){
+            gotoPage("/changeww.jsp", request, response);
+            return;
+        }
         if (request.isUserInRole("student")){
             gotoPage("/student.do",request, response);
             return;
