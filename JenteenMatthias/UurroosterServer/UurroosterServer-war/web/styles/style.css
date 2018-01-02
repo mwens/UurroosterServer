@@ -159,3 +159,8 @@ table tr {
 .closebtn:hover {
     color: black;
 }
+
+.buttonlijktgeenbutton {
+    background-color: transparent;
+    border: 0;
+}

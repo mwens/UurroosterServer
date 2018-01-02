@@ -40,11 +40,11 @@
         <div class="header">
             <h1>
                 <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
-                    Docentenportaal 
+                    Docentenportaal: 
                     <c:if test="${sessionScope['verandergroep'] == 0}">
                         <c:out value="${sessionScope['klasnaam']}" />
                         <input type="hidden" name="stage" value="changenaam">
-                        <button name="edit_groep" type="submit" class="w3-button w3-large w3-blue w3-card-4">&#9998;</button>
+                        <button name="edit_groep" type="submit" class="buttonlijktgeenbutton">&#9998;</button>
                     </c:if>
                     <c:if test="${sessionScope['verandergroep'] == 1}">
                         <input type="text" name="groepsnaam_nieuw">
