@@ -49,7 +49,7 @@ public class student extends HttpServlet {
         sessie.setAttribute("bevestigknop", "");
         sessie.setAttribute("studentnaam",request.getUserPrincipal().getName());
         int userStatus = studentBean.getStatus(userId);
-        System.out.println(userStatus);
+
         switch(userStatus){
             case 0:
                 gotop = kiesStudent(gotop,userId,sessie,request,response);
