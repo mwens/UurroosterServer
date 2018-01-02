@@ -25,6 +25,7 @@ public interface docentBeanLocal {
     public UrsKlas getKlas(int klasid);
     public void addKlas(String klasNaam);
     public void removeKlas(int klasId);
+    public void changeKlasNaam(int klasId, String nieuweNaam);
     
     // STUDENTEN IN KLAS
     public List<UrsStudent> getStudentenInKlas(int klasId);

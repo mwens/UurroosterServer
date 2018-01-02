@@ -109,6 +109,23 @@ public class docentBean implements docentBeanLocal {
         q.executeUpdate();
     }
     
+    /** Verander de naam van de klas
+     * Doet niets wanneer de nieuwe naam al ingebruik is
+     *
+     * @param klasId
+     * @param nieuweNaam
+     */
+    @Override
+    public void changeKlasNaam(int klasId, String nieuweNaam){
+        UrsKlas klas = this.getKlas(klasId);
+        
+        if(em.createNamedQuery("UrsKlas.findByNaam").setParameter("naam", nieuweNaam).getResultList().size() != 0)
+            return;
+        
+        klas.setNaam(nieuweNaam);
+        em.persist(klas);
+    }
+    
     // STUDENTEN IN KLAS
     
     /** Zoek alle studenten in een klas
