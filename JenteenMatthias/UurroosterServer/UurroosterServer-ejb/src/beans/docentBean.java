@@ -116,16 +116,20 @@ public class docentBean implements docentBeanLocal {
      * @param nieuweNaam
      */
     @Override
-    public void changeKlasNaam(int klasId, String nieuweNaam){
+    public int changeKlasNaam(int klasId, String nieuweNaam){
         UrsKlas klas = this.getKlas(klasId);
         if(nieuweNaam.equalsIgnoreCase(""))
-            return;
-        
-        if(em.createNamedQuery("UrsKlas.findByNaam").setParameter("naam", nieuweNaam).getResultList().size() != 0)
-            return;
-        
+            return 0;
+        List<UrsKlas> lijst = em.createNamedQuery("UrsKlas.findByNaam").setParameter("naam", nieuweNaam).getResultList();
+        if(!lijst.isEmpty()){
+            if((lijst.size()==1) && (lijst.get(0)==klas))
+                return 0;
+            else
+                return -1;
+        }
         klas.setNaam(nieuweNaam);
         em.persist(klas);
+        return 0;
     }
     
     // STUDENTEN IN KLAS

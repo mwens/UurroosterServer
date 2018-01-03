@@ -37,24 +37,35 @@
         </script>
     </head>
     <body>
+        <c:if test="${sessionScope['verandergroep'] == -1}">
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>Opgelet!</strong> Deze groepsnaam bestaat reeds! Kies een nieuwe groepsnaam!
+            </div>
+        </c:if>
         <div class="header">
             <h1>
-                <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
-                    Docentenportaal: 
-                    <c:if test="${sessionScope['verandergroep'] == 0}">
-                        <c:out value="${sessionScope['klasnaam']}" />
-                        <input type="hidden" name="stage" value="changenaam">
-                        <button name="edit_groep" type="submit" class="buttonlijktgeenbutton">&#9998;</button>
-                    </c:if>
-                    <c:if test="${sessionScope['verandergroep'] == 1}">
-                        <input type="text" name="groepsnaam_nieuw" value="<c:out value="${sessionScope['klasnaam']}" />">
-                        <input type="hidden" name="stage" value="oknaam">
-                        <button name="edit_groep" type="submit" class="w3-button w3-large w3-blue w3-card-4">Submit</button>
-                    </c:if>
-                    <c:if test="${sessionScope['klasTotaalErrors'] != 0}">
-                    - <c:out value="${sessionScope['klasTotaalErrors']}"/> errors &#9888;
-                    </c:if>
-                </form>
+                <c:if test="${sessionScope['bevestigd'] == 0 and sessionScope['docentnaam'] != 'admin'}">
+                    Docentenportaal: <c:out value="${sessionScope['klasnaam']}" />
+                </c:if>
+                <c:if test="${sessionScope['bevestigd'] != 0 or sessionScope['docentnaam'] == 'admin'}">
+                    <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+                        Docentenportaal: 
+                        <c:if test="${sessionScope['verandergroep'] == 0}">
+                            <c:out value="${sessionScope['klasnaam']}" />
+                            <input type="hidden" name="stage" value="changenaam">
+                            <button name="edit_groep" type="submit" class="buttonlijktgeenbutton">&#9998;</button>
+                        </c:if>
+                        <c:if test="${sessionScope['verandergroep'] != 0}">
+                            <input type="text" name="groepsnaam_nieuw" value="<c:out value="${sessionScope['klasnaam']}" />">
+                            <input type="hidden" name="stage" value="oknaam">
+                            <button name="edit_groep" type="submit" class="w3-button w3-large w3-blue w3-card-4">Submit</button>
+                        </c:if>
+                        <c:if test="${sessionScope['klasTotaalErrors'] != 0}">
+                        - <c:out value="${sessionScope['klasTotaalErrors']}"/> errors &#9888;
+                        </c:if>
+                    </form>
+                </c:if>
             </h1>
         </div>
         <div id="klasgroep">

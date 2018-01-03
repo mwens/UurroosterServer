@@ -16,8 +16,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
         <title>Login</title>
     </head>
-    <body style="background-color: #8cb8ff;">
-        <h1>COMMON CHANGE WW</h1>
+    <body>
         <c:if test="${sessionScope['alert_ww'] == -1}">
             <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
@@ -30,7 +29,9 @@
                 <strong>Fout!</strong> Oud wachtwoord niet correct!
             </div>
         </c:if>
-        <h1 style="background-color: #0061ff;">Wijzig Wachtwoord</h1>
+        <div class="header">
+            <h1>Wijzig Wachtwoord</h1>
+        </div>
         <form method=post action="<% out.println(response.encodeURL("/UurroosterServer-war/")); %>">
             <table>
                 <tr> <td> Wachtwoord:</td><td><input required type="password" name="password_old" /></td></tr>

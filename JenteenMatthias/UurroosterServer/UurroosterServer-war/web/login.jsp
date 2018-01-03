@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
         <title>Login</title>
         <style>
             /* Bordered form */
@@ -55,7 +56,7 @@
             }
         </script>
     </head>
-    <body style="background-color: #DDE7F0;">
+    <body>
         <form method=post action="j_security_check">
             <div class="imgcontainer">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/KU_Leuven_logo.svg" alt="Avatar" class="avatar">

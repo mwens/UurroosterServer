@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
         <title>Log Out</title>
         <style>
             #center {
@@ -19,18 +20,13 @@
                 margin-left: 40%;
                 margin-top: 15%;
             }
-            h1 {
-                background-color: #2196F3;
-                text-weight: bolder;
-                text-align: center;
-                margin-top: 0px;
-                color: white;
-            }
         </style>
     </head>
     <body style="background-color: #DDE7F0;">
         <div id="center">
-            <h1>Afmelden geslaagd!</h1>
+            <div class="header">
+                <h1>Afmelden geslaagd!</h1>
+            </div>
             <form>
                 <input type="hidden" name="stage" value="geslaagd">
             </form>

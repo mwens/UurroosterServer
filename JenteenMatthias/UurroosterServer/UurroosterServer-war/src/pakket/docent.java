@@ -120,8 +120,7 @@ public class docent extends HttpServlet {
             docentBean.setStudentKlas(Integer.parseInt(request.getParameter("verwijderStudent")), -1);
             break;
         case "oknaam":
-            sessie.setAttribute("verandergroep", 0);
-            docentBean.changeKlasNaam( (int) sessie.getAttribute("klasnummer"), request.getParameter("groepsnaam_nieuw") );
+            sessie.setAttribute("verandergroep", docentBean.changeKlasNaam( (int) sessie.getAttribute("klasnummer"), request.getParameter("groepsnaam_nieuw") ));
             break;
         case "changenaam":
             sessie.setAttribute("verandergroep", 1);
