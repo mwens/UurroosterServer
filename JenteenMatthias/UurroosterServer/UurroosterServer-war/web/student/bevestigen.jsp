@@ -20,10 +20,7 @@
         </div>
         <div class="toevoegdiv">
         <h2 class="w3-blue">Wel mee samen:</h2>
-        <table style="background-color: green">
-            <tr>
-                <th>Student</th>
-            </tr>     
+        <table style="background-color: green">    
             <c:forEach var="j" items="${sessionScope['studentenRelatiesWel']}">
                 <tr>
                     <td><c:out value='${j}'/></td>
@@ -34,9 +31,6 @@
         <div class="verwijderdiv">
         <h2 class="w3-blue">Niet mee samen:</h2>
         <table style="background-color: red">
-            <tr>
-                <th>Student</th>
-            </tr>
             <c:forEach var="j" items="${sessionScope['studentenRelatiesNiet']}">
                 <tr>
                     <td><c:out value='${j}'/></td>

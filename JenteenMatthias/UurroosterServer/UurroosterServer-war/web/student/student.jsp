@@ -30,10 +30,7 @@
             <input type="hidden" name="stage" value="wel">
             <button type="submit" class="w3-button w3-large w3-green w3-card-4">+</button>
         </form><br/>
-        <table style="background-color: green">
-            <tr>
-                <th>Student</th>
-            </tr>     
+        <table style="background-color: green">   
             <c:forEach var="j" items="${sessionScope['studentenRelatiesWel']}">
                 <tr>
                     <td><c:out value='${j}'/></td>
@@ -62,9 +59,6 @@
         </form>
             <br/>
         <table style="background-color: red">
-            <tr>
-                <th>Student</th>
-            </tr>
             <c:forEach var="j" items="${sessionScope['studentenRelatiesNiet']}">
                 <tr>
                     <td><c:out value='${j}'/></td>
