@@ -30,8 +30,8 @@ INSERT into URS_Gebruiker VALUES (17,'admin','admin', 'docent');
 INSERT into URS_Gebruiker VALUES (18,'Herman Crauwels','IH8Toledo', 'docent');
 INSERT into URS_Gebruiker VALUES (19,'Joost Vennekens','IH8Toledo', 'docent');
 
-/*                         klasId, naam, status */
-INSERT into URS_Klas VALUES (1,'Groep 1',0);
+/*                         klasId, naam */
+INSERT into URS_Klas VALUES (1,'Groep 1');
 
 /*                        userId | klas | status */
 INSERT into URS_Student VALUES (0, NULL, 0);

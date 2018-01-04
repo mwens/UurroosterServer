@@ -24,8 +24,6 @@ create table URS_Gebruiker(
 create table URS_Klas(
         klasId  int,
         naam    varchar(32)     not null unique,
-        /* 0 = OPEN, 1 = GESLOTEN */
-        status  int             not null,
         primary key(klasId)
         );
 

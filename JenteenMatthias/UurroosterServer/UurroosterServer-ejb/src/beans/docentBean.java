@@ -90,7 +90,7 @@ public class docentBean implements docentBeanLocal {
         qExists.setParameter("naam",klasNaam);
         if(!qExists.getResultList().isEmpty())
             return;
-        em.persist(new UrsKlas(klasid+1, klasNaam, 0));
+        em.persist(new UrsKlas(klasid+1, klasNaam));
     }
     /** Verwijder klas (en studenten uit die klas zetten)
      * 

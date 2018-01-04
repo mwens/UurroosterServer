@@ -31,7 +31,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "UrsKlas.findAll", query = "SELECT u FROM UrsKlas u")
     , @NamedQuery(name = "UrsKlas.findByKlasid", query = "SELECT u FROM UrsKlas u WHERE u.klasid = :klasid")
     , @NamedQuery(name = "UrsKlas.findByNaam", query = "SELECT u FROM UrsKlas u WHERE u.naam = :naam")
-    , @NamedQuery(name = "UrsKlas.findByStatus", query = "SELECT u FROM UrsKlas u WHERE u.status = :status")
     , @NamedQuery(name = "UrsKlas.removeByKlasid", query = "DELETE FROM UrsKlas u WHERE u.klasid = :klasid")
     , @NamedQuery(name = "UrsKlas.findMaxKlasid", query = "SELECT MAX(u.klasid) FROM UrsKlas u")})
 public class UrsKlas implements Serializable {
@@ -47,10 +46,6 @@ public class UrsKlas implements Serializable {
     @Size(min = 1, max = 32)
     @Column(name = "NAAM")
     private String naam;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "STATUS")
-    private int status;
     @OneToMany(mappedBy = "klasid")
     private Collection<UrsStudent> ursStudentCollection;
 
@@ -61,10 +56,9 @@ public class UrsKlas implements Serializable {
         this.klasid = klasid;
     }
 
-    public UrsKlas(Integer klasid, String naam, int status) {
+    public UrsKlas(Integer klasid, String naam) {
         this.klasid = klasid;
         this.naam = naam;
-        this.status = status;
     }
 
     public Integer getKlasid() {
@@ -81,14 +75,6 @@ public class UrsKlas implements Serializable {
 
     public void setNaam(String naam) {
         this.naam = naam;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     @XmlTransient
