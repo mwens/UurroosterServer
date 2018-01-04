@@ -100,8 +100,16 @@ public class commonBean implements commonBeanLocal {
             this.getGebruiker(userId).setWw(new1);
             return 1;
         }
-        return 0;
-            
-        
+        return 0;  
+    }
+    
+    /**
+     *
+     * @param userId
+     * @param new1
+     */
+    @Override
+    public void resetWW(int userId, String new1){
+        this.getGebruiker(userId).setWw(new1);
     }
 }

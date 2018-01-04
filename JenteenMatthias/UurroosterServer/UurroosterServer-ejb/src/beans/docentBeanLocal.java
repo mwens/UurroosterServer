@@ -46,5 +46,7 @@ public interface docentBeanLocal {
     public int bevestigd();
 
     public int periodeGestopt();
+
+    public List<UrsGebruiker> getUsers();
     
 }
