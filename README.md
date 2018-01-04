@@ -1,8 +1,9 @@
 # UurroosterServer
-## TODO
-- Docent pagina bevestig knop
-- groep edit pagina
-- vervang getKlaslozeStudenten door getKlaslozeStudentenVookeur(klasId)
+## Vermeldingen bovenop opdracht
+- auto HTTPS
+- admin account met extra privileges (groepsnamen veranderen en/of reverten NA docent finalisatie)
+- wachtwoord  veranderen voor alle gebruikers
+
 
 ## OMSCHRIJVING
 Zie applicatie Architecturen Project pdf
