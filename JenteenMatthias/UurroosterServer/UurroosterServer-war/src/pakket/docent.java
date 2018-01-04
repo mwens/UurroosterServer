@@ -104,6 +104,9 @@ public class docent extends HttpServlet {
             default:
                 break;
         }
+        sessie.setAttribute("studenten_2",docentBean.aantalBevestigdeStudenten());
+        sessie.setAttribute("studenten_1",docentBean.aantalOnbevestigeStudenten());
+        sessie.setAttribute("studenten_0",(docentBean.aantalStudenten()-docentBean.aantalBevestigdeStudenten()-docentBean.aantalOnbevestigeStudenten()));
         sessie.setAttribute("docentnaam",request.getUserPrincipal().getName());
         sessie.setAttribute("klassen",docentBean.getKlasLijstMetWarnings());
         return "/docent/docent.jsp";

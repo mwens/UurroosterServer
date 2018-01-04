@@ -14,6 +14,29 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <title><c:out value="${sessionScope['docentnaam']}" /></title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+
+          function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+              ['Status', 'Studenten'],
+              ['Geen Keuze',${sessionScope['studenten_0']}],
+              ['Onbevestigd',${sessionScope['studenten_1']}],
+              ['Bevestigd',${sessionScope['studenten_2']}]
+            ]);
+
+            var options = {
+              title: 'Status Studenten'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+          }
+        </script>
     </head>
     <body>
         <c:if test="${sessionScope['alert'] == 1}">
@@ -88,6 +111,9 @@
                 <div style="width: <%=request.getAttribute("aantalToegewezenStudenten") %>%" class="afgewerkt"><%=request.getAttribute("aantalToegewezenStudenten") %>%</div>
             </div>    
         </div>
+        </c:if>
+        <c:if test="${sessionScope['bevestigd'] != 0 && sessionScope['periodeGestopt'] != 0}">
+            <div id="piechart" style="width: 900px; height: 500px;"></div>
         </c:if>
         <div class="knopjes">
             <c:if test="${sessionScope['bevestigd'] != 0 && sessionScope['periodeGestopt'] != 0}">

@@ -372,4 +372,18 @@ public class docentBean implements docentBeanLocal {
         Query q = em.createNamedQuery("UrsStudent.countStudenten");
         return Integer.parseInt(q.getSingleResult().toString());
     }
+    
+    @Override
+    public int aantalBevestigdeStudenten(){
+        Query q = em.createNamedQuery("UrsStudent.findByStatus");
+        q.setParameter("status",2);
+        return q.getResultList().size();
+    }
+    
+    @Override
+    public int aantalOnbevestigeStudenten(){
+        Query q = em.createNamedQuery("UrsStudent.findByStatus");
+        q.setParameter("status",1);
+        return q.getResultList().size();
+    }
 }
