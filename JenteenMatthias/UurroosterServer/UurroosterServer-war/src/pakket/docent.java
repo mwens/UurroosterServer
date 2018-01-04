@@ -58,6 +58,7 @@ public class docent extends HttpServlet {
             case "bevestigen":
             case "voegGroepToe":
             case "index":
+            case "reset":
             default:
                 gotoPage = this.docentOverzicht(stage, request, response);
                 break;
@@ -76,6 +77,8 @@ public class docent extends HttpServlet {
     public String docentOverzicht(String stage, HttpServletRequest request, HttpServletResponse response){
         HttpSession sessie = request.getSession(); 
         sessie.setAttribute("alert", 0);
+        sessie.setAttribute("resetww",0);
+        sessie.setAttribute("users",docentBean.getUsers());
         switch (stage) {
             case "eindeKeuzes":
                 docentBean.eindeKeuzes();
@@ -83,6 +86,10 @@ public class docent extends HttpServlet {
                 break;
             case "verwijderen":
                 docentBean.removeKlas(Integer.parseInt(request.getParameter("verwijderKlas")));
+                break;
+            case "reset":
+                commonBean.resetWW(commonBean.getUserId(request.getParameter("SelectedUser")), "abc123");
+                sessie.setAttribute("resetww",request.getParameter("SelectedUser"));
                 break;
             case "voegGroepToe":
                 docentBean.addKlas((String) request.getParameter("nieuweGroepNaam"));

@@ -386,4 +386,10 @@ public class docentBean implements docentBeanLocal {
         q.setParameter("status",1);
         return q.getResultList().size();
     }
+
+    @Override
+    public List<UrsGebruiker> getUsers(){
+        Query q = em.createNamedQuery("UrsGebruiker.findAll");
+        return q.getResultList();
+    }
 }

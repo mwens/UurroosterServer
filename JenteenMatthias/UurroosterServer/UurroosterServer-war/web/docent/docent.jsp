@@ -57,6 +57,12 @@
                 <strong>Opgelet!</strong> Bevestigen ongedaan gemaakt!
             </div>
         </c:if>
+        <c:if test="${sessionScope['resetww'] != 0}">
+            <div class="success">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>Succes!</strong> Wachtwoord van <c:out value="${sessionScope['resetww']}" /> werd gereset!
+            </div>
+        </c:if>
         <div class="header">
             <h1>Docentenportaal <c:out value="${sessionScope['docentnaam']}" /></h1>
         </div>
@@ -105,15 +111,28 @@
             </c:forEach>
         </table>
         <c:if test="${sessionScope['bevestigd'] != 0}">
-        <div class="progress">
-            <p style="font-weight: bold;">Toegewezen:</p>
-            <div class="container">
-                <div style="width: <%=request.getAttribute("aantalToegewezenStudenten") %>%" class="afgewerkt"><%=request.getAttribute("aantalToegewezenStudenten") %>%</div>
-            </div>    
-        </div>
+            <div class="progress">
+                <p style="font-weight: bold;">Toegewezen:</p>
+                <div class="container">
+                    <div style="width: <%=request.getAttribute("aantalToegewezenStudenten") %>%" class="afgewerkt"><%=request.getAttribute("aantalToegewezenStudenten") %>%</div>
+                </div>    
+            </div>
         </c:if>
         <c:if test="${sessionScope['bevestigd'] != 0 && sessionScope['periodeGestopt'] != 0}">
-            <div id="piechart" style="width: 900px; height: 500px;"></div>
+            <div id="piechart" style="width: 350px; height: 350px;position: absolute; top: 15%; right: 50%;"></div>
+        </c:if>
+        <c:if test="${sessionScope['docentnaam'] == 'admin'}">
+            <form style="position: absolute; top: 15%; right: 20%;">
+                <h2 class="w3-blue">Reset wachtwoord gebruiker:</h2>
+                <input list="Users" name="SelectedUser" id="geselecteerdeUser" autocomplete="off">
+                <datalist id="Users">
+                    <c:forEach var="i" items="${sessionScope['users']}">
+                        <option value="<c:out value='${i.getNaam()}'/>">
+                    </c:forEach>
+                </datalist>
+                <input type="hidden" name="stage" value="reset">
+                <button type="submit" class="w3-button w3-large w3-green w3-card-4">Reset</button>
+            </form>
         </c:if>
         <div class="knopjes">
             <c:if test="${sessionScope['bevestigd'] != 0 && sessionScope['periodeGestopt'] != 0}">

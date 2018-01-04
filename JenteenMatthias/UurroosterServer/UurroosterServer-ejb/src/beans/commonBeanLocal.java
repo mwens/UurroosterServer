@@ -23,4 +23,6 @@ public interface commonBeanLocal {
     public ArrayList<String> getKlasStudenten(UrsKlas klas);
 
     public int wijzigWW(int userId, String old, String new1, String new2);
+
+    public void resetWW(int userId, String new1);
 }
