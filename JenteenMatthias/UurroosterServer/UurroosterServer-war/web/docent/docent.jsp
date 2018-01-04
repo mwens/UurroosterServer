@@ -29,7 +29,8 @@
             ]);
 
             var options = {
-              title: 'Status Studenten'
+                backgroundColor: 'transparent',
+                title: 'Status Studenten'
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
