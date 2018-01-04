@@ -68,6 +68,7 @@
                 <input placeholder="Enter Password" required type="password" name="j_password" id="password" />
                 <input type="checkbox" onclick="myFunction()">Show Password
                 <button type="submit" class="w3-button w3-large w3-blue w3-card-4" style="width: 100%">Log in</button>
+                <a href="wwvergeten.jsp">Wachtwoord vergeten</a>
             </div>
         </form>
     </body>
