@@ -38,7 +38,11 @@ public class Controller extends HttpServlet {
         String stage = request.getParameter("stage");
         if("afmelden".equals(stage)){
             HttpSession sessie = request.getSession();
-            sessie.invalidate();
+            try{
+                sessie.invalidate();
+            } catch (NullPointerException e){
+                // Error/implementation difference in apache tomcat (catalina) workaround
+            }
             gotoPage("/logout.jsp", request, response);
             return;
         }
