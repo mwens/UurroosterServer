@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import pakket.UrsGebruiker;
 import pakket.UrsKlas;
+import pakket.UrsSettings;
 import pakket.UrsStudent;
 import pakket.UrsStudentrelatie;
 import pakket.UrsStudentrelatiePK;
@@ -391,5 +392,12 @@ public class docentBean implements docentBeanLocal {
     public List<UrsGebruiker> getUsers(){
         Query q = em.createNamedQuery("UrsGebruiker.findAll");
         return q.getResultList();
+    }
+    
+    public void setAdminMessage(String message){
+        Query q = em.createNamedQuery("UrsSettings.setOmschrijving");
+        q.setParameter("naam", "Melding Admin");
+        q.setParameter("omschrijving", message);
+        q.executeUpdate();
     }
 }

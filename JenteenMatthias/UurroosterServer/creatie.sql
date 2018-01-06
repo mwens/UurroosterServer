@@ -11,6 +11,7 @@ drop table URS_StudentRelatie;
 drop table URS_Student;
 drop table URS_Klas;
 drop table URS_Gebruiker;
+drop table URS_Settings;
 
 create table URS_Gebruiker(
         userId      int,
@@ -45,4 +46,11 @@ create table URS_StudentRelatie(
         foreign key(student) references URS_Gebruiker,
         foreign key(collega) references URS_Gebruiker,
         primary key(student, collega)
+        );
+
+create table URS_Settings(
+        settingsId int          not null,
+        naam varchar(32)        not null unique,
+        omschrijving varchar(400),
+        primary key(settingsId)
         );

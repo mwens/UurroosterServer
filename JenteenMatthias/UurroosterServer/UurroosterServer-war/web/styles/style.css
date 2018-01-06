@@ -167,3 +167,8 @@ table tr {
     background-color: transparent;
     border: 0;
 }
+
+#adminMessage{
+    position: absolute;
+    bottom: 10%;
+}

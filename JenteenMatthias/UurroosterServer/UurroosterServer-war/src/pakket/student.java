@@ -81,7 +81,7 @@ public class student extends HttpServlet {
         
         sessie.setAttribute("studentenRelatiesWel", welCollegas);
         sessie.setAttribute("studentenRelatiesNiet", nietCollegas);
-        
+        sessie.setAttribute("adminMessage",commonBean.getAdminMessage().getOmschrijving());
         gotoPage(gotop,request, response);
     }
     

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.ejb.Local;
 import pakket.UrsGebruiker;
 import pakket.UrsKlas;
+import pakket.UrsSettings;
 
 /**
  *
@@ -25,4 +26,6 @@ public interface commonBeanLocal {
     public int wijzigWW(int userId, String old, String new1, String new2);
 
     public void resetWW(int userId, String new1);
+
+    public UrsSettings getAdminMessage();
 }

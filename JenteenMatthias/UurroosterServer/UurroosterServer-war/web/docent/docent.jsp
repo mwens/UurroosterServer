@@ -135,6 +135,23 @@
                 <button type="submit" class="w3-button w3-large w3-green w3-card-4">Reset</button>
             </form>
         </c:if>
+        <div id="adminMessage">
+            <c:if test="${sessionScope['docentnaam'] == 'admin'}">
+                <form method="post" action="<% out.println(response.encodeURL("docent.do")); %>">
+                    <h3>Admin message: </h3>
+                    <c:if test="${sessionScope['adminMessage'] != null}">
+                        <c:out value="${sessionScope['adminMessage']}" />
+                        <input type="hidden" name="stage" value="deletemessage">
+                        <button type="submit" class="w3-button w3-large w3-red w3-card-4">Delete</button>
+                    </c:if>
+                    <c:if test="${sessionScope['adminMessage'] == null}">
+                        <input type="text" name="message_nieuw">
+                        <input type="hidden" name="stage" value="okmessage">
+                        <button type="submit" class="w3-button w3-large w3-blue w3-card-4">Submit</button>
+                    </c:if>
+                </form>
+            </c:if>
+        </div>
         <div class="knopjes">
             <c:if test="${sessionScope['bevestigd'] != 0 && sessionScope['periodeGestopt'] != 0}">
                 <form method="post" action="<% out.println(response.encodeURL("")); %>">
