@@ -15,7 +15,7 @@
         <title><c:out value="${sessionScope['studentnaam']}" /></title>
     </head>
     <body>
-        <c:if test="${sessionScope['adminMessage'] != null}">
+        <c:if test="${sessionScope['adminMessage'] != null && sessionScope['meldinggelezen'] != 1}}">
             <div class="warning">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                 <strong>Belangrijk!</strong> <c:out value="${sessionScope['adminMessage']}" />
