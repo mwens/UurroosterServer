@@ -15,13 +15,16 @@
         <title><c:out value="${sessionScope['studentnaam']}" /></title>
     </head>
     <body>
-        <c:if test="${sessionScope['adminMessage'] != null && sessionScope['meldinggelezen'] != 1}}">
+        <c:if test="${sessionScope['adminMessage'] != null && sessionScope['meldinggelezen'] != 1}">
             <div class="warning">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                <strong>Belangrijk!</strong> <c:out value="${sessionScope['adminMessage']}" />
+                <form method="post" action="<% out.println(response.encodeURL("student.do")); %>">
+                    <strong>Belangrijk!</strong> <c:out value="${sessionScope['adminMessage']}" />
+                    <input type="hidden" name="stage" value="meldinggesloten">
+                    <button class="buttonlijktgeenbuttonclosebtn">&times;</button>
+                </form>
             </div>
         </c:if>
-        <div class="header">
+        <div class="titel">
             <h1>Studentenportaal <c:out value="${sessionScope['studentnaam']}" /></h1>
         </div>
         <div class="toevoegdiv">

@@ -17,18 +17,18 @@
     <body>
         <c:if test="${sessionScope['adminMessage'] != null && sessionScope['meldinggelezen'] != 1}">
             <div class="warning">
-                <form>
+                <form method="post" action="<% out.println(response.encodeURL("student.do")); %>">
                     <strong>Belangrijk!</strong> <c:out value="${sessionScope['adminMessage']}" />
                     <input type="hidden" name="stage" value="meldinggesloten">
                     <button class="buttonlijktgeenbuttonclosebtn">&times;</button>
                 </form>
             </div>
         </c:if>
-        <div class="header">
+        <div class="titel">
             <h1>Studentenportaal <c:out value="${sessionScope['studentnaam']}" /></h1>
         </div>
         <div class="toevoegdiv">
-        <form>
+        <form method="post" action="<% out.println(response.encodeURL("student.do")); %>">
             <h2 class="w3-blue">Wel mee samen:</h2>
             <input list="Studenten" name="SelectedStudent" id="geselecteerdeStudent" autocomplete="off">
             <datalist id="Studenten">
@@ -55,7 +55,7 @@
         </table>
         </div>
         <div class="verwijderdiv">
-        <form>
+        <form method="post" action="<% out.println(response.encodeURL("student.do")); %>">
             <h2 class="w3-blue">Niet mee samen:</h2>
             <input list="Studenten" name="SelectedStudent" id="geselecteerdeStudent" autocomplete="off">
             <datalist id="Studenten">
