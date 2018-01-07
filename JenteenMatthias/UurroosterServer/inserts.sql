@@ -62,3 +62,5 @@ INSERT into URS_StudentRelatie VALUES (1,4,2);
 INSERT into URS_StudentRelatie VALUES (1,0,2);
 INSERT into URS_StudentRelatie VALUES (1,7,1);
 
+INSERT into URS_Settings VALUES (1,'Melding Admin', NULL)
+

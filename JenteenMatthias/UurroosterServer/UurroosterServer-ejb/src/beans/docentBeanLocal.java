@@ -48,5 +48,7 @@ public interface docentBeanLocal {
     public int periodeGestopt();
 
     public List<UrsGebruiker> getUsers();
+
+    public void setAdminMessage(String message);
     
 }

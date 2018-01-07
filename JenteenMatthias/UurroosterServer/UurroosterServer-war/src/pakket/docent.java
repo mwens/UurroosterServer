@@ -58,6 +58,8 @@ public class docent extends HttpServlet {
             case "bevestigen":
             case "voegGroepToe":
             case "index":
+            case "deletemessage":
+            case "okmessage":
             case "reset":
             default:
                 gotoPage = this.docentOverzicht(stage, request, response);
@@ -80,6 +82,12 @@ public class docent extends HttpServlet {
         sessie.setAttribute("resetww",0);
         sessie.setAttribute("users",docentBean.getUsers());
         switch (stage) {
+            case "deletemessage":
+                docentBean.setAdminMessage(null);
+                break;
+            case "okmessage":
+                docentBean.setAdminMessage(request.getParameter("message_nieuw"));
+                break;
             case "eindeKeuzes":
                 docentBean.eindeKeuzes();
                 sessie.setAttribute("periodeGestopt", docentBean.periodeGestopt());
@@ -116,6 +124,7 @@ public class docent extends HttpServlet {
         sessie.setAttribute("studenten_0",(docentBean.aantalStudenten()-docentBean.aantalBevestigdeStudenten()-docentBean.aantalOnbevestigeStudenten()));
         sessie.setAttribute("docentnaam",request.getUserPrincipal().getName());
         sessie.setAttribute("klassen",docentBean.getKlasLijstMetWarnings());
+        sessie.setAttribute("adminMessage",commonBean.getAdminMessage().getOmschrijving());
         return "/docent/docent.jsp";
     }
     

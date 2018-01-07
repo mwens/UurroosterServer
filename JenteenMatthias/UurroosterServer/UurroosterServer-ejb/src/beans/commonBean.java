@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import pakket.UrsGebruiker;
 import pakket.UrsKlas;
+import pakket.UrsSettings;
 import pakket.UrsStudent;
 
 /**
@@ -111,5 +112,16 @@ public class commonBean implements commonBeanLocal {
     @Override
     public void resetWW(int userId, String new1){
         this.getGebruiker(userId).setWw(new1);
+    }
+    
+    /**
+     *
+     * @return Melding van admin
+     */
+    @Override
+    public UrsSettings getAdminMessage(){
+        Query q = em.createNamedQuery("UrsSettings.findByNaam");
+        q.setParameter("naam", "Melding Admin");
+        return (UrsSettings) q.getSingleResult();
     }
 }
