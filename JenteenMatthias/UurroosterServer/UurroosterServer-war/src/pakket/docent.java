@@ -40,7 +40,6 @@ public class docent extends HttpServlet {
         
         String gotoPage;
         HttpSession sessie = request.getSession(); 
-        request.setAttribute("aantalToegewezenStudenten", (int)((float)docentBean.aantalToegewezenStudenten()*100/(float)docentBean.aantalStudenten()));
         if(commonBean.getUserId(request.getUserPrincipal().getName()) == -1){
             gotoPage("Error.jsp", request, response);
             return;
@@ -72,7 +71,7 @@ public class docent extends HttpServlet {
                 gotoPage = this.groepOverzicht(stage, request, response);
                 break; 
         }
-
+        request.setAttribute("aantalToegewezenStudenten", (int)((float)docentBean.aantalToegewezenStudenten()*100/(float)docentBean.aantalStudenten()));
         this.gotoPage(gotoPage, request, response);
     }
     
