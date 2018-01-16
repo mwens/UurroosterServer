@@ -306,6 +306,15 @@ public class docentBean implements docentBeanLocal {
      */
     @Override
     public void eindeKeuzes(){
+        Query q = em.createNamedQuery("UrsStudent.findAll");
+        List<UrsStudent> studenten = q.getResultList();
+        for(int i=0;i<studenten.size();i++){
+            if(studenten.get(i).getStatus() == 0){
+                Query q2 = em.createNamedQuery("UrsStudentrelatie.deleteBystudent");
+                q2.setParameter("student",studenten.get(i).getUserid());
+                q2.executeUpdate();
+            }    
+        }
         em.createNamedQuery("UrsStudent.updateStatusEindeKeuze").executeUpdate();
     }  
     
