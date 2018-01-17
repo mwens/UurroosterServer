@@ -30,8 +30,9 @@ INSERT into URS_Gebruiker VALUES (17,'admin','admin', 'docent');
 INSERT into URS_Gebruiker VALUES (18,'Herman Crauwels','IH8Toledo', 'docent');
 INSERT into URS_Gebruiker VALUES (19,'Joost Vennekens','IH8Toledo', 'docent');
 
-/*                         klasId, naam */
+/*                         klasId, naam 
 INSERT into URS_Klas VALUES (1,'Groep 1');
+*/
 
 /*                        userId | klas | status */
 INSERT into URS_Student VALUES (0, NULL, 0);
@@ -52,7 +53,7 @@ INSERT into URS_Student VALUES (14, NULL, 0);
 INSERT into URS_Student VALUES (15, NULL, 0);
 INSERT into URS_Student VALUES (16, NULL, 0);
 
-/*                                student | collega | status */
+/*                                student | collega | status
 INSERT into URS_StudentRelatie VALUES (0,2,2);
 INSERT into URS_StudentRelatie VALUES (0,1,1);
 INSERT into URS_StudentRelatie VALUES (0,14,2);
@@ -61,6 +62,7 @@ INSERT into URS_StudentRelatie VALUES (0,3,1);
 INSERT into URS_StudentRelatie VALUES (1,4,2);
 INSERT into URS_StudentRelatie VALUES (1,0,2);
 INSERT into URS_StudentRelatie VALUES (1,7,1);
+*/
 
 INSERT into URS_Settings VALUES (1,'Melding Admin', NULL)
 
