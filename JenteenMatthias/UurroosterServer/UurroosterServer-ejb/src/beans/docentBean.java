@@ -308,10 +308,10 @@ public class docentBean implements docentBeanLocal {
     public void eindeKeuzes(){
         Query q = em.createNamedQuery("UrsStudent.findAll");
         List<UrsStudent> studenten = q.getResultList();
-        for(int i=0;i<studenten.size();i++){
-            if(studenten.get(i).getStatus() == 0){
+        for(UrsStudent stud : studenten){
+            if(stud.getStatus() == 0){
                 Query q2 = em.createNamedQuery("UrsStudentrelatie.deleteBystudent");
-                q2.setParameter("student",studenten.get(i).getUserid());
+                q2.setParameter("student",stud.getUserid());
                 q2.executeUpdate();
             }    
         }
