@@ -193,8 +193,8 @@ public class docentBean implements docentBeanLocal {
         }
         
         for(UrsStudent stud : studentenInKlas){
-            List<UrsStudentrelatie> relsStud = (List<UrsStudentrelatie>) stud.getUrsGebruiker().getUrsStudentrelatieCollection();
-            List<UrsStudentrelatie> relsCol = (List<UrsStudentrelatie>) stud.getUrsGebruiker().getUrsStudentrelatieCollection1();
+            List<UrsStudentrelatie> relsStud = (List<UrsStudentrelatie>) em.createNamedQuery("UrsStudentrelatie.findByCollega").setParameter("collega", stud.getUserid()).getResultList();
+            List<UrsStudentrelatie> relsCol = (List<UrsStudentrelatie>) em.createNamedQuery("UrsStudentrelatie.findByStudent").setParameter("student", stud.getUserid()).getResultList();
             
             for(UrsStudentrelatie relS : relsStud){
                 UrsGebruiker studd = commonBean.getGebruiker(relS.getUrsStudentrelatiePK().getStudent());
